@@ -9,13 +9,12 @@
 
     outputs = { self, nixpkgs, home-manager, ... }@inputs: {
         nixosConfigurations = {
-            # replace 'nixdom' with your hostname
             nixdom = nixpkgs.lib.nixosSystem {
                 # might have to use apparently deprecated specialArgs method
                 # because of lack of docs on _module.args
                 _module.args = { inherit inputs; }; # Pass flake inputs to our config
                 modules = [ 
-                    ./nixos/configuration.nix
+                    ./configs/configuration.nix
                 ];
             };
         };
