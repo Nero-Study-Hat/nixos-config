@@ -12,7 +12,7 @@
     outputs = { self, nixpkgs, home-manager, ... }@inputs: {
         nixosConfigurations = {
             nixdom = nixpkgs.lib.nixosSystem {
-                system = "x86_64-linux"
+                system = "x86_64-linux";
                 modules = [ 
                     ./configs/configuration.nix
                 ];
@@ -21,3 +21,6 @@
     };
 
 }
+
+# Command:
+# nixos-install --flake github:Nero-Study-Hat/nixos-config/1-get-base-nixos-setup-with-flakes-handled#nixdom
