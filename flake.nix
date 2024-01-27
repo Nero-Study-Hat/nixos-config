@@ -21,6 +21,3 @@
     };
 
 }
-
-# Command:
-# nixos-install --flake github:Nero-Study-Hat/nixos-config/1-get-base-nixos-setup-with-flakes-handled#nixdom

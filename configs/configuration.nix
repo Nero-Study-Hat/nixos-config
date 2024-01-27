@@ -18,16 +18,7 @@
 
   time.timeZone = "America/New_York";
 
-  boot.loader = {
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot/efi";
-    };
-    grub = {
-      efiSupport = true;
-      device = "nodev";
-    };
-  };
+  boot.loader.grub.enable = true;
 
   users.users = {
     nero = {
