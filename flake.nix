@@ -12,9 +12,7 @@
     outputs = { self, nixpkgs, home-manager, ... }@inputs: {
         nixosConfigurations = {
             nixdom = nixpkgs.lib.nixosSystem {
-                # might have to use apparently deprecated specialArgs method
-                # because of lack of docs on _module.args
-                _module.args = { inherit inputs; }; # Pass flake inputs to our config
+                system = "x86_64-linux"
                 modules = [ 
                     ./configs/configuration.nix
                 ];
