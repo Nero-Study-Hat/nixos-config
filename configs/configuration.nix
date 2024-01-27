@@ -18,7 +18,12 @@
 
   time.timeZone = "America/New_York";
 
-  boot.loader.grub.enable = true;
+  boot.loader = {
+    grub.enable = true;
+    grub.devices = [ "/dev/sda3" ];
+    grub.efiSupport = true;
+    boot.loader.efi.canTouchEfiVariables = true;
+  };
 
   users.users = {
     nero = {
