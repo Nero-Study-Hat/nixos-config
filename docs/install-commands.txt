@@ -1,0 +1,3 @@
+export NIX_CONFIG="experimental-features = nix-command flakes"
+nix shell nixpkgs#git --command nix flake clone github:Nero-Study-Hat/nixos-config/1-get-base-nixos-setup-with-flakes-handled --dest /mnt/.n
+nix shell nixpkgs#git --command nixos-install --impure --flake /mnt/.n#nixdom
