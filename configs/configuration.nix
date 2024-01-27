@@ -1,6 +1,6 @@
 { inputs, lib, config, pkgs, ... }: {
   imports = [
-    ./hardware-configuration.nix
+    ./vmtest-hardware-configuration.nix
   ];
 
   nixpkgs = {
