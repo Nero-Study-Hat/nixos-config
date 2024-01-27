@@ -14,6 +14,16 @@
   };
 
   networking.hostName = "stardom";
+  networking.networkmanager.enable = true;
+
+  time.timeZone = "Amaerica/New_York";
+
+  i18n.defaultLocale = "en_US.UTF-8";
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "us";
+    useXkbConfig = true; # use xkb.options in tty.
+  };
 
   boot.loader = {
     efi = {
@@ -34,5 +44,5 @@
     };
   };
 
-  system.stateVersion = "23.05";
+  system.stateVersion = "24.05";
 }
