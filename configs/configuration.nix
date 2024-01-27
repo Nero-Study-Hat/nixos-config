@@ -29,7 +29,7 @@
     nero = {
       initialPassword = "nixisreallycool";
       isNormalUser = true;
-      extraGroups = ["wheel"];
+      extraGroups = ["wheel", "networkmanager"];
     };
   };
 
