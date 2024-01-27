@@ -19,17 +19,21 @@
   time.timeZone = "America/New_York";
 
   boot.loader = {
-    grub.enable = true;
-    grub.devices = [ "/dev/sda3" ];
-    grub.efiSupport = true;
-    boot.loader.efi.canTouchEfiVariables = true;
+    efi = {
+      canTouchEfiVariables = true;
+      efiSysMountPoint = "/boot/efi";
+    };
+    grub = {
+      efiSupport = true;
+      device = "nodev";
+    };
   };
 
   users.users = {
     nero = {
       initialPassword = "nixisreallycool";
       isNormalUser = true;
-      extraGroups = ["wheel", "networkmanager"];
+      extraGroups = ["wheel" "networkmanager"];
     };
   };
 
