@@ -16,7 +16,7 @@
         };
         homeConfigurations = {
             nero = home-manager.lib.homeManagerConfiguration {
-                pkgs = DEFINEPKGSHERE;
+                inherit pkgs;
                 modules = [ ./home-manager/home.nix ];
             };
         };
