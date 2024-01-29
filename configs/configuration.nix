@@ -1,4 +1,6 @@
-{ inputs, lib, config, pkgs, ... }: {
+{ inputs, lib, config, pkgs, ... }:
+
+{
   imports = [
     ./vmtest-hardware-configuration.nix
   ];

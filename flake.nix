@@ -3,19 +3,21 @@
 
     inputs = {
         nixpkgs.url = "nixpkgs/nixos-unstable";
-        home-manager = {
-            url = "github:nix-community/home-manager/release-23.11";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
+        home-manager.url = "github:nix-community/home-manager";
+        home-manager.inputs.nixpkgs.follows = "nixpkgs";
     };
 
     outputs = { self, nixpkgs, home-manager, ... }@inputs: {
         nixosConfigurations = {
             nixdom = nixpkgs.lib.nixosSystem {
                 system = "x86_64-linux";
-                modules = [ 
-                    ./configs/configuration.nix
-                ];
+                modules = [ ./configs/configuration.nix ];
+            };
+        };
+        homeConfigurations = {
+            nero = home-manager.lib.homeManagerConfiguration {
+                pkgs = DEFINEPKGSHERE;
+                modules = [ ./home-manager/home.nix ];
             };
         };
     };
