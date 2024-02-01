@@ -7,7 +7,7 @@
         home-manager.inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    outputs = { self, nixpkgs, ... }:
+    outputs = { self, nixpkgs, home-manager, ... }@inputs:
     let
         lib = nixpkgs.lib;
         pkgs = nixpkgs.legacyPackages.${"x86_64-linux"};
@@ -19,10 +19,10 @@
         };
         };
         homeConfigurations = {
-        nero = home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
-            modules = [ ./home-manager/home.nix ];
-        };
+            nero = home-manager.lib.homeManagerConfiguration {
+                inherit pkgs;
+                modules = [ ./home-manager/home.nix ];
+            };
         };
     };
 
