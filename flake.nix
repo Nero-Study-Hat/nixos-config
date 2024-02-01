@@ -13,10 +13,10 @@
         pkgs = nixpkgs.legacyPackages.${"x86_64-linux"};
     in {
         nixosConfigurations = {
-        nixdom = lib.nixosSystem {
-            system = "x86_64-linux";
-            modules = [ ./configs/configuration.nix ];
-        };
+            nixdom = lib.nixosSystem {
+                system = "x86_64-linux";
+                modules = [ ./configs/configuration.nix ];
+            };
         };
         homeConfigurations = {
             nero = home-manager.lib.homeManagerConfiguration {
