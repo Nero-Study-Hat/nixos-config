@@ -10,6 +10,7 @@ home.packages = with pkgs; [
     git
     github-desktop
     virtualbox
+    cool-retro-term
 
     # Sys Management
     gparted

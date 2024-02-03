@@ -8,6 +8,11 @@
 
     home.keyboard.layout = "us";
 
+    home.packages = with pkgs; [
+        # Basics
+        brave
+    ];
+
     #TODO: Handle the following as secrets to learn how.
     programs.git = {
         enable = true;
