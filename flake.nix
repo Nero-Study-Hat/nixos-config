@@ -16,7 +16,7 @@
             nixdom = lib.nixosSystem {
                 system = "x86_64-linux";
                 modules = [ ./configs/configuration.nix ];
-                _modules.args.inputs = {inherit inputs;};
+                specialArgs = { inherit inputs; };
             };
         };
         homeConfigurations = {
