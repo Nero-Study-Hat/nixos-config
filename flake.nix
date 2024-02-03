@@ -11,8 +11,8 @@
     let
         system = "x86_64-linux";
         lib = nixpkgs.lib;
-        pkgs = nixpkgs.legacyPackages.${"system"};
-        defaultPackage.${"system"} = home-manager.defaultPackage.${"system"};
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
     in {
         nixosConfigurations = {
             stardom = lib.nixosSystem {
