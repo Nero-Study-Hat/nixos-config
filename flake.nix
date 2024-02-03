@@ -9,12 +9,13 @@
 
     outputs = { self, nixpkgs, home-manager, ... }@inputs:
     let
+        system = "x86_64-linux";
         lib = nixpkgs.lib;
-        pkgs = nixpkgs.legacyPackages.${"x86_64-linux"};
+        pkgs = nixpkgs.legacyPackages.${"system"};
     in {
         nixosConfigurations = {
-            nixdom = lib.nixosSystem {
-                system = "x86_64-linux";
+            stardom = lib.nixosSystem {
+                inherit system;
                 modules = [ ./configs/configuration.nix ];
                 specialArgs = { inherit inputs; };
             };
