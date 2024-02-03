@@ -1,41 +1,52 @@
-{ inputs, lib, config, pkgs, ... }: {
-  imports = [
-    ./vmtest-hardware-configuration.nix
-  ];
+{ inputs, lib, config, pkgs, ... }:
 
-  nixpkgs = {
-    config.allowUnfree = true;
-  };
+{
+	imports = [
+		./vmtest-hardware-configuration.nix
+	];
 
-  nix.settings = {
-    experimental-features = "nix-command flakes";
-    # Deduplicate and optimize nix store
-    auto-optimise-store = true;
-  };
+	nixpkgs = {
+		config.allowUnfree = true;
+	};
 
-  networking.hostName = "stardom";
-  networking.networkmanager.enable = true;
+	nix.settings = {
+		experimental-features = "nix-command flakes";
+		# Deduplicate and optimize nix store
+		auto-optimise-store = true;
+	};
 
-  time.timeZone = "America/New_York";
+	networking.hostName = "stardom";
+	networking.networkmanager.enable = true;
 
-  boot.loader = {
-    efi = {
-      efiSysMountPoint = "/boot/efi";
-    };
-    grub = {
-      efiSupport = true;
-      efiInstallAsRemovable = true;
-      device = "nodev";
-    };
-  };
+	time.timeZone = "America/New_York";
 
-  users.users = {
-    nero = {
-      initialPassword = "nixisreallycool";
-      isNormalUser = true;
-      extraGroups = ["wheel" "networkmanager"];
-    };
-  };
+	boot.loader = {
+		efi = {
+			efiSysMountPoint = "/boot/efi";
+		};
+		grub = {
+			efiSupport = true;
+			efiInstallAsRemovable = true;
+			device = "nodev";
+		};
+	};
 
-  system.stateVersion = "24.05";
+	users.users = {
+		nero = {
+			initialPassword = "nixisreallycool";
+			isNormalUser = true;
+			extraGroups = ["wheel" "networkmanager"];
+		};
+	};
+
+	services.xserver.enable = true;
+	services.xserver.displayManager.sddm.enable = true;
+	services.xserver.desktopManager.plasma5.enable = true;
+
+	environment.systemPackages = with pkgs; [
+		git
+		cool-retro-term
+	];
+
+	system.stateVersion = "24.05";
 }
