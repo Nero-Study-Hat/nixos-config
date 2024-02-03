@@ -4,3 +4,14 @@ nix shell nixpkgs#git --command nix flake clone "github:Nero-Study-Hat/nixos-con
 nix shell nixpkgs#git --command nixos-install --impure --flake /mnt/.n#stardom
 
 # in virtualbox, make sure 'Enable EFI' is checked
+
+# To build home-manager config.
+# Approach 1 (from home dir) - tested working
+nix run home-manager -- build --flake /.n#nero
+result/activate
+# reboot
+# Aproach 2 (from flake dir) - not tested working
+nix run . -- build --flake .
+exec $SHELL -l
+# if changes have been made to home config at this point, to update you can
+home-manager switch --flake .
