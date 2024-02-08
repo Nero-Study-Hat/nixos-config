@@ -1,5 +1,5 @@
 export NIX_CONFIG="experimental-features = nix-command flakes"
-export branch="3-setup-gui-and-packages-standalone-user"
+export branch="feat/5-get-packages-installed-in-home-by-a-specific-file"
 nix shell nixpkgs#git --command nix flake clone "github:Nero-Study-Hat/nixos-config/${branch}" --dest /mnt/.n
 nix shell nixpkgs#git --command nixos-install --impure --flake /mnt/.n#stardom
 
