@@ -11,6 +11,7 @@
     let
         system = "x86_64-linux";
         lib = nixpkgs.lib;
+        nixpkgs.config.allowUnfree = true;
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
     in {

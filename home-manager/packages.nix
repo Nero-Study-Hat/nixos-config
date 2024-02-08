@@ -1,5 +1,9 @@
 { pkgs, ... }:
 
+imports = [ ./programs/bash.nix
+            ./programs/git.nix
+        ];
+
 home.packages = with pkgs; [
     # Basics
     brave
@@ -7,13 +11,13 @@ home.packages = with pkgs; [
 
     # Development
     vscode
-    git
-    github-desktop
     virtualbox
     cool-retro-term
+    tmux
 
     # Sys Management
     gparted
+    htop
 
     # Notes
     obsidian
@@ -29,16 +33,13 @@ home.packages = with pkgs; [
     blender
     pureref
 
-    # Aesthetic
+    # Utilities
     neofetch
-
-    # Misc
     tldr
     flameshot
     yt-dlp
 
-    # Media Platforms
-    steam
+    # Media
     freetube
 
     # Video Creation

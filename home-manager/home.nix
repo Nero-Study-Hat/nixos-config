@@ -13,21 +13,12 @@
         brave
     ];
 
-    #TODO: Handle the following as secrets to learn how.
-    programs.git = {
-        enable = true;
-        userName = "Nero-Study-Hat";
-        userEmail = "nerostudyhat@gmail.com";
-    };
+    programs = {
+        tmux.enable = true;
+        htop.enable = true;
 
-    programs.bash = {
-        enable = true;
-        enableCompletion = true;
-        shellAliases = {
-            cl = "clear"; # yes I am this lazy, generally I ctrl+l
-        };
+        home-manager.enable = true;
     };
 
     home.stateVersion = "23.11";
-    programs.home-manager.enable = true;
 }
