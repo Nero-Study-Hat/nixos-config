@@ -2,7 +2,7 @@
     description = "My initial system flake.";
 
     inputs = {
-        nixpkgs.url = "nixpkgs/nixos-unstable";
+        nixpkgs.url = "nixpkgs/nixos-23.11";
         home-manager.url = "github:nix-community/home-manager";
         home-manager.inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -10,13 +10,11 @@
     outputs = { self, nixpkgs, home-manager, ... }@inputs:
     let
         system = "x86_64-linux";
-        lib = nixpkgs.lib;
-        # nixpkgs.config.allowUnfree = true;
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
     in {
         nixosConfigurations = {
-            stardom = lib.nixosSystem {
+            stardom = nixpkgs.lib.nixosSystem {
                 inherit system;
                 modules = [ ./configs/configuration.nix ];
                 specialArgs = { inherit inputs; };
