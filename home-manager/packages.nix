@@ -45,11 +45,6 @@
 
         # Media
         freetube
-
-        # Video Creation
-        davinci-resolve
-        audacity
-
     ];
 
     programs.tmux = {
