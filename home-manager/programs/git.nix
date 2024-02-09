@@ -2,7 +2,7 @@
     home.packages = with pkgs; [ 
         git
         github-desktop
-     ]
+     ];
 
     programs.git = {
         enable = true;

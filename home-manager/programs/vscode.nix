@@ -8,6 +8,6 @@
         extensions = with pkgs.vscode-extensions; [
             bbenoist.Nix
             PKief.material-icon-theme
-        ]
+        ];
     };
 }
