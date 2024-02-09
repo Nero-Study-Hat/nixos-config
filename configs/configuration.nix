@@ -5,10 +5,6 @@
 		./vmtest-hardware-configuration.nix
 	];
 
-	nixpkgs = {
-		config.allowUnfree = true;
-	};
-
 	nix.settings = {
 		experimental-features = "nix-command flakes";
 		# Deduplicate and optimize nix store

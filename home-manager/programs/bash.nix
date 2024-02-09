@@ -1,11 +1,13 @@
+{ pkgs, ... }:
+
 {
-    home.packages = with pkgs; [ bash-completion ]
+    home.packages = with pkgs; [ bash-completion ];
 
     programs.bash = {
         enable = true;
         enableCompletion = true;
         shellAliases = {
-            cl = "clear"; # yes I am this lazy, generally I ctrl+l
+            cl = "clear";
         };
         historyIgnore = [ "ls" "cd" "cl" "clear" "exit" ];
     };
