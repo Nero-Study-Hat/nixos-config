@@ -1,6 +1,11 @@
 export NIX_CONFIG="experimental-features = nix-command flakes"
 export branch="feat/5-get-packages-installed-in-home-by-a-specific-file"
 nix shell nixpkgs#git --command nix flake clone "github:Nero-Study-Hat/nixos-config/${branch}" --dest /mnt/.n
+
+# Test
+nix shell nixpkgs#git --command nix flake check "github:Nero-Study-Hat/nixos-config/${branch}" --no-write-lock-file
+
+# Install
 nix shell nixpkgs#git --command nixos-install --impure --flake /mnt/.n#stardom
 
 # in virtualbox, make sure 'Enable EFI' is checked

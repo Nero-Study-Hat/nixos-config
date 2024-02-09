@@ -8,17 +8,6 @@
 
     home.keyboard.layout = "us";
 
-    home.packages = with pkgs; [
-        # Basics
-        brave
-    ];
-
-    programs = {
-        tmux.enable = true;
-        htop.enable = true;
-
-        home-manager.enable = true;
-    };
-
+    programs.home-manager.enable = true;
     home.stateVersion = "23.11";
 }
