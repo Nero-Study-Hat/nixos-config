@@ -1,3 +1,22 @@
+partioning (for VirtBox-VM) (cmds src -> https://gist.github.com/Vincibean/baf1b76ca5147449a1a479b5fcc9a222)
+
+parted /dev/sda -- mklabel gpt
+parted /dev/sda -- mkpart primary 512MiB -8GiB
+parted /dev/sda -- mkpart primary linux-swap -8GiB 100%
+parted /dev/sda -- mkpart ESP fat32 1MiB 512MiB
+parted /dev/sda -- set 3 esp on
+
+mkfs.ext4 -L nixos /dev/sda1
+mkswap -L swap /dev/sda2
+mkfs.fat -F 32 -n boot /dev/sda3
+
+mount -L nixos /mnt
+mkdir -p /mnt/boot
+mount -L boot /mnt/boot
+swapon /dev/sda2
+
+---
+
 export NIX_CONFIG="experimental-features = nix-command flakes"
 export branch="feat/5-get-packages-installed-in-home-by-a-specific-file"
 nix shell nixpkgs#git --command nix flake clone "github:Nero-Study-Hat/nixos-config/${branch}" --dest /mnt/.n
