@@ -47,3 +47,13 @@ home.packages = with pkgs; [
     audacity
 
 ];
+
+programs.tmux = {
+    enable = true;
+    package = pkgs.tmux;
+};
+
+programs.htop = {
+    enable = true;
+    package = pkgs.htop;
+}
