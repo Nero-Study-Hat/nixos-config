@@ -1,4 +1,4 @@
-partioning (for VirtBox-VM) (cmds src -> https://gist.github.com/Vincibean/baf1b76ca5147449a1a479b5fcc9a222)
+# partioning (for VirtBox-VM) (cmds src -> https://gist.github.com/Vincibean/baf1b76ca5147449a1a479b5fcc9a222)
 
 parted /dev/sda -- mklabel gpt
 parted /dev/sda -- mkpart primary 512MiB -8GiB

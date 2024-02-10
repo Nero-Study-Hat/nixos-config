@@ -4,6 +4,8 @@
     imports = [ 
         ./packages.nix
         ./programs/bash.nix
+        ./programs/git.nix
+        ./programs/vscode.nix
     ];
 
 	nixpkgs = {
