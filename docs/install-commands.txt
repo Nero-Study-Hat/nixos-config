@@ -11,8 +11,8 @@ mkswap -L swap /dev/sda2
 mkfs.fat -F 32 -n boot /dev/sda3
 
 mount -L nixos /mnt
-mkdir -p /mnt/boot
-mount -L boot /mnt/boot
+mkdir -p /mnt/boot/efi
+mount -L boot /mnt/boot/efi
 swapon /dev/sda2
 
 ---
@@ -25,6 +25,7 @@ nix shell nixpkgs#git --command nix flake clone "github:Nero-Study-Hat/nixos-con
 nix shell nixpkgs#git --command nix flake check "github:Nero-Study-Hat/nixos-config/${branch}" --no-write-lock-file
 
 # Install
+fix swap partition UUID in harware-configuration.nix file
 nix shell nixpkgs#git --command nixos-install --impure --flake /mnt/.n#stardom
 
 # in virtualbox, make sure 'Enable EFI' is checked
