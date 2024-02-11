@@ -2,7 +2,7 @@
 
 {
 	imports = [
-		./vmtest-hardware-configuration.nix
+		./pc-hardware-configuration.nix
 	];
 
 	nix.settings = {
@@ -16,6 +16,8 @@
 
 	time.timeZone = "America/New_York";
 
+	boot.kernelPackages = pkgs.linuxPackages_latest;
+	boot.supportedFilesystems = [ "ntfs" ];
 	boot.loader = {
 		efi = {
 			efiSysMountPoint = "/boot/efi";
@@ -36,13 +38,9 @@
 	};
 
 	services.xserver.enable = true;
+	services.xserver.videoDrivers = [ "amdgpu" ];
 	services.xserver.displayManager.sddm.enable = true;
 	services.xserver.desktopManager.plasma5.enable = true;
-
-	environment.systemPackages = with pkgs; [
-		git
-		cool-retro-term
-	];
 
 	system.stateVersion = "24.05";
 }

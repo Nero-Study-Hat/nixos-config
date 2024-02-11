@@ -1,3 +1,5 @@
+{ pkgs, ... }:
+
 {
     programs.vscode = {
         enable = true;
@@ -5,9 +7,10 @@
         enableUpdateCheck = false;
         enableExtensionUpdateCheck = false;
 
+        # ext ids must be all lowercase
         extensions = with pkgs.vscode-extensions; [
-            bbenoist.Nix
-            PKief.material-icon-theme
+            bbenoist.nix
+            pkief.material-icon-theme
         ];
     };
 }

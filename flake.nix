@@ -16,7 +16,7 @@
         nixosConfigurations = {
             stardom = nixpkgs.lib.nixosSystem {
                 inherit system;
-                modules = [ ./configs/configuration.nix ];
+                modules = [ ./configs/stardom/configuration.nix ];
                 specialArgs = { inherit inputs; };
             };
         };
