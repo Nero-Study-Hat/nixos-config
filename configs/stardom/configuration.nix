@@ -2,7 +2,7 @@
 
 {
 	imports = [
-		./vmtest-hardware-configuration.nix
+		./pc-hardware-configuration.nix
 	];
 
 	nix.settings = {
