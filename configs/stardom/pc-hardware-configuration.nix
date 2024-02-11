@@ -19,27 +19,27 @@
 	networking.useDHCP = lib.mkDefault true;
 
 	nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-	hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+	hardware.cpu.amd.updateMicrocode = true;
+	hardware.enableRedistributableFirmware = true;
 
-	hardware = {
-		opengl = {
-			enable = true;
+	hardware.opengl = {
+		enable = true;
 
-			# For AMD vulkan support
-			driSupport = true;
-			driSupport32Bit = true;
+		# For AMD vulkan support
+		driSupport = true;
+		driSupport32Bit = true;
 
-			extraPackages = with pkgs; [
-				amdvlk
-				mesa_23
-				rocmPackages.clr.icd
-			];
+		extraPackages = with pkgs; [
+			amdvlk
+			rocmPackages.clr.icd
+		];
 
-			# For 32 bit applications 
-			# Only available on unstable
-			extraPackages32 = with pkgs; [
-				driversi686Linux.amdvlk
-			];
-		};
+		# For 32 bit applications 
+		# Only available on unstable
+		extraPackages32 = with pkgs; [
+			driversi686Linux.amdvlk
+		];
 	};
+
+	environment.variables.AMD_VULKAN_ICD = "RADV";
 }
