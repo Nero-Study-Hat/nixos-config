@@ -15,6 +15,7 @@ declare -a home_directories=(
 )
 
 for dir in "${home_directories[@]}"; do
+    rmdir "$dir"
     ln -s "/mnt/nero-priv-data/${dir}" "/home/${USER}/${dir}"
 done
 
