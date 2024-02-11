@@ -22,27 +22,28 @@
 	hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
 	hardware = {
-	opengl = {
-		enable = true;
+		opengl = {
+			enable = true;
 
-		# For AMD vulkan support
-		driSupport = true;
-		driSupport32Bit = true;
+			# For AMD vulkan support
+			driSupport = true;
+			driSupport32Bit = true;
 
-		extraPackages = with pkgs; [
-			amdvlk
-			mesa_23
-			rocmPackages.clr.icd
+			extraPackages = with pkgs; [
+				amdvlk
+				mesa_23
+				rocmPackages.clr.icd
+			];
+
+			# For 32 bit applications 
+			# Only available on unstable
+			extraPackages32 = with pkgs; [
+				driversi686Linux.amdvlk
+			];
+		};
+
+		systemd.tmpfiles.rules = [
+			"L+    /opt/rocm/hip   -    -    -     -    ${pkgs.hip}"
 		];
-
-		# For 32 bit applications 
-		# Only available on unstable
-		extraPackages32 = with pkgs; [
-			driversi686Linux.amdvlk
-		];
-	};
-
-	systemd.tmpfiles.rules = [
-		"L+    /opt/rocm/hip   -    -    -     -    ${pkgs.hip}"
-	];
+	}
 }
