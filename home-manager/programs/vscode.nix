@@ -8,8 +8,8 @@
         enableExtensionUpdateCheck = false;
 
         extensions = with pkgs.vscode-extensions; [
-            bbenoist.Nix
-            PKief.material-icon-theme
+            bbenoist.nix
+            pkief.material-icon-theme
         ];
     };
 }
