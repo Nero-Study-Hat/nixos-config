@@ -15,7 +15,7 @@ declare -a home_directories=(
 )
 
 for dir in "${home_directories[@]}"; do
-    ln -s "$nero_priv_data/$dir" "$home/$dir"
+    ln -s "/mnt/nero-priv-data/${dir}" "/home/${USER}/${dir}"
 done
 
 nix run home-manager -- build --flake /.n#nero
