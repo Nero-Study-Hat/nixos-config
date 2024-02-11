@@ -18,15 +18,6 @@
 
     home.keyboard.layout = "us";
 
-    programs.bash = {
-        enable = true;
-        enableCompletion = true;
-        shellAliases = {
-            cl = "clear";
-        };
-        historyIgnore = [ "ls" "cd" "cl" "clear" "exit" ];
-    };
-
     programs.home-manager.enable = true;
     home.stateVersion = "23.11";
 }

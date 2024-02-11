@@ -7,6 +7,11 @@ mkdir -p /mnt/boot/efi
 mount -L NIXOS_EFI /mnt/boot/efi
 swapon /dev/nvme1n1p7
 
+mkdir -p /mnt/nero-priv-data
+mount -L "nero-priv-data" /mnt/nero-priv-data
+mkdir -p /mnt/nero-pub-data
+mount -L "nero-pub-data" /mnt/nero-pub-data
+
 # Get the repo.
 echo -e $'\n**GETTING THE FLAKE REPO**\n'
 export NIX_CONFIG="experimental-features = nix-command flakes"
