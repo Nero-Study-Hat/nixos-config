@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Partition Handling
 echo -e $'**PARTITION HANDLING**\n'
@@ -11,6 +11,9 @@ mkdir -p /mnt/nero-priv-data
 mount -L "nero-priv-data" /mnt/nero-priv-data
 mkdir -p /mnt/nero-pub-data
 mount -L "nero-pub-data" /mnt/nero-pub-data
+
+chown -R :users "/mnt/nero-priv-data"
+chown -R :users "/mnt/nero-pub-data"
 
 # Get the repo.
 echo -e $'\n**GETTING THE FLAKE REPO**\n'
