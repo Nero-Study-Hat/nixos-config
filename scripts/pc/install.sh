@@ -18,7 +18,7 @@ chown -R :users "/mnt/nero-pub-data"
 # Get the repo.
 echo -e $'\n**GETTING THE FLAKE REPO**\n'
 export NIX_CONFIG="experimental-features = nix-command flakes"
-export branch="feat/7-get-my-nixos-project-setup-on-my-pc"
+export branch="main"
 export proj_dir=".n"
 nix shell nixpkgs#git --command nix flake clone "github:Nero-Study-Hat/nixos-config/${branch}" \
 --dest "/mnt/${proj_dir}"
