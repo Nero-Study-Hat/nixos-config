@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# use "nix shell nixpkgs#git --command " before ./script on fresh sys to work with git
 
 if [ "$EUID" == 0 ]; then
     echo "This script should not be run as root."
