@@ -2,12 +2,12 @@
 
 {
     imports = [ 
-        ./programs/morePackages.nix
-
+        ./programs/test.nix
+        
         ./packages.nix
         ./programs/bash.nix
         ./programs/git.nix
-        ./programs/test.nix
+        ./programs/vscode.nix
     ];
 
 	nixpkgs = {
