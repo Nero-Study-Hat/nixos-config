@@ -1,14 +1,12 @@
 { pkgs, ... }:
 
 {
-    # imports = [ ./programs/bash.nix
-    #             ./programs/git.nix
-    #         ];
 
     home.packages = with pkgs; [
         # Basics
         brave
         libsForQt5.dolphin
+        libsForQt5.bismuth
 
         # Development
         vscode
@@ -45,6 +43,9 @@
 
         # Media
         freetube
+
+        # Fun
+        cmatrix
     ];
 
     programs.tmux = {
