@@ -5,21 +5,26 @@
     home.packages = with pkgs; [
         # Basics
         brave
+        virtualbox
         libsForQt5.dolphin
         libsForQt5.bismuth
 
         # Development
         vscode
-        virtualbox
         git
         github-desktop
-        bash
-        cool-retro-term
-        tmux
+
+        # Game Dev
+        godot_4
 
         # Sys Management
+        bash
         gparted
         htop
+        cool-retro-term
+        tmux
+        curl
+        wget
 
         # Notes
         obsidian
@@ -30,10 +35,12 @@
         protonvpn-cli_2
         # need to make yubico-authenticator nixpkg
 
-        # Art
+        # Content Creation
         krita
         blender
+        davinci-resolve
         # pureref  # currently requires manual setup
+
 
         # Utilities
         neofetch
