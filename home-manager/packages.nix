@@ -55,11 +55,6 @@
         cmatrix
     ];
 
-    programs.steam = {
-        enable = true;
-        package = pkgs.steam;
-    };
-
     programs.tmux = {
         enable = true;
         package = pkgs.tmux;

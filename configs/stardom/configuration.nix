@@ -55,5 +55,15 @@
 		#jack.enable = true;
 	};
 
+	nixpkgs = {
+		config.allowUnfree = true;
+        config.permittedInsecurePackages = [ "steam" ];
+	};
+
+    programs.steam = {
+        enable = true;
+        package = pkgs.steam;
+    };
+
 	system.stateVersion = "24.05";
 }
