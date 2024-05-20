@@ -7,7 +7,6 @@
         ./programs/bash.nix
         ./programs/git.nix
         ./programs/vscode.nix
-        ./programs/yubico.nix
     ];
 
 	nixpkgs = {

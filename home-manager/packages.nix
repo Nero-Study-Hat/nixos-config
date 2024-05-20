@@ -22,11 +22,11 @@
         gparted
         htop
         cool-retro-term
-        tmux
         curl
         wget
 
-        # Notes
+        # productivity
+        morgen
         obsidian
         remnote
 
@@ -54,6 +54,11 @@
         # Fun
         cmatrix
     ];
+
+    programs.steam = {
+        enable = true;
+        package = pkgs.steam;
+    };
 
     programs.tmux = {
         enable = true;

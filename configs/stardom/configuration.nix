@@ -10,6 +10,9 @@
 		# Deduplicate and optimize nix store
 		auto-optimise-store = true;
 	};
+	
+	# environment.systemPackages = with pkgs; [ yubico-pam ];
+	# security.pam.yubico.enable = true;
 
 	networking.hostName = "stardom";
 	networking.networkmanager.enable = true;
