@@ -19,7 +19,7 @@
 
 	time.timeZone = "America/New_York";
 
-	boot.kernelPackages = pkgs.linuxPackages_latest;
+	boot.kernelPackages = pkgs.linuxPackages_6_8;
 	boot.supportedFilesystems = [ "ntfs" ];
 	boot.loader = {
 		efi = {
@@ -36,7 +36,10 @@
 		nero = {
 			initialPassword = "nixisreallycool";
 			isNormalUser = true;
-			extraGroups = ["wheel" "networkmanager"];
+			extraGroups = [ 
+							"qemu-libvirtd" "libvirtd" 
+							"wheel" "video" "audio" "disk" "networkmanager" 
+						];
 		};
 	};
 
@@ -55,15 +58,21 @@
 		#jack.enable = true;
 	};
 
-	nixpkgs = {
-		config.allowUnfree = true;
-        config.permittedInsecurePackages = [ "steam" ];
-	};
+	nixpkgs.config.allowUnfree = true;
 
+	programs.java.enable = true; 
     programs.steam = {
         enable = true;
-        package = pkgs.steam;
     };
+
+	# environment.systemPackages = with pkgs-stable; [ packages ];
+
+	# # Virtualbox Setup
+	virtualisation.virtualbox.host.enable = true;
+	virtualisation.virtualbox.host.package = pkgs.virtualbox;
+	users.extraGroups.vboxusers.members = [ "nero" ];
+	virtualisation.virtualbox.host.enableExtensionPack = true;
+	virtualisation.virtualbox.guest.enable = true;
 
 	system.stateVersion = "24.05";
 }

@@ -3,6 +3,7 @@
 
     inputs = {
         nixpkgs.url = "nixpkgs/nixos-unstable";
+        nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
         home-manager = {
             url = "github:nix-community/home-manager";
             inputs.nixpkgs.follows = "nixpkgs";
@@ -14,11 +15,12 @@
         };
     };
 
-    outputs = { self, nixpkgs, home-manager, plasma-manager, ... }@inputs:
+    outputs = { self, nixpkgs, nixpkgs-stable, home-manager, plasma-manager, ... }@inputs:
     let
         system = "x86_64-linux";
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
+        rootPath = self;
     in {
         nixosConfigurations = {
             stardom = nixpkgs.lib.nixosSystem {
@@ -30,7 +32,14 @@
         homeConfigurations = {
             nero = home-manager.lib.homeManagerConfiguration {
                 inherit pkgs;
-                extraSpecialArgs = {inherit inputs;};
+                extraSpecialArgs = {
+                    inherit inputs;
+                    inherit rootPath;
+                    pkgs-stable = import nixpkgs-stable {
+                        inherit system;
+                        config.allowUnfree = true;
+                    };
+                };
 
                 modules = [
                     ./home-manager/home.nix

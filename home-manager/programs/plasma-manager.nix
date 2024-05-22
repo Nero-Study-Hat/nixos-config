@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ plasma-manager, ... }:
 
 {
     # home.packages = with pkgs; [ hollywood ];
