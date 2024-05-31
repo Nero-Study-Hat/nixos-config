@@ -1,6 +1,3 @@
-# The source of this is from the still open nixpkgs PR #285941
-# from github user ilikefrogs101
-
 { fetchNuGet }: [
   (fetchNuGet { pname = "EnvDTE"; version = "8.0.2"; sha256 = "1wdvjzdmqbqyqlaijpjc959vvdic12vqr3c5sffhbxi7m1si5k63"; })
   (fetchNuGet { pname = "JetBrains.Annotations"; version = "2019.1.3"; sha256 = "188b0qw6lih0k3ddnmimadzr3y1y6vh6ramgkjnyskqd43prjzc2"; })

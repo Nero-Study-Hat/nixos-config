@@ -1,8 +1,7 @@
 { pkgs, pkgs-stable, rootPath, ... }:
 
 let
-    # godot4-mono = pkgs.callPackage /home/nero/.nixflake/pkgs/godot4-mono {}; # starts building before hitting an error later in process
-    godot4-mono = pkgs.callPackage "${rootPath}/pkgs/godot4-mono" {};
+    godot4-mono = pkgs.callPackage "${rootPath}/pkgs/godot4-mono" {}; # depends on dotnetCorePackages.sdk_version
 in
 {
     home.packages = [
@@ -17,7 +16,7 @@ in
         pkgs.github-desktop
 
         # Game Dev
-        # pkgs.godot_4
+        pkgs.godot_4
         godot4-mono
 
         # Sys Management
@@ -32,6 +31,7 @@ in
         pkgs.morgen
         pkgs.obsidian
         pkgs.remnote
+        pkgs.zoom-us
 
         # Secure Apps
         pkgs.tor-browser

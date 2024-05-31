@@ -65,7 +65,9 @@
         enable = true;
     };
 
-	# environment.systemPackages = with pkgs-stable; [ packages ];
+	environment.systemPackages = with pkgs; [
+		dotnetCorePackages.sdk_8_0_2xx
+	];
 
 	# # Virtualbox Setup
 	virtualisation.virtualbox.host.enable = true;

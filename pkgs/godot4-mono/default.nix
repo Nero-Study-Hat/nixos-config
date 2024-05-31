@@ -185,8 +185,8 @@ stdenv.mkDerivation rec {
     substituteInPlace "$out/share/applications/org.godotengine.Godot4-Mono.desktop" \
       --replace "Exec=godot" "Exec=$out/bin/godot4-mono" \
       --replace "Godot Engine" "Godot Engine ${version} (Mono, $(echo "${withPrecision}" | sed 's/.*/\u&/') Precision)"
-    cp icon.svg "$out/share/icons/hicolor/scalable/apps/godot.svg"
-    cp icon.png "$out/share/icons/godot.png"
+    cp icon.svg "$out/share/icons/hicolor/scalable/apps/godot_icon.svg"
+    cp icon.png "$out/share/icons/godot_icon.png"
     '';
 
   meta = with lib; {

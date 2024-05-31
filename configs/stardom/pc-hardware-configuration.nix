@@ -26,7 +26,6 @@
 			"2"
 		];
 	};
-	# fileSystems."/mnt/nero-pub-data".device = "/dev/disk/by-label/nero-pub-data";
 
 	swapDevices = [{ device = "/dev/disk/by-uuid/fa2d35b2-c349-42bd-b735-a5c71417f950"; }];
 
