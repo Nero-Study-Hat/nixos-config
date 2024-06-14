@@ -23,7 +23,7 @@
                 "Switch Window Up" = "Ctrl+Alt+Up";
                 "ShowDesktopGrid" = "Meta+A";
                 "Window Close" = "Alt+Q";
-                "Window Operations Menu" = "Alt+E";
+                "Window Operations Menu" = "Alt+R";
                 "toggle_spiral_layout" = "Alt+S";
                 # "next_layout" = "Ctrl+Shift+Meta+Right";
                 # "prev_layout" = "Ctrl+Shift+Meta+Left";

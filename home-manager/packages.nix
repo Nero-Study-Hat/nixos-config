@@ -7,6 +7,7 @@ in
     home.packages = [
         # Basics
         pkgs.brave
+        pkgs.mullvad-browser
         pkgs.libsForQt5.dolphin
         pkgs.libsForQt5.bismuth
 
@@ -42,6 +43,7 @@ in
         pkgs.krita
         pkgs.blender
         pkgs-stable.davinci-resolve
+        pkgs.aseprite
         # pureref  # currently requires manual setup
 
 
@@ -49,9 +51,12 @@ in
         pkgs.neofetch
         pkgs.tldr
         pkgs.flameshot
+        pkgs.simplescreenrecorder
         pkgs.yt-dlp
 
         # Media
+        pkgs.vlc
+        pkgs.obs-studio
         pkgs.freetube
 
         # Fun
