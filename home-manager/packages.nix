@@ -8,8 +8,10 @@ in
         # Basics
         pkgs.brave
         pkgs.mullvad-browser
+        pkgs.vesktop
         pkgs.libsForQt5.dolphin
-        pkgs.libsForQt5.bismuth
+        pkgs-stable.libsForQt5.bismuth
+        pkgs.kdePackages.fcitx5-with-addons
 
         # Development
         pkgs.vscode
@@ -28,7 +30,7 @@ in
         pkgs.curl
         pkgs.wget
 
-        # productivity
+        # productivitya
         pkgs.morgen
         pkgs.obsidian
         pkgs.remnote
@@ -41,7 +43,7 @@ in
 
         # Content Creation
         pkgs.krita
-        pkgs.blender
+        pkgs.blender-hip
         pkgs-stable.davinci-resolve
         pkgs.aseprite
         # pureref  # currently requires manual setup
@@ -56,13 +58,10 @@ in
 
         # Media
         pkgs.vlc
-        pkgs.obs-studio
         pkgs.freetube
 
         # Fun
         pkgs.cmatrix
-        pkgs.steam-tui
-        pkgs.steamcmd
     ];
 
     programs.tmux = {

@@ -35,12 +35,12 @@
 	hardware.cpu.amd.updateMicrocode = true;
 	hardware.enableRedistributableFirmware = true;
 
-	hardware.opengl = {
+	hardware.graphics = {
 		enable = true;
 
 		# For AMD vulkan support
-		driSupport = true;
-		driSupport32Bit = true;
+		# driSupport = true;
+		enable32Bit = true;
 
 		extraPackages = with pkgs; [
 			amdvlk
@@ -53,6 +53,5 @@
 			driversi686Linux.amdvlk
 		];
 	};
-
 	environment.variables.AMD_VULKAN_ICD = "RADV";
 }
