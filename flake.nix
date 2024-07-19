@@ -22,13 +22,16 @@
         defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
         rootPath = self;
     in {
+        nixosModules = import ./modules;
+
         nixosConfigurations = {
             stardom = nixpkgs.lib.nixosSystem {
                 inherit system;
+                specialArgs = { inherit inputs outputs; };
                 modules = [ ./configs/stardom/configuration.nix ];
-                specialArgs = { inherit inputs; };
             };
         };
+        
         homeConfigurations = {
             nero = home-manager.lib.homeManagerConfiguration {
                 inherit pkgs;

@@ -1,8 +1,9 @@
-{ inputs, lib, config, pkgs, ... }:
+{ inputs, outputs, lib, config, pkgs, ... }:
 
 {
 	imports = [
 		./pc-hardware-configuration.nix
+		outputs.nixosModules.kde
 	];
 
 	nix.settings = {
@@ -10,9 +11,6 @@
 		# Deduplicate and optimize nix store
 		auto-optimise-store = true;
 	};
-	
-	# environment.systemPackages = with pkgs; [ yubico-pam ];
-	# security.pam.yubico.enable = true;
 
 	networking.hostName = "stardom";
 	networking.networkmanager.enable = true;
@@ -36,26 +34,10 @@
 		nero = {
 			initialPassword = "nixisreallycool";
 			isNormalUser = true;
-			extraGroups = [ 
-							"qemu-libvirtd" "libvirtd" 
+			extraGroups = [
 							"wheel" "video" "audio" "disk" "networkmanager" 
 						];
 		};
-	};
-
-	services.xserver.enable = true;
-	services.xserver.videoDrivers = [ "amdgpu" ];
-	services.displayManager.sddm.enable = true;
-	services.xserver.desktopManager.plasma5.enable = true;
-
-	security.rtkit.enable = true;
-	services.pipewire = {
-		enable = true;
-		alsa.enable = true;
-		alsa.support32Bit = true;
-		pulse.enable = true;
-		# If you want to use JACK applications, uncomment this
-		#jack.enable = true;
 	};
 
 	nixpkgs.config.allowUnfree = true;
