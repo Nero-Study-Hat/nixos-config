@@ -1,7 +1,8 @@
-{ inputs, lib, config, pkgs, ... }:
+{ inputs, outputs, lib, config, pkgs, ... }:
 
 {
 	imports = [
+		../../modules/kde.nix
 		./pc-hardware-configuration.nix
 	];
 
@@ -16,7 +17,7 @@
 
 	time.timeZone = "America/New_York";
 
-	boot.kernelPackages = pkgs.linuxPackages_latest;
+	boot.kernelPackages = pkgs.linuxPackages_6_8;
 	boot.supportedFilesystems = [ "ntfs" ];
 	boot.loader = {
 		efi = {
@@ -33,14 +34,29 @@
 		nero = {
 			initialPassword = "nixisreallycool";
 			isNormalUser = true;
-			extraGroups = ["wheel" "networkmanager"];
+			extraGroups = [
+							"wheel" "video" "audio" "disk" "networkmanager" 
+						];
 		};
 	};
 
-	services.xserver.enable = true;
-	services.xserver.videoDrivers = [ "amdgpu" ];
-	services.xserver.displayManager.sddm.enable = true;
-	services.xserver.desktopManager.plasma5.enable = true;
+	nixpkgs.config.allowUnfree = true;
+
+	programs.java.enable = true; 
+    programs.steam = {
+        enable = true;
+    };
+
+	environment.systemPackages = with pkgs; [
+		dotnetCorePackages.sdk_8_0_2xx
+	];
+
+	# # Virtualbox Setup
+	virtualisation.virtualbox.host.enable = true;
+	virtualisation.virtualbox.host.package = pkgs.virtualbox;
+	users.extraGroups.vboxusers.members = [ "nero" ];
+	virtualisation.virtualbox.host.enableExtensionPack = true;
+	virtualisation.virtualbox.guest.enable = true;
 
 	system.stateVersion = "24.05";
 }

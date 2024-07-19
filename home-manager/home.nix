@@ -1,7 +1,8 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, plasma-manager, pkgs-stable, rootPath, ... }:
 
 {
     imports = [ 
+        ./programs/plasma-manager.nix
         ./packages.nix
         ./programs/bash.nix
         ./programs/git.nix
@@ -19,5 +20,5 @@
     home.keyboard.layout = "us";
 
     programs.home-manager.enable = true;
-    home.stateVersion = "23.11";
+    home.stateVersion = "24.05";
 }

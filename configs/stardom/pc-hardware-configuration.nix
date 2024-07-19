@@ -1,10 +1,9 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-	imports = [ ];
-
 	boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
 	boot.initrd.kernelModules = [ "amdgpu" ];
+
 	boot.kernelModules = [ "kvm-amd" ];
 	boot.extraModulePackages = [ ];
 
@@ -12,7 +11,19 @@
 	fileSystems."/boot/efi".device = "/dev/disk/by-label/NIXOS_EFI";
 
 	fileSystems."/mnt/nero-priv-data".device = "/dev/disk/by-label/nero-priv-data";
-	fileSystems."/mnt/nero-pub-data".device = "/dev/disk/by-label/nero-pub-data";
+	fileSystems."/mnt/nero-pub-data" =
+	{
+		device = "/dev/disk/by-label/nero-pub-data";
+		fsType = "ntfs";
+		options = [
+			"ntfs-3g"
+			"uid=1000"
+			"gid=100"
+			"umask=0022"
+			"0"
+			"2"
+		];
+	};
 
 	swapDevices = [{ device = "/dev/disk/by-uuid/fa2d35b2-c349-42bd-b735-a5c71417f950"; }];
 
@@ -22,12 +33,12 @@
 	hardware.cpu.amd.updateMicrocode = true;
 	hardware.enableRedistributableFirmware = true;
 
-	hardware.opengl = {
+	hardware.graphics = {
 		enable = true;
 
 		# For AMD vulkan support
-		driSupport = true;
-		driSupport32Bit = true;
+		# driSupport = true;
+		enable32Bit = true;
 
 		extraPackages = with pkgs; [
 			amdvlk
@@ -40,6 +51,5 @@
 			driversi686Linux.amdvlk
 		];
 	};
-
 	environment.variables.AMD_VULKAN_ICD = "RADV";
 }

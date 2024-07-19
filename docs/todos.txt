@@ -1,1 +1,1 @@
-Figure out Steam installation.
+Setup yubikey login.
