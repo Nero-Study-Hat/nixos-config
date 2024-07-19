@@ -2,8 +2,8 @@
 
 {
 	imports = [
+		../../modules/kde.nix
 		./pc-hardware-configuration.nix
-		outputs.nixosModules.kde
 	];
 
 	nix.settings = {
