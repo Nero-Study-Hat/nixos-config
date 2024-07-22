@@ -7,7 +7,10 @@
 		./pc-hardware-configuration.nix
 	];
 
-	# modules.test.name = "hollywood";
+	mytest = {
+		enable = true;
+		name = "bat";
+	};
 
 	nix.settings = {
 		experimental-features = "nix-command flakes";
