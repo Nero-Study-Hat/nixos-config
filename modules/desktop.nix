@@ -1,4 +1,4 @@
-{ lib, config, options, pkgs, ... }:
+{ lib, config, options, pkgs, hyprland, ... }:
 
 let
     cfg = config.desktop;
@@ -29,6 +29,7 @@ in
 			programs.hyprland = {
 				enable = true;
 				xwayland.enable = true;
+				package = hyprland.packages.${pkgs.system}.hyprland;
 			};
 		})
 	];
