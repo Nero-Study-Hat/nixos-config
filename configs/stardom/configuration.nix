@@ -3,14 +3,11 @@
 {
 	imports = [
 		../../modules/kde.nix
-		../../modules/mytest.nix
+		../../modules/desktop.nix
 		./pc-hardware-configuration.nix
 	];
 
-	mytest = {
-		enable = true;
-		name = "bat";
-	};
+	desktop.choice = "kde";
 
 	nix.settings = {
 		experimental-features = "nix-command flakes";
