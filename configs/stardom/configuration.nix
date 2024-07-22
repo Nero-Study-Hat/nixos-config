@@ -2,7 +2,7 @@
 
 {
 	imports = [
-		../../modules/kde.nix
+		# ../../modules/kde.nix
 		../../modules/desktop.nix
 		./pc-hardware-configuration.nix
 	];

@@ -4,12 +4,12 @@ let
     cfg = config.desktop;
 in
 {
-    options.mytest = {
+    options.desktop = {
 		choice = lib.mkOption {
 			type = lib.types.str;
-			default = "boo";
-			example = "hollywood";
-			description = "The package to be installed.";
+			default = "kde";
+			example = "hyprland";
+			description = "The DE or WM with associated packages and config to setup.";
 		};
     };
 
