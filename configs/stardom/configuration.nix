@@ -6,7 +6,7 @@
 		./pc-hardware-configuration.nix
 	];
 
-	desktop.choice = "hyprland";
+	desktop.choice = "kde";
 
 	nix.settings = {
 		experimental-features = "nix-command flakes";
@@ -43,7 +43,10 @@
 	};
 
 	security.polkit.enable = true;
+	programs.dconf.enable = true;
 
+	# enable sound with pipewire
+	sound.enable = true;
 	security.rtkit.enable = true;
 	services.pipewire = {
 		enable = true;
@@ -53,6 +56,9 @@
 		jack.enable = true;
 	};
 
+	# Enable CUPS to print documents.
+	services.printing.enable = true;
+
 	nixpkgs.config.allowUnfree = true;
 
 	programs.java.enable = true; 
@@ -61,7 +67,7 @@
     };
 
 	environment.systemPackages = with pkgs; [
-		dotnetCorePackages.sdk_8_0_2xx
+		dotnetCorePackages.sdk_8_0_1xx
 	];
 
 	# # Virtualbox Setup

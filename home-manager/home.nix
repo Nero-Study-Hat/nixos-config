@@ -2,7 +2,8 @@
 
 {
     imports = [ 
-        ./programs/plasma-manager.nix
+        # ./programs/plasma-manager.nix
+        ./programs/hyprland.nix
         ./packages.nix
         ./programs/bash.nix
         ./programs/git.nix
