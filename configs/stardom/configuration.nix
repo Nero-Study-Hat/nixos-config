@@ -6,7 +6,7 @@
 		./pc-hardware-configuration.nix
 	];
 
-	desktop.choice = "kde";
+	desktop.choice = "hyprland";
 
 	nix.settings = {
 		experimental-features = "nix-command flakes";

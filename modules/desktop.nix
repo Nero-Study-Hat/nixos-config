@@ -1,4 +1,4 @@
-{ inputs, lib, config, options, pkgs, ... }:
+{ hyprland, lib, config, options, pkgs, ... }:
 
 let
     cfg = config.desktop;
@@ -58,7 +58,7 @@ in
 				enable = true;
 				xwayland.enable = true;
 				portalPackage = pkgs.xdg-desktop-portal-hyprland;
-				package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+				package = hyprland.packages.${pkgs.system}.hyprland;
 			};
 			
 
@@ -104,16 +104,6 @@ in
 			xdg.portal = {
 				enable = true;
 				extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-			};
-
-			systemd.user.targets.hyprland-session = {
-				unitConfig = {
-					Description = "Hyprland compositor session";
-					Documentation = [ "man:systemd.special(7)" ];
-					BindsTo = [ "graphical-session.target" ];
-					Wants = [ "graphical-session-pre.target" ];
-					After = [ "graphical-session-pre.target" ];
-				};
 			};
 		})
 	];

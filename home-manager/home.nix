@@ -1,4 +1,4 @@
-{ config, pkgs, lib, plasma-manager, pkgs-stable, rootPath, ... }:
+{ lib, config, pkgs, pkgs-stable, plasma-manager, hyprland, rootPath, ... }:
 
 {
     imports = [ 
