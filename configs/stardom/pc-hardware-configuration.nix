@@ -52,4 +52,10 @@
 		];
 	};
 	environment.variables.AMD_VULKAN_ICD = "RADV";
+
+	hardware.opengl = {  
+		enable = true;  
+		driSupport = true;  
+		driSupport32Bit = true;  
+	};
 }

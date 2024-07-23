@@ -13,15 +13,17 @@
             inputs.nixpkgs.follows = "nixpkgs";
             inputs.home-manager.follows = "home-manager";
         };
-        hyprland.url = "github:hyprwm/Hyprland";
+        hyprland = {
+            url = "github:hyprwm/hyprland";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
         hyprland-plugins = {
             url = "github:hyprwm/hyprland-plugins";
             inputs.hyprland.follows = "hyprland";
         };
-        
     };
 
-    outputs = { self, nixpkgs, nixpkgs-stable, home-manager, plasma-manager, ... }@inputs:
+    outputs = { self, nixpkgs, nixpkgs-stable, home-manager, plasma-manager, hyprland,  ... }@inputs:
     let
         system = "x86_64-linux";
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
@@ -31,7 +33,10 @@
         nixosConfigurations = {
             stardom = nixpkgs.lib.nixosSystem {
                 inherit system;
-                modules = [ ./configs/stardom/configuration.nix ];
+                modules = [ 
+                    ./configs/stardom/configuration.nix
+                    inputs.hyprland.nixosModules.default
+                ];
                 specialArgs = { inherit inputs; };
             };
         };
