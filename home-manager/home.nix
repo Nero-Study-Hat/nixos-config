@@ -3,7 +3,8 @@
 {
     imports = [ 
         # ./programs/plasma-manager.nix
-        ./programs/hyprland.nix
+        ../modules/home/hyprland.nix #TODO: conditional module for desktop
+
         ./packages.nix
         ./programs/bash.nix
         ./programs/git.nix

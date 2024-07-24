@@ -17,11 +17,6 @@
             url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
             inputs.nixpkgs.follows = "nixpkgs";
         };
-        hyprland-plugins = {
-            url = "github:hyprwm/hyprland-plugins";
-            inputs.hyprland.follows = "hyprland";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
         hyprkool = {
             url = "github:thrombe/hyprkool";
             inputs.hyprland.follows = "hyprland";
@@ -62,7 +57,7 @@
                 modules = [
                     ./home-manager/home.nix
                     inputs.plasma-manager.homeManagerModules.plasma-manager
-                    inputs.hyprland.homeManagerModules.default
+                    # inputs.hyprland.homeManagerModules.default
                 ];
             };
         };
