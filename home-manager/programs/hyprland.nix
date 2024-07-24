@@ -181,7 +181,6 @@
 
                 # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
                 bind = $mainMod, T, exec, $terminal
-                bind = alt, Q, killactive,
                 bind = $mainMod, M, exit,
                 bind = $mainMod, E, exec, $fileManager
                 bind = $mainMod, V, togglefloating,
@@ -227,10 +226,6 @@
                 bind = $mainMod, mouse_down, workspace, e+1
                 bind = $mainMod, mouse_up, workspace, e-1
 
-                # Move/resize windows with mainMod + LMB/RMB and dragging
-                bindm = $mainMod, mouse:272, movewindow
-                bindm = $mainMod, mouse:273, resizewindow
-
 
                 ##############################
                 ### WINDOWS AND WORKSPACES ###
@@ -248,6 +243,20 @@
                 windowrulev2 = suppressevent maximize, class:.* # You'll probably like this.
             ''
         ];
+
+        settings = {
+            "$mod" = "SUPER";
+
+            bindm = [
+                # custom from me: does not work
+                "ALT, Q, killactive"
+
+                # default example: works
+                "$mod, mouse:272, movewindow"
+                "$mod, mouse:273, resizewindow"
+                "$mod ALT, mouse:272, resizewindow"
+            ];
+        };
 
         # settings = {
         #     "$terminal" = "kitty";
