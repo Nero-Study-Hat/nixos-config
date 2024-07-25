@@ -2,52 +2,15 @@
 
 # todos - hypridle, hyprlock, hyprkool
 
-let
-    # hyprkool = pkgs.callPackage "${rootPath}/pkgs/hyprkool" {};
-
-        hyprkool = pkgs.callPackage ({
-            lib,
-            fetchFromGitHub,
-            cmake,
-            hyprland,
-            hyprkool,
-        }:
-        hyprlandPlugins.mkHyprlandPlugin pkgs.hyprland {
-            pluginName = "hyprland";
-            version = "0.7.0";
-
-            src = fetchFromGitHub {
-                owner = "thrombe";
-                repo = "hyprkool";
-                rev = "3cafd73";
-            };
-
-            # any nativeBuildInputs required for the plugin
-            nativeBuildInputs = [cmake];
-
-            # set any buildInputs that are not already included in Hyprland
-            # by default, Hyprland and its dependencies are included
-            buildInputs = [];
-
-            meta = {
-                homepage = "https://github.com/thrombe/hyprkool";
-                description = "An opinionated Hyprland plugin that tries to replicate the feel of KDE activities and grid layouts.";
-                license = lib.licenses.mit;
-                platforms = lib.platforms.linux;
-                maintainers = with lib.maintainers; [thrombe];
-            };
-        });
-
-in
 {
     wayland.windowManager.hyprland = {
         enable = true;
         package = inputs.hyprland.packages.${pkgs.system}.hyprland;
         xwayland.enable = true;
+        systemd.enable = true;
 
         plugins = [
-            # inputs.hyprkool.packages.${pkgs.system}.hyprkool-plugin
-            hyprkool
+            inputs.hyprkool.packages.${pkgs.system}.default
         ];
 
         extraConfig = lib.concatStrings [
@@ -56,18 +19,17 @@ in
         ];
 
         settings = {
-            "plugin:hyprkool" = {
-                remember_activity_focus = true;
-                fallback_commands = true;
-
-                switch_workspace_on_edge = false;
-
+            plugin.hyprkool = {
                 activities = [
                     "work"
                     "slack"
                 ];
 
                 workspaces = [ 2 2 ];
+            };
+
+            debug = {
+                disable_logs = false;
             };
 
             "$terminal" = "cool-retro-term";
@@ -123,7 +85,7 @@ in
                 enabled = true;
                 bezier = [ "myBezier, 0.05, 0.9, 0.1, 1.05" ];
                 animation = [
-                    "workspaces, 1, 2, default, fade"
+                    # "workspaces, 1, 2, default, fade"
 
                     "windows, 1, 7, myBezier"
                     "windowsOut, 1, 7, default, popin 80%"
@@ -195,7 +157,7 @@ in
 
             exec-once = [
                 "waybar & swww"
-                "hyprkool daemon -m"
+                # "hyprkool daemon -m"
             ];
 
             env = [

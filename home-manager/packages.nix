@@ -1,8 +1,8 @@
 { pkgs, pkgs-stable, rootPath, ... }:
 
-let
-    godot4-mono = pkgs.callPackage "${rootPath}/pkgs/godot4-mono" {}; # depends on dotnetCorePackages.sdk_version
-in
+# let
+#     godot4-mono = pkgs.callPackage "${rootPath}/pkgs/godot4-mono" {}; # depends on dotnetCorePackages.sdk_version
+# in
 {
     home.packages = [
         # Basics
@@ -18,9 +18,9 @@ in
         pkgs.git
         pkgs.github-desktop
 
-        # Game Dev
-        pkgs.godot_4
-        godot4-mono
+        # # Game Dev
+        # pkgs.godot_4
+        # godot4-mono
 
         # Sys Management
         pkgs.bash
@@ -31,10 +31,10 @@ in
         pkgs.wget
 
         # productivitya
-        pkgs.morgen
-        pkgs.obsidian
-        pkgs.remnote
-        pkgs.zoom-us
+        # pkgs.morgen
+        # pkgs.obsidian
+        # pkgs.remnote
+        # pkgs.zoom-us
 
         # Secure Apps
         pkgs.tor-browser
@@ -42,10 +42,10 @@ in
         # need to make yubico-authenticator nixpkg
 
         # Content Creation
-        pkgs.krita
-        pkgs.blender-hip
-        pkgs-stable.davinci-resolve
-        pkgs.aseprite
+        # pkgs.krita
+        # pkgs.blender-hip
+        # pkgs-stable.davinci-resolve
+        # pkgs.aseprite
         # pureref  # currently requires manual setup
 
 

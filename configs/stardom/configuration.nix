@@ -2,7 +2,7 @@
 
 {
 	imports = [
-		../../modules/desktop.nix
+		../../modules/core/desktop.nix
 		./pc-hardware-configuration.nix
 	];
 
@@ -16,6 +16,8 @@
 		# Deduplicate and optimize nix store
 		auto-optimise-store = true;
 	};
+
+	nixpkgs.overlays = [ inputs.hyprland.overlays.default ];
 
 	networking.hostName = "stardom";
 	networking.networkmanager.enable = true;

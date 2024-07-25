@@ -1,4 +1,4 @@
-{ lib, config, pkgs, pkgs-stable, plasma-manager, hyprland, rootPath, ... }:
+{ inputs, lib, config, pkgs, pkgs-stable, plasma-manager, rootPath, ... }:
 
 {
     imports = [ 
@@ -14,6 +14,7 @@
 	nixpkgs = {
 		config.allowUnfree = true;
         config.permittedInsecurePackages = [ "electron-25.9.0" ];
+        overlays = [ inputs.hyprland.overlays.default ];
 	};
 
     home.username = "nero";

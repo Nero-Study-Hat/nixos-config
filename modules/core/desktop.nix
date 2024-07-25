@@ -60,6 +60,8 @@ in
 			# };
 
 			environment.systemPackages = with pkgs; [
+				inputs.hyprkool.packages."${system}".default
+
 				swww           # wallpaper daemon
 				rofi-wayland   # app launcher
 				hyprcursor
@@ -74,6 +76,8 @@ in
 				# notifications
 				mako           # notification daemon
 				libnotify
+
+				pyprland       # plugin system
 
 				## Utilities
 				# gromit-mpx     # for drawing on the screen

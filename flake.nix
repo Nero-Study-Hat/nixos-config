@@ -14,17 +14,22 @@
             inputs.home-manager.follows = "home-manager";
         };
         hyprland = {
-            url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+            type = "git";
+            url = "https://github.com/hyprwm/Hyprland";
+            submodules = true;
             inputs.nixpkgs.follows = "nixpkgs";
+        };
+        hyprland-plugins = {
+            url = "github:hyprwm/hyprland-plugins";
+            inputs.hyprland.follows = "hyprland";
         };
         hyprkool = {
             url = "github:thrombe/hyprkool";
             inputs.hyprland.follows = "hyprland";
-            inputs.nixpkgs.follows = "nixpkgs";
         };
     };
 
-    outputs = { self, nixpkgs, nixpkgs-stable, home-manager, plasma-manager, hyprland,  ... }@inputs:
+    outputs = { self, nixpkgs, nixpkgs-stable, home-manager, plasma-manager, hyprland,   ... }@inputs:
     let
         system = "x86_64-linux";
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
@@ -36,7 +41,6 @@
                 inherit system;
                 modules = [ 
                     ./configs/stardom/configuration.nix
-                    inputs.hyprland.nixosModules.default
                 ];
                 specialArgs = { inherit inputs; };
             };
@@ -57,7 +61,6 @@
                 modules = [
                     ./home-manager/home.nix
                     inputs.plasma-manager.homeManagerModules.plasma-manager
-                    # inputs.hyprland.homeManagerModules.default
                 ];
             };
         };
