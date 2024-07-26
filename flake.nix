@@ -27,15 +27,36 @@
             url = "github:thrombe/hyprkool";
             inputs.hyprland.follows = "hyprland";
         };
+        # hyprspace = {
+        #     url = "github:KZDKM/Hyprspace";
+        #     inputs.hyprland.follows = "hyprland";
+        # };
+        hyprland-virtual-desktops = {
+            url = "github:levnikmyskin/hyprland-virtual-desktops/dev";
+            inputs.hyprland.follows = "hyprland";
+        };
     };
 
-    outputs = { self, nixpkgs, nixpkgs-stable, home-manager, plasma-manager, hyprland,   ... }@inputs:
+    outputs = {
+        self,
+        nixpkgs,
+        nixpkgs-stable,
+        home-manager,
+        plasma-manager,
+        hyprland,
+        hyprland-plugins,
+        hyprkool,
+        hyprland-virtual-desktops,
+        ... 
+    }@inputs:
     let
         system = "x86_64-linux";
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
         rootPath = self;
     in {
+        nixpkgs.overlays = [ hyprland.overlays.default ];
+
         nixosConfigurations = {
             stardom = nixpkgs.lib.nixosSystem {
                 inherit system;
@@ -56,6 +77,7 @@
                         inherit system;
                         config.allowUnfree = true;
                     };
+                    inherit hyprland hyprland-plugins hyprkool hyprland-virtual-desktops;
                 };
 
                 modules = [

@@ -14,7 +14,6 @@
 	nixpkgs = {
 		config.allowUnfree = true;
         config.permittedInsecurePackages = [ "electron-25.9.0" ];
-        overlays = [ inputs.hyprland.overlays.default ];
 	};
 
     home.username = "nero";

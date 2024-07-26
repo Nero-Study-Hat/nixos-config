@@ -1,33 +1,114 @@
-{ lib, pkgs, inputs, rootPath, ... }:
-
-# todos - hypridle, hyprlock, hyprkool
+{ lib, pkgs, hyprland, hyprland-plugins, hyprkool, hyprland-virtual-desktops, rootPath, ... }:
 
 {
+    home.packages = with pkgs; [
+        hyprkool.packages."${system}".default
+
+        swww           # wallpaper daemon
+        rofi-wayland   # app launcher
+        hyprcursor
+
+        kitty          # hyprland's default terminal
+
+        hyprlock       # *fast* lock screen
+        hyprpicker     # screen-space color picker
+        # hyprshade      # to apply shaders to the screen
+        # hyprshot       # instead of grim(shot) or maim/slurp
+
+        # notifications
+        mako           # notification daemon
+        libnotify
+
+        pyprland       # plugin system
+
+        ## Utilities
+        # gromit-mpx     # for drawing on the screen
+        # pamixer        # for volume control
+        # wf-recorder    # screencasting
+        # wlr-randr      # for monitors that hyprctl can't handle
+        # xorg.xrandr    # for XWayland windows
+
+        (pkgs.waybar.overrideAttrs (oldAttrs: {
+            mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+            })
+        )
+    ];
+
     wayland.windowManager.hyprland = {
         enable = true;
-        package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+        package = hyprland.packages.${pkgs.system}.hyprland;
         xwayland.enable = true;
         systemd.enable = true;
 
         plugins = [
-            inputs.hyprkool.packages.${pkgs.system}.default
+            # does not load because "/nix/store/8x6i3dndmna41ikshrp3jlgb5jw82wr6-hyprkool-0.7.0/lib/libhyprkool.so" DNE
+            # hyprkool.packages.${pkgs.system}.default
+            # hyprspace.packages.${pkgs.system}.Hyprspace # does not build (I did have the input)
+
+            hyprland-plugins.packages.${pkgs.system}.hyprexpo
+            hyprland-virtual-desktops.packages.${pkgs.system}.virtual-desktops
         ];
 
+        # hyprlang config
         extraConfig = lib.concatStrings [
-            '' # hyprlang config
+            ''
+                # animations {
+                #     animation = workspaces, 1, 2, default, fade
+                # }
+
+                # # Switch activity
+                # bind = $mainMod, TAB, exec, hyprkool next-activity -c
+
+                # # Move active window to a different acitvity
+                # bind = $mainMod CTRL, TAB, exec, hyprkool next-activity -c -w
+
+                # # Relative workspace jumps
+                # bind = CTRL ALT, left, exec, hyprkool move-left -c
+                # bind = CTRL ALT, right, exec, hyprkool move-right -c
+                # bind = CTRL ALT, down, exec, hyprkool move-down -c
+                # bind = CTRL ALT, up, exec, hyprkool move-up -c
+
+                # # Move active window to a workspace
+                # bind = $mainMod CTRL, left, exec, hyprkool move-left -c -w
+                # bind = $mainMod CTRL, right, exec, hyprkool move-right -c -w
+                # bind = $mainMod CTRL, down, exec, hyprkool move-down -c -w
+                # bind = $mainMod CTRL, up, exec, hyprkool move-up -c -w
+
+                # # this only works if you have the hyprkool plugin
+                # bind = $mainMod, a, exec, hyprkool toggle-overview
+
+                # bind = SUPER, a, hyprexpo:expo, toggle # can be: toggle, off/disable or on/enable
+
+                plugin {
+                    virtual-desktops {
+                        names = 1:main, 2:tech, 3:slack 
+                        cycleworkspaces = 1
+                        rememberlayout = size
+                        notifyinit = 0
+                        verbose_logging = 0
+                    }
+                    # hyprexpo {
+                    #     columns = 3
+                    #     gap_size = 5
+                    #     bg_col = rgb(111111)
+                    #     workspace_method = first 1 # [center/first] [workspace] e.g. first 1 or center m+1
+                    #     enable_gesture = false
+                    # }
+                }
+
+                # plugin {
+                #     hyprkool {
+                #         overview {
+                #             hover_border_color = rgba(33ccffee)
+                #             focus_border_color = rgba(00ff99ee)
+                #             workspace_gap_size = 10
+                #         }
+                #     }
+                # }
             ''
         ];
 
         settings = {
-            plugin.hyprkool = {
-                activities = [
-                    "work"
-                    "slack"
-                ];
-
-                workspaces = [ 2 2 ];
-            };
-
             debug = {
                 disable_logs = false;
             };
@@ -107,23 +188,6 @@
 
             bind = [
                 "ALT, SPACE, exec, $menu"
-                
-                # Switch activity
-                "$mainMod, TAB, exec, hyprkool next-activity -c"
-                # Move active window to a different acitvity
-                "$mainMod CTRL, TAB, exec, hyprkool next-activity -c -w"
-                # Relative workspace jumps
-                "CTRL ALT, left, exec, hyprkool move-left -c"
-                "CTRL ALT, right, exec, hyprkool move-right -c"
-                "CTRL ALT, up, exec, hyprkool move-down -c"
-                "CTRL ALT, down, exec, hyprkool move-up -c"
-                # Move active window to a workspace
-                "CTRL $mainMod, left, exec, hyprkool move-left -c -w"
-                "CTRL $mainMod, right, exec, hyprkool move-right -c -w"
-                "CTRL $mainMod, up, exec, hyprkool move-down -c -w"
-                "CTRL $mainMod, down, exec, hyprkool move-up -c -w"
-
-                "$mainMod, b, exec, hyprkool toggle-overview"
             ];
 
             bindr = [
@@ -157,7 +221,6 @@
 
             exec-once = [
                 "waybar & swww"
-                # "hyprkool daemon -m"
             ];
 
             env = [

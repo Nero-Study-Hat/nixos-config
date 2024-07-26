@@ -53,44 +53,6 @@ in
 				portalPackage = pkgs.xdg-desktop-portal-hyprland;
 				package = inputs.hyprland.packages.${pkgs.system}.hyprland;
 			};
-			
-
-			# environment.sessionVariables = {
-			# 	NIXOS_OZONE_WL = "1";
-			# };
-
-			environment.systemPackages = with pkgs; [
-				inputs.hyprkool.packages."${system}".default
-
-				swww           # wallpaper daemon
-				rofi-wayland   # app launcher
-				hyprcursor
-
-				kitty          # hyprland's default terminal
-
-				hyprlock       # *fast* lock screen
-				hyprpicker     # screen-space color picker
-				# hyprshade      # to apply shaders to the screen
-				# hyprshot       # instead of grim(shot) or maim/slurp
-
-				# notifications
-				mako           # notification daemon
-				libnotify
-
-				pyprland       # plugin system
-
-				## Utilities
-				# gromit-mpx     # for drawing on the screen
-				# pamixer        # for volume control
-				# wf-recorder    # screencasting
-				# wlr-randr      # for monitors that hyprctl can't handle
-				# xorg.xrandr    # for XWayland windows
-
-				(pkgs.waybar.overrideAttrs (oldAttrs: {
-					mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-					})
-				)
-			];
 
 			# for desktop program interations with each other
 			services.dbus.enable = true;

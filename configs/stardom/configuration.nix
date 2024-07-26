@@ -17,8 +17,6 @@
 		auto-optimise-store = true;
 	};
 
-	nixpkgs.overlays = [ inputs.hyprland.overlays.default ];
-
 	networking.hostName = "stardom";
 	networking.networkmanager.enable = true;
 
@@ -47,8 +45,8 @@
 		};
 	};
 
-	security.polkit.enable = true;
-	programs.dconf.enable = true;
+	# security.polkit.enable = true;
+	# programs.dconf.enable = true;
 
 	# enable sound with pipewire
 	security.rtkit.enable = true;
