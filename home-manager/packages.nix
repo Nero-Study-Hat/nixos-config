@@ -29,6 +29,7 @@ in
         pkgs.cool-retro-term
         pkgs.curl
         pkgs.wget
+        pkgs.file
 
         # productivitya
         pkgs.morgen

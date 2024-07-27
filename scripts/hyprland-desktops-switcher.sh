@@ -1,43 +1,76 @@
 #!/usr/bin/env bash
 
-### PLAN ###
-#   this will be made as a script and I will make a PR regarding
-#   adding this script to the plugin in an associated /scripts dir
-#   with it's existence and functionality being explained in the readme
-#
-# - initial setup
-#     - env variable in hyprland config for current activity
-#     - create 16 virtual desktops and 4 activities (variable possibilities)
-# - bash script for switching current focused virtual desktop based on keyboard shortcut input
-#     - check activity variable to choose array of virtual desktops to work with
-#     - map desktop in group to 1-4 for simplicity
-#     - move between four virtual desktops based on arrow keys behavior in kde
-#         - left right conditions - from 1 and 3 always add 1, from 2 and 4 always subtract 1
-#         - up down conditions - from 1 and 2 always add 2, from 3 and 4 always subtract 2
-#
-#   - additional setup
-#     - display current (and change-able) activity and virtual desktop from bar
+# requirement: a virtual desktop for each cell in the table of rows*columns
+
+# USER SETTINGS
+declare -i columns=2
+declare -i rows=2
+wrapEnable="true"
+# -------------------
 
 
-currentDesktopNum=$( hyprctl printdesk | awk '{print $3;}' | sed 's/.$//' )
+declare -i currentDesktopNum=$( hyprctl printdesk | awk '{print $3;}' | sed 's/.$//' )
+declare -i modifierNum
+declare -i targetDesktopNum
 
-if [[ "$1" == "left" && "$currentDesktopNum" == "1" ]]; then
-    hyprctl dispatch vdesk 3
-    exit 1
+
+declare -i limit=$(($rows + 1))
+for (( i=1; i<limit; i++ )) ; {
+    # left-most column
+    x=$(( $i * $columns - ($columns - 1) ))
+    if [ "$x" -eq "$currentDesktopNum" ] && [ "$1" == "left" ]; then
+        if [ "$wrapEnable" == "true" ]; then
+            targetDesktopNum=$(( $currentDesktopNum + ($columns - 1) ))
+            hyprctl dispatch vdesk ${targetDesktopNum}
+            exit 1
+        else
+            exit 1
+        fi
+    fi
+    # right-most column
+    y=$(( $i * $columns ))
+    if [ "$y" -eq "$currentDesktopNum" ] && [ "$1" == "right" ]; then
+        if [ "$wrapEnable" == "true" ]; then
+            targetDesktopNum=$(( $currentDesktopNum - ($columns - 1) ))
+            hyprctl dispatch vdesk ${targetDesktopNum}
+            exit 1
+        else
+            exit 1
+        fi
+    fi
+}
+
+if [ "$currentDesktopNum" -ge 1 ] && [ "$currentDesktopNum" -le "$columns" ] && [ "$1" == "up" ]; then
+    if [ "$wrapEnable" == "true" ]; then
+        targetDesktopNum=$(( $currentDesktopNum + ($columns * ($rows - 1)) ))
+
+        # echo "current: ${currentDesktopNum} modifer: ${modifierNum} target: ${wrapUpNum}" # this is reached
+        hyprctl dispatch vdesk ${targetDesktopNum}
+        exit 1
+    else
+        exit 1
+    fi
+elif [ "$currentDesktopNum" -ge $(($columns * ($rows - 1) + 1)) ] && [ "$currentDesktopNum" -le $(($rows * $columns)) ] && [ "$1" == "down" ]; then
+    if [ "$wrapEnable" == "true" ]; then
+        targetDesktopNum=$(($currentDesktopNum - ($columns * ($rows - 1))))
+        hyprctl dispatch vdesk ${targetDesktopNum}
+        exit 1
+    else
+        exit 1
+    fi
 fi
 
-if [[ "$1" == "right" && "$currentDesktopNum" == "3" ]]; then
-    hyprctl dispatch vdesk 1
-fi
-
-if [ "$1" == "left" ]; then
-    targetDesktopNum=$(("$currentDesktopNum"-1))
-    hyprctl dispatch vdesk "$targetDesktopNum"
-    exit 1
-fi
 
 if [ "$1" == "right" ]; then
-    targetDesktopNum=$(("$currentDesktopNum"+1))
-    hyprctl dispatch vdesk "$targetDesktopNum"
-    exit 1
+    modifierNum=(1)
+elif [ "$1" == "left" ]; then
+    modifierNum=(-1)
+elif [ "$1" == "up" ]; then
+    modifierNum=$(($rows * -1))
+elif [ "$1" == "down" ]; then
+    modifierNum=($rows)
 fi
+
+targetDesktopNum=$(( $currentDesktopNum + $modifierNum ))
+hyprctl dispatch vdesk ${targetDesktopNum}
+exit 1

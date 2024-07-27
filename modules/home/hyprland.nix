@@ -1,5 +1,8 @@
 { lib, pkgs, hyprland, hyprland-plugins, hyprkool, hyprland-virtual-desktops, rootPath, ... }:
 
+let
+    virtualDesktopSwitchScript = "${rootPath}/scripts/hyprland-desktops-switcher.sh";
+in
 {
     home.packages = with pkgs; [
         hyprkool.packages."${system}".default
@@ -45,7 +48,6 @@
             # hyprkool.packages.${pkgs.system}.default
             # hyprspace.packages.${pkgs.system}.Hyprspace # does not build (I did have the input)
 
-            hyprland-plugins.packages.${pkgs.system}.hyprexpo
             hyprland-virtual-desktops.packages.${pkgs.system}.virtual-desktops
         ];
 
@@ -79,7 +81,15 @@
 
                 # bind = SUPER, a, hyprexpo:expo, toggle # can be: toggle, off/disable or on/enable
 
+
                 plugin {
+                    # hyprkool {
+                    #     overview {
+                    #         hover_border_color = rgba(33ccffee)
+                    #         focus_border_color = rgba(00ff99ee)
+                    #         workspace_gap_size = 10
+                    #     }
+                    # }
                     virtual-desktops {
                         names = 1:main, 2:tech, 3:slack 
                         cycleworkspaces = 1
@@ -87,24 +97,7 @@
                         notifyinit = 0
                         verbose_logging = 0
                     }
-                    # hyprexpo {
-                    #     columns = 3
-                    #     gap_size = 5
-                    #     bg_col = rgb(111111)
-                    #     workspace_method = first 1 # [center/first] [workspace] e.g. first 1 or center m+1
-                    #     enable_gesture = false
-                    # }
                 }
-
-                # plugin {
-                #     hyprkool {
-                #         overview {
-                #             hover_border_color = rgba(33ccffee)
-                #             focus_border_color = rgba(00ff99ee)
-                #             workspace_gap_size = 10
-                #         }
-                #     }
-                # }
             ''
         ];
 
@@ -188,6 +181,10 @@
 
             bind = [
                 "ALT, SPACE, exec, $menu"
+                "CTRL ALT, up, exec, ${virtualDesktopSwitchScript} up"
+                "CTRL ALT, down, exec, ${virtualDesktopSwitchScript} down"
+                "CTRL ALT, right, exec, ${virtualDesktopSwitchScript} right"
+                "CTRL ALT, left, exec, ${virtualDesktopSwitchScript} left"
             ];
 
             bindr = [
