@@ -181,10 +181,16 @@ in
 
             bind = [
                 "ALT, SPACE, exec, $menu"
-                "CTRL ALT, up, exec, ${virtualDesktopSwitchScript} up"
-                "CTRL ALT, down, exec, ${virtualDesktopSwitchScript} down"
-                "CTRL ALT, right, exec, ${virtualDesktopSwitchScript} right"
-                "CTRL ALT, left, exec, ${virtualDesktopSwitchScript} left"
+                
+                "CTRL ALT, up, exec, ${virtualDesktopSwitchScript} up focus"
+                "CTRL ALT, down, exec, ${virtualDesktopSwitchScript} down focus"
+                "CTRL ALT, right, exec, ${virtualDesktopSwitchScript} right focus"
+                "CTRL ALT, left, exec, ${virtualDesktopSwitchScript} left focus"
+
+                "CTRL $mainMod, up, exec, ${virtualDesktopSwitchScript} up window"
+                "CTRL $mainMod, down, exec, ${virtualDesktopSwitchScript} down window"
+                "CTRL $mainMod, right, exec, ${virtualDesktopSwitchScript} right window"
+                "CTRL $mainMod, left, exec, ${virtualDesktopSwitchScript} left window"
             ];
 
             bindr = [
