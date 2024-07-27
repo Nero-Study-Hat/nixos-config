@@ -57,38 +57,5 @@
 		jack.enable = true;
 	};
 
-
-	nixpkgs.config.allowUnfree = true;
-	environment.systemPackages = with pkgs; [
-		# browsing and sharing
-		pkgs.brave
-		pkgs.simplescreenrecorder
-
-		# code
-        pkgs.vscode
-        pkgs.git
-        pkgs.github-desktop
-
-		# sys
-        pkgs.bash
-        pkgs.gparted
-        pkgs.htop
-        pkgs.cool-retro-term
-        pkgs.curl
-        pkgs.wget
-        pkgs.file
-        pkgs.tldr
-	];
-
-    programs.tmux = {
-        enable = true;
-        package = pkgs.tmux;
-    };
-
-    programs.htop = {
-        enable = true;
-        package = pkgs.htop;
-    };
-
 	system.stateVersion = "24.05";
 }

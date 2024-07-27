@@ -62,10 +62,20 @@
         nixpkgs.overlays = [ hyprland.overlays.default ];
 
         packages.x86_64-linux = {
-            isoimage = nixos-generators.nixosGenerate {
+            isoimage = nixpkgs.nixos-generators.nixosGenerate {
                 inherit system;
                 modules = [
                     ./hosts/isoimage/configuration.nix
+                    home-manager.nixosModules.home-manager
+                    {
+                        home-manager.useGlobalPkgs = true;
+                        home-manager.useUserPackages = true;
+                        home-manager.users.nixer = import ./users/isoimage-nixer/home.nix;
+
+                        home-manager.extraSpecialArgs = {
+                            inherit hyprland hyprland-plugins hyprkool hyprland-virtual-desktops;
+                        };
+                    }
                 ];
                 format = "iso";
                 specialArgs = { inherit inputs; };
@@ -96,7 +106,7 @@
                 };
 
                 modules = [
-                    ./home-manager/home.nix
+                    ./users/stardom-nero/home.nix
                     inputs.plasma-manager.homeManagerModules.plasma-manager
                 ];
             };
