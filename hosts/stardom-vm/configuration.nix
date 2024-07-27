@@ -17,13 +17,13 @@
 		auto-optimise-store = true;
 	};
 
-	networking.hostName = "stardom";
+    # TODO: prompt user to update this somehow
+	networking.hostName = "stardom-vm";
 	networking.networkmanager.enable = true;
 
 	time.timeZone = "America/New_York";
 
 	boot.kernelPackages = pkgs.linuxPackages_6_8;
-	boot.supportedFilesystems = [ "ntfs" ];
 	boot.loader = {
 		efi = {
 			efiSysMountPoint = "/boot/efi";
@@ -36,7 +36,7 @@
 	};
 
 	users.users = {
-		nero = {
+		nixer = {
 			initialPassword = "nixisreallycool";
 			isNormalUser = true;
 			extraGroups = [
@@ -44,9 +44,6 @@
 						];
 		};
 	};
-
-	# security.polkit.enable = true;
-	# programs.dconf.enable = true;
 
 	# enable sound with pipewire
 	security.rtkit.enable = true;
@@ -61,23 +58,16 @@
 	# Enable CUPS to print documents.
 	services.printing.enable = true;
 
+
 	nixpkgs.config.allowUnfree = true;
+	environment.systemPackages = with pkgs; [
+		dotnetCorePackages.sdk_8_0_1xx
+	];
 
 	programs.java.enable = true; 
     programs.steam = {
         enable = true;
     };
-
-	environment.systemPackages = with pkgs; [
-		dotnetCorePackages.sdk_8_0_1xx
-	];
-
-	# # Virtualbox Setup
-	virtualisation.virtualbox.host.enable = true;
-	virtualisation.virtualbox.host.package = pkgs.virtualbox;
-	users.extraGroups.vboxusers.members = [ "nero" ];
-	virtualisation.virtualbox.host.enableExtensionPack = true;
-	virtualisation.virtualbox.guest.enable = true;
 
 	system.stateVersion = "24.05";
 }

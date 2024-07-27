@@ -8,11 +8,18 @@
             url = "github:nix-community/home-manager";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+
+        nixos-generators = {
+            url = "github:nix-community/nixos-generators";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
+
         plasma-manager = {
             url = "github:pjones/plasma-manager";
             inputs.nixpkgs.follows = "nixpkgs";
             inputs.home-manager.follows = "home-manager";
         };
+        
         hyprland = {
             type = "git";
             url = "https://github.com/hyprwm/Hyprland?ref=refs/tags/v0.41.2";
@@ -48,10 +55,22 @@
     let
         system = "x86_64-linux";
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        lib = nixpkgs.legacyPackages.x86_64-linux.lib;
         defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
         rootPath = self;
     in {
         nixpkgs.overlays = [ hyprland.overlays.default ];
+
+        packages.x86_64-linux = {
+            isoimage = nixos-generators.nixosGenerate {
+                inherit system;
+                modules = [
+                    ./hosts/isoimage/configuration.nix
+                ];
+                format = "iso";
+                specialArgs = { inherit inputs; };
+            };
+        };
 
         nixosConfigurations = {
             stardom = nixpkgs.lib.nixosSystem {
@@ -61,13 +80,6 @@
                 ];
                 specialArgs = { inherit inputs; };
             };
-
-            # exampleIso = nixpkgs.lib.nixosSystem {
-            #     specialArgs = { inherit inputs; };
-            #     modules = [
-            #         ./hosts/isoimage/configuration.nix
-            #     ];
-            # };
         };
         
         homeConfigurations = {

@@ -1,9 +1,10 @@
 { inputs, outputs, lib, config, pkgs, ... }:
 
 {
+	# no hard-configuration.nix because this will be used by nixos-generator to
+	# build an iso which does its own thing to work on a bunch of different hardware
 	imports = [
 		../../modules/core/desktop.nix
-		./hardware-configuration.nix
 	];
 
 	desktop.choice = "hyprland";
@@ -17,7 +18,8 @@
 		auto-optimise-store = true;
 	};
 
-	networking.hostName = "stardom";
+	networking.hostName = "isoimage";
+	networking.useDHCP = lib.mkDefault true;
 	networking.networkmanager.enable = true;
 
 	time.timeZone = "America/New_York";
@@ -36,7 +38,7 @@
 	};
 
 	users.users = {
-		nero = {
+		nixer = {
 			initialPassword = "nixisreallycool";
 			isNormalUser = true;
 			extraGroups = [
@@ -44,9 +46,6 @@
 						];
 		};
 	};
-
-	# security.polkit.enable = true;
-	# programs.dconf.enable = true;
 
 	# enable sound with pipewire
 	security.rtkit.enable = true;
@@ -58,26 +57,38 @@
 		jack.enable = true;
 	};
 
-	# Enable CUPS to print documents.
-	services.printing.enable = true;
 
 	nixpkgs.config.allowUnfree = true;
-
-	programs.java.enable = true; 
-    programs.steam = {
-        enable = true;
-    };
-
 	environment.systemPackages = with pkgs; [
-		dotnetCorePackages.sdk_8_0_1xx
+		# browsing and sharing
+		pkgs.brave
+		pkgs.simplescreenrecorder
+
+		# code
+        pkgs.vscode
+        pkgs.git
+        pkgs.github-desktop
+
+		# sys
+        pkgs.bash
+        pkgs.gparted
+        pkgs.htop
+        pkgs.cool-retro-term
+        pkgs.curl
+        pkgs.wget
+        pkgs.file
+        pkgs.tldr
 	];
 
-	# # Virtualbox Setup
-	virtualisation.virtualbox.host.enable = true;
-	virtualisation.virtualbox.host.package = pkgs.virtualbox;
-	users.extraGroups.vboxusers.members = [ "nero" ];
-	virtualisation.virtualbox.host.enableExtensionPack = true;
-	virtualisation.virtualbox.guest.enable = true;
+    programs.tmux = {
+        enable = true;
+        package = pkgs.tmux;
+    };
+
+    programs.htop = {
+        enable = true;
+        package = pkgs.htop;
+    };
 
 	system.stateVersion = "24.05";
 }
