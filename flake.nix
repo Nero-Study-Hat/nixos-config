@@ -57,10 +57,17 @@
             stardom = nixpkgs.lib.nixosSystem {
                 inherit system;
                 modules = [ 
-                    ./configs/stardom/configuration.nix
+                    ./hosts/stardom/configuration.nix
                 ];
                 specialArgs = { inherit inputs; };
             };
+
+            # exampleIso = nixpkgs.lib.nixosSystem {
+            #     specialArgs = { inherit inputs; };
+            #     modules = [
+            #         ./hosts/isoimage/configuration.nix
+            #     ];
+            # };
         };
         
         homeConfigurations = {

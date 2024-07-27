@@ -1,1 +1,0 @@
-[Extremely Simple and heavily explained starting flake for a system](https://nixos-and-flakes.thiscute.world/nixos-with-flakes/nixos-with-flakes-enabled)

@@ -1,1 +1,8 @@
-Setup yubikey login.
+Hyprland Specific
+- setup sddm, hypridle, hyprlock, screenshot utility
+- audio control utility
+- waybar and of eww widgets
+- activities component to desktop-switcher script
+
+General
+- Setup yubikey login.
