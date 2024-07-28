@@ -38,7 +38,7 @@
 	};
 
 	users.users = {
-		nixer = {
+		iso = {
 			initialPassword = "nixisreallycool";
 			isNormalUser = true;
 			extraGroups = [

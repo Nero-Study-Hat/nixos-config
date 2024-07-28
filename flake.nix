@@ -42,6 +42,7 @@
 
     outputs = {
         self,
+        nixos-generators,
         nixpkgs,
         nixpkgs-stable,
         home-manager,
@@ -62,7 +63,7 @@
         nixpkgs.overlays = [ hyprland.overlays.default ];
 
         packages.x86_64-linux = {
-            isoimage = nixpkgs.nixos-generators.nixosGenerate {
+            isoimage = nixos-generators.nixosGenerate {
                 inherit system;
                 modules = [
                     ./hosts/isoimage/configuration.nix
@@ -70,7 +71,7 @@
                     {
                         home-manager.useGlobalPkgs = true;
                         home-manager.useUserPackages = true;
-                        home-manager.users.nixer = import ./users/isoimage-nixer/home.nix;
+                        home-manager.users.nixer = import ./users/iso/home.nix;
 
                         home-manager.extraSpecialArgs = {
                             inherit hyprland hyprland-plugins hyprkool hyprland-virtual-desktops;
@@ -106,7 +107,7 @@
                 };
 
                 modules = [
-                    ./users/stardom-nero/home.nix
+                    ./users/nero/home.nix
                     inputs.plasma-manager.homeManagerModules.plasma-manager
                 ];
             };
