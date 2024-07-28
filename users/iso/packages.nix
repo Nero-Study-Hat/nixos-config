@@ -1,34 +1,34 @@
-{ pkgs-stable, ... }:
+{ pkgs, ... }:
 
 {
     home.packages = [
 		# browsing and sharing
-		pkgs-stable.brave
-		pkgs-stable.simplescreenrecorder
+		pkgs.brave
+		pkgs.simplescreenrecorder
 
 		# code
-        pkgs-stable.vscode
-        pkgs-stable.git
-        pkgs-stable.github-desktop
+        pkgs.vscode
+        pkgs.git
+        pkgs.github-desktop
 
 		# sys
-        pkgs-stable.bash
-        pkgs-stable.gparted
-        pkgs-stable.htop
-        pkgs-stable.cool-retro-term
-        pkgs-stable.curl
-        pkgs-stable.wget
-        pkgs-stable.file
-        pkgs-stable.tldr
+        pkgs.bash
+        pkgs.gparted
+        pkgs.htop
+        pkgs.cool-retro-term
+        pkgs.curl
+        pkgs.wget
+        pkgs.file
+        pkgs.tldr
     ];
 
     programs.tmux = {
         enable = true;
-        package = pkgs-stable.tmux;
+        package = pkgs.tmux;
     };
 
     programs.htop = {
         enable = true;
-        package = pkgs-stable.htop;
+        package = pkgs.htop;
     };
 }

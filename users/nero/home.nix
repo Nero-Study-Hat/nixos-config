@@ -6,7 +6,7 @@
         ../../modules/home/hyprland.nix #TODO: conditional module for desktop
 
         ./packages.nix
-        ../../modules/home/programs/bash.nix
+        ../../modules/home/bash.nix
         ../../modules/home/git.nix
         ../../modules/home/vscode.nix
     ];

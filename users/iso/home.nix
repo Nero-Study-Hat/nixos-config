@@ -5,7 +5,7 @@
         ../../modules/home/hyprland.nix #TODO: conditional module for desktop
 
         ./packages.nix
-        ../../modules/home/programs/bash.nix
+        ../../modules/home/bash.nix
         ../../modules/home/git.nix
         ../../modules/home/vscode.nix
     ];
@@ -16,7 +16,7 @@
 	};
 
     home.username = "iso";
-    home.homeDirectory = "/home/nero";
+    home.homeDirectory = "/home/iso";
 
     home.keyboard.layout = "us";
 

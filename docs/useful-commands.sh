@@ -13,4 +13,4 @@ result/activate
 home-manager switch --flake {path/to/flake/dir}#username
 
 # --- iso image ---
-nix build {path/to/flake/dir}#iso
+nix build {path/to/flake/dir}#isoimage -o {target/output/path}

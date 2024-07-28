@@ -71,9 +71,15 @@
                     {
                         home-manager.useGlobalPkgs = true;
                         home-manager.useUserPackages = true;
-                        home-manager.users.nixer = import ./users/iso/home.nix;
+                        home-manager.users.iso = import ./users/iso/home.nix;
 
                         home-manager.extraSpecialArgs = {
+                            inherit inputs;
+                            inherit rootPath;
+                            pkgs-stable = import nixpkgs-stable {
+                                inherit system;
+                                config.allowUnfree = true;
+                            };
                             inherit hyprland hyprland-plugins hyprkool hyprland-virtual-desktops;
                         };
                     }

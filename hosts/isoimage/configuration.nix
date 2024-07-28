@@ -18,6 +18,11 @@
 		auto-optimise-store = true;
 	};
 
+	nixpkgs = {
+		config.allowUnfree = true;
+        config.permittedInsecurePackages = [ "electron-25.9.0" ];
+	};
+
 	networking.hostName = "isoimage";
 	networking.useDHCP = lib.mkDefault true;
 	networking.networkmanager.enable = true;
