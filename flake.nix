@@ -84,8 +84,16 @@
                         };
                     }
                 ];
-                format = "iso";
                 specialArgs = { inherit inputs; };
+                format = "iso";
+            };
+            stardom-vm = nixos-generators.nixosGenerate {
+                inherit system;
+                modules = [ 
+                    ./hosts/stardom-vm/configuration.nix
+                ];
+                specialArgs = { inherit inputs; };
+                format = "virtualbox";
             };
         };
 

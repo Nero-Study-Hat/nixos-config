@@ -1,9 +1,10 @@
 { inputs, outputs, lib, config, pkgs, ... }:
 
 {
+	# no hard-configuration.nix because this will be used by nixos-generator to
+	# build an iso which does its own thing to work on a bunch of different hardware
 	imports = [
 		../../modules/core/desktop.nix
-		./hardware-configuration.nix
 	];
 
 	desktop.choice = "hyprland";

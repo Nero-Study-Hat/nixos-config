@@ -1,4 +1,5 @@
 Hyprland Specific
+- setup dolphin theme and ability to use ubs devices
 - setup sddm, hypridle, hyprlock, screenshot utility
 - audio control utility
 - waybar and of eww widgets
