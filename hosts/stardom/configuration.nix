@@ -34,6 +34,7 @@
 			device = "nodev";
 		};
 	};
+	boot.tmp.cleanOnBoot = true;
 
 	users.users = {
 		nero = {

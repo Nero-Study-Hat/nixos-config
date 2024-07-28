@@ -34,6 +34,8 @@
 		};
 	};
 
+	boot.tmp.cleanOnBoot = true;
+
 	# enable sound with pipewire
 	security.rtkit.enable = true;
 	services.pipewire = {

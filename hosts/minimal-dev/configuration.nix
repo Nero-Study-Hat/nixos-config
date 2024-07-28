@@ -23,7 +23,7 @@
         config.permittedInsecurePackages = [ "electron-25.9.0" ];
 	};
 
-	networking.hostName = "isoimage";
+	networking.hostName = "minimal-dev";
 	networking.useDHCP = lib.mkDefault true;
 	networking.networkmanager.enable = true;
 
@@ -31,16 +31,7 @@
 
 	boot.kernelPackages = pkgs.linuxPackages_6_8;
 	boot.supportedFilesystems = [ "ntfs" ];
-	boot.loader = {
-		efi = {
-			efiSysMountPoint = "/boot/efi";
-		};
-		grub = {
-			efiSupport = true;
-			efiInstallAsRemovable = true;
-			device = "nodev";
-		};
-	};
+	boot.tmp.cleanOnBoot = true;
 
 	users.users = {
 		iso = {

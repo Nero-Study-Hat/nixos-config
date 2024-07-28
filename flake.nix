@@ -66,7 +66,7 @@
             isoimage = nixos-generators.nixosGenerate {
                 inherit system;
                 modules = [
-                    ./hosts/isoimage/configuration.nix
+                    ./hosts/minimal-dev/configuration.nix
                     home-manager.nixosModules.home-manager
                     {
                         home-manager.useGlobalPkgs = true;
@@ -91,6 +91,29 @@
                 inherit system;
                 modules = [ 
                     ./hosts/stardom-vm/configuration.nix
+                ];
+                specialArgs = { inherit inputs; };
+                format = "virtualbox";
+            };
+            hyprkool-testvm = nixos-generators.nixosGenerate {
+                inherit system;
+                modules = [
+                    ./hosts/minimal-dev/configuration.nix
+                    home-manager.nixosModules.home-manager
+                    {
+                        home-manager.useGlobalPkgs = true;
+                        home-manager.useUserPackages = true;
+                        home-manager.users.tester = import ./users/test-users/hyprkool/home.nix;
+
+                        home-manager.extraSpecialArgs = {
+                            inherit inputs;
+                            pkgs-stable = import nixpkgs-stable {
+                                inherit system;
+                                config.allowUnfree = true;
+                            };
+                            inherit hyprland hyprkool;
+                        };
+                    }
                 ];
                 specialArgs = { inherit inputs; };
                 format = "virtualbox";
