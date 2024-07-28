@@ -1,5 +1,6 @@
 nix shell nixpkgs#git --command command-with-git-available
 nix shell nixpkgs#git --command nix flake check "github:Nero-Study-Hat/nixos-config/${branch}" --no-write-lock-file
+nix run nixpkgs#python -- --version
 
 # --- NixOS ---
 sudo nixos-rebuild switch --flake /{path/to/flake/dir}#stardom

@@ -24,18 +24,6 @@
 
 	time.timeZone = "America/New_York";
 
-	boot.kernelPackages = pkgs.linuxPackages_6_8;
-	boot.loader = {
-		efi = {
-			efiSysMountPoint = "/boot/efi";
-		};
-		grub = {
-			efiSupport = true;
-			efiInstallAsRemovable = true;
-			device = "nodev";
-		};
-	};
-
 	users.users = {
 		nixer = {
 			initialPassword = "nixisreallycool";

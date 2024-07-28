@@ -63,7 +63,6 @@
 
 	nixpkgs.config.allowUnfree = true;
 
-	programs.java.enable = true; 
     programs.steam = {
         enable = true;
     };

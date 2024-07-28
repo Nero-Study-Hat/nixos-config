@@ -12,6 +12,7 @@ in
         pkgs.libsForQt5.dolphin
         pkgs-stable.libsForQt5.bismuth
         pkgs.kdePackages.fcitx5-with-addons
+        pkgs.protonvpn-cli_2
 
         # Development
         pkgs.vscode
@@ -29,7 +30,7 @@ in
         pkgs.cool-retro-term
         pkgs.curl
         pkgs.wget
-        pkgs.file
+        pkgs.ncdu
 
         # productivitya
         pkgs.morgen
@@ -37,16 +38,12 @@ in
         pkgs.remnote
         pkgs.zoom-us
 
-        # Secure Apps
-        pkgs.tor-browser
-        pkgs.protonvpn-cli_2
-        # need to make yubico-authenticator nixpkg
 
         # Content Creation
-        pkgs.krita
         pkgs.blender-hip
         pkgs-stable.davinci-resolve
-        pkgs.aseprite
+        # pkgs.krita
+        # pkgs.aseprite
         # pureref  # currently requires manual setup
 
 
@@ -56,13 +53,6 @@ in
         pkgs.flameshot
         pkgs.simplescreenrecorder
         pkgs.yt-dlp
-
-        # Media
-        pkgs.vlc
-        pkgs.freetube
-
-        # Fun
-        pkgs.cmatrix
     ];
 
     programs.tmux = {
