@@ -15,3 +15,11 @@ home-manager switch --flake {path/to/flake/dir}#username
 
 # --- iso image ---
 nix build {path/to/flake/dir}#isoimage -o {target/output/path}
+
+# --- cleaning ---
+nix-collect-garbage
+nix-collect-garbage --delete-older-than {number of days}d
+nix-store --gc
+# useful pkg for cleaning is ncdu
+# for me
+cd / && ncdu --exclude "nero-priv-data" --exclude "nero-pub-data"

@@ -21,6 +21,8 @@
 
     home.keyboard.layout = "us";
 
+    fonts.fontconfig.enable = true;
+
     programs.home-manager.enable = true;
     home.stateVersion = "24.05";
 }

@@ -41,6 +41,13 @@
 							"wheel" "video" "audio" "disk" "networkmanager" 
 						];
 		};
+		tester = {
+			initialPassword = "nixisreallycool";
+			isNormalUser = true;
+			extraGroups = [
+							"wheel" "video" "audio" "disk" "networkmanager" 
+						];
+		};
 	};
 
 	# enable sound with pipewire

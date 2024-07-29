@@ -42,10 +42,7 @@
 
         plugins = [
             # does not load because "/nix/store/8x6i3dndmna41ikshrp3jlgb5jw82wr6-hyprkool-0.7.0/lib/libhyprkool.so" DNE
-            # hyprkool.packages.${pkgs.system}.default
-            # hyprspace.packages.${pkgs.system}.Hyprspace # does not build (I did have the input)
-
-            hyprland-virtual-desktops.packages.${pkgs.system}.virtual-desktops
+            hyprkool.packages.${pkgs.system}.default
         ];
 
         # hyprlang config

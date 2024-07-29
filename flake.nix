@@ -103,7 +103,7 @@
                     {
                         home-manager.useGlobalPkgs = true;
                         home-manager.useUserPackages = true;
-                        home-manager.users.tester = import ./users/test-users/hyprkool/home.nix;
+                        home-manager.users.tester = import ./users/test-hyprkool/home.nix;
 
                         home-manager.extraSpecialArgs = {
                             inherit inputs;

@@ -15,7 +15,7 @@
         config.permittedInsecurePackages = [ "electron-25.9.0" ];
 	};
 
-    home.username = "iso";
+    home.username = "tester";
     home.homeDirectory = "/home/tester";
 
     home.keyboard.layout = "us";

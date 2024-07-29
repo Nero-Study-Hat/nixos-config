@@ -14,11 +14,17 @@ in
     };
 
 	config = lib.mkMerge [
-		(lib.mkIf (cfg.choice == "kde")
-		{
+		({
 			services.xserver.enable = true;
 			services.xserver.videoDrivers = [ "amdgpu" ];
 			services.displayManager.sddm.enable = true;
+		})
+
+		(lib.mkIf (cfg.choice == "kde")
+		{
+			# services.xserver.enable = true;
+			# services.xserver.videoDrivers = [ "amdgpu" ];
+			# services.displayManager.sddm.enable = true;
 			services.xserver.desktopManager.plasma5.enable = true;
 
 			# keep in mind home-manager modules for kde
@@ -27,24 +33,24 @@ in
 		(lib.mkIf (cfg.choice == "hyprland")
 		{
 			# sddm session log in handling
-			# services.displayManager.sddm.enable = true;
-			# services.displayManager.sddm.wayland.enable = true;
 			# services.xserver.enable = true; # for Xwayland
 			# services.xserver.videoDrivers = [ "amdgpu" ];
+			# services.displayManager.sddm.enable = true;
+			services.displayManager.sddm.wayland.enable = true;
 
 			# greetd session log in handling
-			services.xserver.enable = false;
-			services.greetd = {
-				enable = true;
-				settings = {
-					default_session = {
-						user = "nero";
-						command = "Hyprland";
-					};
-				};
-			};
+			# services.xserver.enable = false;
+			# services.greetd = {
+			# 	enable = true;
+			# 	settings = {
+			# 		default_session = {
+			# 			user = "nero";
+			# 			command = "Hyprland";
+			# 		};
+			# 	};
+			# };
 
-			security.pam.services.swaylock = {};
+			# security.pam.services.swaylock = {};
 			
 
 			programs.hyprland = {

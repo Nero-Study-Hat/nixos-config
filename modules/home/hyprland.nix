@@ -7,11 +7,22 @@ in
     home.packages = with pkgs; [
         hyprkool.packages."${system}".default
 
+
+        nwg-look
+        cascadia-code
+        kdePackages.breeze-icons
+        kdePackages.qtstyleplugin-kvantum
+        catppuccin-kvantum
+        adwaita-icon-theme
+
         swww           # wallpaper daemon
         rofi-wayland   # app launcher
         hyprcursor
 
-        kitty          # hyprland's default terminal
+        pulseaudio
+        killall # Restart processes
+        pavucontrol # Audio panel
+        grimblast # Screenshots
 
         hyprlock       # *fast* lock screen
         hyprpicker     # screen-space color picker
@@ -229,6 +240,9 @@ in
             env = [
                 "XCURSOR_SIZE,24"
                 "HYPRCURSOR_SIZE,24"
+                "QT_QPA_PLATFORM,wayland"
+                "QT_QPA_PLATFORMTHEME,qt5ct"
+                "QT_STYLE_OVERRIDE,kvantum"
             ];
         };
     };
