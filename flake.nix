@@ -30,27 +30,24 @@
             url = "github:hyprwm/hyprland-plugins";
             inputs.hyprland.follows = "hyprland";
         };
-        hyprkool = {
-            url = "github:thrombe/hyprkool";
-            inputs.hyprland.follows = "hyprland";
-        };
         hyprland-virtual-desktops = {
             url = "github:levnikmyskin/hyprland-virtual-desktops/dev";
+            inputs.hyprland.follows = "hyprland";
+        };
+
+        # for testing configs only currently
+        hyprkool = {
+            url = "github:thrombe/hyprkool";
             inputs.hyprland.follows = "hyprland";
         };
     };
 
     outputs = {
         self,
-        nixos-generators,
         nixpkgs,
         nixpkgs-stable,
         home-manager,
-        plasma-manager,
-        hyprland,
-        hyprland-plugins,
-        hyprkool,
-        hyprland-virtual-desktops,
+        nixos-generators,
         ... 
     }@inputs:
     let
@@ -60,7 +57,37 @@
         defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
         rootPath = self;
     in {
-        nixpkgs.overlays = [ hyprland.overlays.default ];
+        nixpkgs.overlays = [ inputs.hyprland.overlays.default ];
+
+
+        nixosConfigurations = {
+            stardom = nixpkgs.lib.nixosSystem {
+                inherit system;
+                modules = [ 
+                    ./hosts/stardom/configuration.nix
+                ];
+                specialArgs = { inherit inputs; };
+            };
+        };
+        
+        homeConfigurations = {
+            nero = home-manager.lib.homeManagerConfiguration {
+                inherit pkgs;
+                extraSpecialArgs = {
+                    inherit inputs;
+                    inherit rootPath;
+                    pkgs-stable = import nixpkgs-stable {
+                        inherit system;
+                        config.allowUnfree = true;
+                    };
+                };
+
+                modules = [
+                    ./users/nero/home.nix
+                    inputs.plasma-manager.homeManagerModules.plasma-manager
+                ];
+            };
+        };
 
         packages.x86_64-linux = {
             isoimage = nixos-generators.nixosGenerate {
@@ -80,7 +107,6 @@
                                 inherit system;
                                 config.allowUnfree = true;
                             };
-                            inherit hyprland hyprland-plugins hyprkool hyprland-virtual-desktops;
                         };
                     }
                 ];
@@ -111,7 +137,6 @@
                                 inherit system;
                                 config.allowUnfree = true;
                             };
-                            inherit hyprland hyprkool;
                         };
                     }
                 ];
@@ -119,36 +144,5 @@
                 format = "virtualbox";
             };
         };
-
-        nixosConfigurations = {
-            stardom = nixpkgs.lib.nixosSystem {
-                inherit system;
-                modules = [ 
-                    ./hosts/stardom/configuration.nix
-                ];
-                specialArgs = { inherit inputs; };
-            };
-        };
-        
-        homeConfigurations = {
-            nero = home-manager.lib.homeManagerConfiguration {
-                inherit pkgs;
-                extraSpecialArgs = {
-                    inherit inputs;
-                    inherit rootPath;
-                    pkgs-stable = import nixpkgs-stable {
-                        inherit system;
-                        config.allowUnfree = true;
-                    };
-                    inherit hyprland hyprland-plugins hyprkool hyprland-virtual-desktops;
-                };
-
-                modules = [
-                    ./users/nero/home.nix
-                    inputs.plasma-manager.homeManagerModules.plasma-manager
-                ];
-            };
-        };
     };
-
 }

@@ -20,38 +20,14 @@ in
 			services.displayManager.sddm.enable = true;
 		})
 
-		(lib.mkIf (cfg.choice == "kde")
+		( lib.mkIf (cfg.choice == "kde" || cfg.choice == "all")
 		{
-			# services.xserver.enable = true;
-			# services.xserver.videoDrivers = [ "amdgpu" ];
-			# services.displayManager.sddm.enable = true;
 			services.xserver.desktopManager.plasma5.enable = true;
-
-			# keep in mind home-manager modules for kde
 		})
 
-		(lib.mkIf (cfg.choice == "hyprland")
+		( lib.mkIf (cfg.choice == "hyprland" || cfg.choice == "all")
 		{
-			# sddm session log in handling
-			# services.xserver.enable = true; # for Xwayland
-			# services.xserver.videoDrivers = [ "amdgpu" ];
-			# services.displayManager.sddm.enable = true;
-			services.displayManager.sddm.wayland.enable = true;
-
-			# greetd session log in handling
-			# services.xserver.enable = false;
-			# services.greetd = {
-			# 	enable = true;
-			# 	settings = {
-			# 		default_session = {
-			# 			user = "nero";
-			# 			command = "Hyprland";
-			# 		};
-			# 	};
-			# };
-
-			# security.pam.services.swaylock = {};
-			
+			services.displayManager.sddm.wayland.enable = true;			
 
 			programs.hyprland = {
 				enable = true;
@@ -60,11 +36,14 @@ in
 				package = inputs.hyprland.packages.${pkgs.system}.hyprland;
 			};
 
-			# for desktop program interations with each other
 			services.dbus.enable = true;
 			xdg.portal = {
 				enable = true;
-				extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+				wlr.enable = true;
+				extraPortals = [ 
+					pkgs.xdg-desktop-portal-wlr
+					pkgs.xdg-desktop-portal-gtk
+				];
 			};
 		})
 	];

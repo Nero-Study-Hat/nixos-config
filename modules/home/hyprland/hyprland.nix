@@ -1,56 +1,12 @@
-{ lib, pkgs, hyprland, hyprland-plugins, hyprkool, hyprland-virtual-desktops, rootPath, ... }:
+{ inputs, lib, pkgs, rootPath, ... }:
 
 let
     virtualDesktopSwitchScript = "${rootPath}/scripts/hyprland-desktops-switcher.sh";
 in
 {
-    home.packages = with pkgs; [
-        hyprkool.packages."${system}".default
-
-
-        nwg-look
-        cascadia-code
-        kdePackages.breeze-icons
-        kdePackages.qtstyleplugin-kvantum
-        catppuccin-kvantum
-        adwaita-icon-theme
-
-        swww           # wallpaper daemon
-        rofi-wayland   # app launcher
-        hyprcursor
-
-        pulseaudio
-        killall # Restart processes
-        pavucontrol # Audio panel
-        grimblast # Screenshots
-
-        hyprlock       # *fast* lock screen
-        hyprpicker     # screen-space color picker
-        # hyprshade      # to apply shaders to the screen
-        # hyprshot       # instead of grim(shot) or maim/slurp
-
-        # notifications
-        mako           # notification daemon
-        libnotify
-
-        pyprland       # plugin system
-
-        ## Utilities
-        # gromit-mpx     # for drawing on the screen
-        # pamixer        # for volume control
-        # wf-recorder    # screencasting
-        # wlr-randr      # for monitors that hyprctl can't handle
-        # xorg.xrandr    # for XWayland windows
-
-        (pkgs.waybar.overrideAttrs (oldAttrs: {
-            mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-            })
-        )
-    ];
-
     wayland.windowManager.hyprland = {
         enable = true;
-        package = hyprland.packages.${pkgs.system}.hyprland;
+        package = inputs.hyprland.packages.${pkgs.system}.hyprland;
         xwayland.enable = true;
         systemd.enable = true;
 
@@ -59,7 +15,7 @@ in
             # hyprkool.packages.${pkgs.system}.default
             # hyprspace.packages.${pkgs.system}.Hyprspace # does not build (I did have the input)
 
-            hyprland-virtual-desktops.packages.${pkgs.system}.virtual-desktops
+            inputs.hyprland-virtual-desktops.packages.${pkgs.system}.virtual-desktops
         ];
 
         # hyprlang config
@@ -243,6 +199,10 @@ in
                 "QT_QPA_PLATFORM,wayland"
                 "QT_QPA_PLATFORMTHEME,qt5ct"
                 "QT_STYLE_OVERRIDE,kvantum"
+
+                # for virtualizing
+                "WLR_NO_HARDWARE_CURSORS,1"
+                "WLR_RENDERER_ALLOW_SOFTWARE,1"
             ];
         };
     };

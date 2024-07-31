@@ -6,7 +6,7 @@
 		./hardware-configuration.nix
 	];
 
-	desktop.choice = "hyprland";
+	desktop.choice = "all";
 
 	nix.settings = {
 		substituters = ["https://hyprland.cachix.org"];

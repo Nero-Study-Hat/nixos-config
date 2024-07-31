@@ -2,8 +2,9 @@
 
 {
     imports = [ 
-        # ./programs/plasma-manager.nix
-        ../../modules/home/hyprland.nix #TODO: conditional module for desktop
+        #TODO: conditional module for desktop
+        ../../modules/home/plasma-manager.nix
+        ../../modules/home/hyprland
 
         ./packages.nix
         ../../modules/home/bash.nix
