@@ -191,6 +191,7 @@ in
 
             exec-once = [
                 "waybar & swww"
+                "hypridle"
             ];
 
             env = [

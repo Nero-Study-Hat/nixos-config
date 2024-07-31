@@ -1,13 +1,17 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
+    wayland.windowManager.hyprland.settings = {
+        bind = [
+            "SUPER_L, l, exec, sleep 1 && hyprlock"
+        ];
+    };
+    
     # source of hyprlock style: https://github.com/MrVivekRajan/Hyprlock-Styles/blob/main/Style-10/hyprlock.conf
     programs.hyprlock = {
         enable = true;
         package = pkgs.hyprlock;
         settings = {
-            grace = 90;
-            # TODO: pam_module = pkgs.pam_u2f; 
 
             background = {
                 monitor = "";
@@ -22,42 +26,11 @@
             };
 
             general = {
+                #TODO: pam_module = pkgs.pam_u2f; 
                 no_fade_in = false;
                 grace = 0;
                 disable_loading_bar = false;
-            };
-
-            # Day
-            label = {
-                monitor = "";
-                color = "rgba(216, 222, 233, 0.70)";
-                font_size = 90;
-                font_family = "Cascadia Code";
-                position = "0, 350";
-                halign = "center";
-                valign = "center";
-            };
-
-            # Date-Month
-            label = {
-                monitor = "";
-                color = "rgba(216, 222, 233, 0.70)";
-                font_size = 40;
-                font_family = "Cascadia Code";
-                position = "0, 250";
-                halign = "center";
-                valign = "center";
-            };
-
-            # Time
-            label = {
-                monitor = "";
-                color = "rgba(216, 222, 233, 0.70)";
-                font_size = 20;
-                font_family = "Cascadia Code";
-                position = "0, 190";
-                halign = "center";
-                valign = "center";
+                hide_cursor = true;
             };
 
             # Profie-Photo
@@ -76,7 +49,7 @@
                 valign = "center";
             };
 
-            # USER-BOX
+            # # USER-BOX
             shape = {
                 monitor = "";
                 size = "300, 60";
@@ -95,7 +68,7 @@
             # USER
             label = {
                 monitor = "";
-                text = "    $USER";
+                text = " $USER";
                 color = "rgba(216, 222, 233, 0.80)";
                 outline_thickness = 2;
                 dots_size = 0.2; # Scale of input-field height, 0.2 - 0.8
@@ -121,45 +94,54 @@
                 font_color = "rgb(200, 200, 200)";
                 fade_on_empty = false;
                 font_family = "Cascadia Code";
+                placeholder_text = ''<i><span foreground="##ffffff99">🔒 Enter Pass</span></i>'';
                 hide_input = false;
                 position = "0, -210";
                 halign = "center";
                 valign = "center";
             };
-
-            # Power
-            label = {
-                monitor = "";
-                text = "󰐥  󰜉  󰤄";
-                color = "rgba(255, 255, 255, 0.6)";
-                font_size = 50;
-                position = "0, 100";
-                halign = "center";
-                valign = "bottom";
-            }
         };
 
+        # for some reason labels with cmd in text arribute only work
+        # here as there is an issue with the attribute "already exists"
         extraConfig = lib.concatStrings [
             ''
                 # Day
                 label {
+                    monitor =
                     text = cmd[update:1000] echo -e "$(date +"%A")"
+                    color = rgba(216, 222, 233, 0.70)
+                    font_size = 90
+                    font_family = Cascadia Code
+                    position = 0, 350
+                    halign = center
+                    valign = center
                 }
 
                 # Date-Month
                 label {
+                    monitor =
                     text = cmd[update:1000] echo -e "$(date +"%d %B")"
+                    color = rgba(216, 222, 233, 0.70)
+                    font_size = 40
+                    font_family = Cascadia Code
+                    position = 0, 250
+                    halign = center
+                    valign = center
                 }
 
                 # Time
                 label {
+                    monitor =
                     text = cmd[update:1000] echo "<span>$(date +"- %I:%M -")</span>"
-                }
-
-                input-field {
-                    placeholder_text = <i><span foreground="##ffffff99">🔒 Enter Pass</span></i>
+                    color = rgba(216, 222, 233, 0.70)
+                    font_size = 20
+                    font_family = Cascadia Code
+                    position = 0, 190
+                    halign = center
+                    valign = center
                 }
             ''
         ];
-    }
+    };
 }
