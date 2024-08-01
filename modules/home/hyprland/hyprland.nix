@@ -2,7 +2,6 @@
 
 let
     virtualDesktopSwitchScript = "${rootPath}/scripts/hyprland-desktops-switcher.sh";
-    screenshotScript = "${rootPath}/scripts/hyprland-screenshot.sh";
 in
 {
     wayland.windowManager.hyprland = {
@@ -77,6 +76,7 @@ in
             "$terminal" = "cool-retro-term";
             "$mainMod" = "SUPER";
             "$menu" = "rofi -show drun -show-icons";
+            "$screenshot" = ''grim -g "$(slurp)" - | swappy -f -'';
 
             monitor = [
                 "DP-2, 3440x1440@100, auto-left, 1"
@@ -167,7 +167,7 @@ in
                 "alt, Q, killactive"
                 "$mainMod, V, togglefloating"
                 "$mainMod, S, togglespecialworkspace, magic"
-                "Print, execr, ${screenshotScript}"
+                ",code:107, exec, $screenshot" # camera icon key on my keyboard
                 "SUPER, SUPER_L, exec, rofi -show window"
             ];
 
