@@ -2,17 +2,26 @@
 
 {
     home.packages = with pkgs; [
+        cascadia-code
+        adwaita-icon-theme
+        catppuccin-kvantum
+
+        wlr-randr
         xorg.xrandr    # for XWayland windows
         nwg-look
-        cascadia-code
         kdePackages.breeze-icons
         kdePackages.qtstyleplugin-kvantum
-        catppuccin-kvantum
-        adwaita-icon-theme
 
         swww           # wallpaper daemon
         rofi-wayland   # app launcher
         hyprcursor
+
+        wl-screenrec
+        wl-clipboard
+
+        grim
+        slurp
+        swappy
 
         pulseaudio
         killall # Restart processes

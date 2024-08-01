@@ -2,6 +2,7 @@
 
 let
     virtualDesktopSwitchScript = "${rootPath}/scripts/hyprland-desktops-switcher.sh";
+    screenshotScript = "${rootPath}/scripts/hyprland-screenshot.sh";
 in
 {
     wayland.windowManager.hyprland = {
@@ -166,6 +167,8 @@ in
                 "alt, Q, killactive"
                 "$mainMod, V, togglefloating"
                 "$mainMod, S, togglespecialworkspace, magic"
+                "Print, execr, ${screenshotScript}"
+                "SUPER, SUPER_L, exec, rofi -show window"
             ];
 
             bindm = [
@@ -204,6 +207,8 @@ in
                 # for virtualizing
                 "WLR_NO_HARDWARE_CURSORS,1"
                 "WLR_RENDERER_ALLOW_SOFTWARE,1"
+
+                "USE_WAYLAND_GRIM,true"
             ];
         };
     };

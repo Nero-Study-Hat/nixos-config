@@ -65,21 +65,59 @@
                 valign = "center";
             };
 
-            # USER
-            label = {
-                monitor = "";
-                text = " $USER";
-                color = "rgba(216, 222, 233, 0.80)";
-                outline_thickness = 2;
-                dots_size = 0.2; # Scale of input-field height, 0.2 - 0.8
-                dots_spacing = 0.2; # Scale of dots' absolute size, 0.0 - 1.0
-                dots_center = true;
-                font_size = 18;
-                font_family = "Cascadia Code";
-                position = "0, -130";
-                halign = "center";
-                valign = "center";
-            };
+            # Day
+            label = [ 
+                {
+                    monitor = "";
+                    text = ''cmd[update:1000] echo -e "$(date +"%A")"'';
+                    color = "rgba(216, 222, 233, 0.70)";
+                    font_size = 90;
+                    font_family = "Cascadia Code";
+                    position = "0, 350";
+                    halign = "center";
+                    valign = "center";
+                }
+
+                # Date-Month
+                {
+                    monitor = "";
+                    text = ''cmd[update:1000] echo -e "$(date +"%d %B")"'';
+                    color = "rgba(216, 222, 233, 0.70)";
+                    font_size = 40;
+                    font_family = "Cascadia Code";
+                    position = "0, 250";
+                    halign = "center";
+                    valign = "center";
+                }
+
+                # Time
+                {
+                    monitor = "";
+                    text = ''cmd[update:1000] echo "<span>$(date +"- %I:%M -")</span>"'';
+                    color = "rgba(216, 222, 233, 0.70)";
+                    font_size = 20;
+                    font_family = "Cascadia Code";
+                    position = "0, 190";
+                    halign = "center";
+                    valign = "center";
+                }
+                
+                # USER
+                {
+                    monitor = "";
+                    text = " $USER";
+                    color = "rgba(216, 222, 233, 0.80)";
+                    outline_thickness = 2;
+                    dots_size = 0.2; # Scale of input-field height, 0.2 - 0.8
+                    dots_spacing = 0.2; # Scale of dots' absolute size, 0.0 - 1.0
+                    dots_center = true;
+                    font_size = 18;
+                    font_family = "Cascadia Code";
+                    position = "0, -130";
+                    halign = "center";
+                    valign = "center";
+                }
+            ];
 
             # INPUT FIELD
             input-field = {
@@ -101,47 +139,5 @@
                 valign = "center";
             };
         };
-
-        # for some reason labels with cmd in text arribute only work
-        # here as there is an issue with the attribute "already exists"
-        extraConfig = lib.concatStrings [
-            ''
-                # Day
-                label {
-                    monitor =
-                    text = cmd[update:1000] echo -e "$(date +"%A")"
-                    color = rgba(216, 222, 233, 0.70)
-                    font_size = 90
-                    font_family = Cascadia Code
-                    position = 0, 350
-                    halign = center
-                    valign = center
-                }
-
-                # Date-Month
-                label {
-                    monitor =
-                    text = cmd[update:1000] echo -e "$(date +"%d %B")"
-                    color = rgba(216, 222, 233, 0.70)
-                    font_size = 40
-                    font_family = Cascadia Code
-                    position = 0, 250
-                    halign = center
-                    valign = center
-                }
-
-                # Time
-                label {
-                    monitor =
-                    text = cmd[update:1000] echo "<span>$(date +"- %I:%M -")</span>"
-                    color = rgba(216, 222, 233, 0.70)
-                    font_size = 20
-                    font_family = Cascadia Code
-                    position = 0, 190
-                    halign = center
-                    valign = center
-                }
-            ''
-        ];
     };
 }
