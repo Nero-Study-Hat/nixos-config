@@ -14,10 +14,10 @@ in
                               );
 
     # configuration of the bar
-    programs.waybar.settings = (builtins.readFile "${dirPath}/config.jsonc");
+    programs.waybar.settings = lib.importJSON "${dirPath}/config.jsonc";
 
     # CSS style of the bar
-    programs.waybar.style = {
-        #
-    };
+    # programs.waybar.style = {
+    #     #
+    # };
 }
