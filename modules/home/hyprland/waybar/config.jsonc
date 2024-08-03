@@ -1,14 +1,13 @@
 {
     "mainbar": {
         "layer": "top",
-        "modules-right": ["battery", "clock"],
+        "modules-right": ["clock"],
 
-        "battery": {
-            "format": "{capacity}% {icon}",
-            "format-icons": ["", "", "", "", ""]
-        },
         "clock": {
-            "format-alt": "{:%a, %d. %b  %H:%M}"
+            "interval": 60,
+            "format": "  {:%a %b %d  %H:%M}",
+            "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+            "format-alt": "{:%Y-%m-%d}"
         }
     }
 }

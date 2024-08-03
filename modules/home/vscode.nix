@@ -12,5 +12,12 @@
             bbenoist.nix
             pkief.material-icon-theme
         ];
+
+        userSettings = {
+            "extensions.autoCheckUpdates" = false;
+            "update.mode" = "none";
+            "editor.fontFamily" = "Cascadia Code";
+            "editor.minimap.enabled" = false;
+        }
     };
 }

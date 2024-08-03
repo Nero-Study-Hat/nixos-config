@@ -14,7 +14,14 @@ in
                               );
 
     # configuration of the bar
-    programs.waybar.settings = lib.importJSON "${dirPath}/config.jsonc";
+
+    # doesn't allow comments
+    # programs.waybar.settings = lib.importJSON "${dirPath}/config.jsonc";
+
+    # nixlang specific
+    programs.waybar.settings = {
+        
+    };
 
     # CSS style of the bar
     # programs.waybar.style = {
