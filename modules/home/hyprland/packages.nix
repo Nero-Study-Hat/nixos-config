@@ -2,7 +2,6 @@
 
 {
     home.packages = with pkgs; [
-        cascadia-code
         adwaita-icon-theme
         catppuccin-kvantum
 
@@ -13,7 +12,6 @@
         kdePackages.qtstyleplugin-kvantum
 
         swww           # wallpaper daemon
-        rofi-wayland   # app launcher
         hyprcursor
 
         wl-screenrec
@@ -33,4 +31,15 @@
         mako
         libnotify
     ];
+
+    nixpkgs.overlays = [(final: prev: {
+        rofi-emoji = prev.rofi-emoji.override { rofi-unwrapped = prev.rofi-wayland-unwrapped; };
+    })];
+
+    programs.rofi = {
+        enable = true;
+        package = pkgs.rofi-wayland;
+        plugins = [ pkgs.rofi-emoji ];
+        font = "cascadia-code";
+    };
 }

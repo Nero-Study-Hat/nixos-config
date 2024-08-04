@@ -16,8 +16,11 @@
         userSettings = {
             "extensions.autoCheckUpdates" = false;
             "update.mode" = "none";
+            "editor.fontSize" = 15;
             "editor.fontFamily" = "Cascadia Code";
+            "editor.codeLensFontFamily" = "Cascadia Code";
+            "editor.fontLigatures" = true;
             "editor.minimap.enabled" = false;
-        }
+        };
     };
 }

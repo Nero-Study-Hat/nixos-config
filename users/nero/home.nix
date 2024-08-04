@@ -22,7 +22,19 @@
 
     home.keyboard.layout = "us";
 
-    fonts.fontconfig.enable = true;
+    home.packages = with pkgs; [
+        cascadia-code
+        source-code-pro
+        noto-fonts
+        noto-fonts-extra
+        noto-fonts-cjk-sans
+        noto-fonts-emoji
+        fira-code-symbols
+        font-awesome
+		symbola
+    ];
+
+    fonts.fontconfig.defaultFonts.emoji = ["Noto Color Emoji"];
 
     programs.home-manager.enable = true;
     home.stateVersion = "24.05";

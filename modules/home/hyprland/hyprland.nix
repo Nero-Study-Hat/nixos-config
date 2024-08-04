@@ -168,7 +168,7 @@ in
                 "$mainMod, V, togglefloating"
                 "$mainMod, S, togglespecialworkspace, magic"
                 ",code:107, exec, $screenshot" # camera icon key on my keyboard
-                "SUPER, SUPER_L, exec, rofi -show window"
+                "SUPER, SUPER_L, exec, rofi -modi emoji -show emoji"
             ];
 
             bindm = [
