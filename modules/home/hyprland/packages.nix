@@ -24,7 +24,6 @@
         pulseaudio
         killall # Restart processes
         pavucontrol # Audio panel
-        pulsemixer
         sway-contrib.grimshot # Screenshots
 
         # notifications

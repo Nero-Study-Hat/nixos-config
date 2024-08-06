@@ -1,13 +1,36 @@
 {
-    "mainbar" = {
-        "layer" = "top";
-        "modules-right" = ["clock"];
-
-        "clock" = {
-            "interval" = 60;
-            "format" = "  {:%a %b %d  %H:%M}";
-            "tooltip-format" = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-            "format-alt" = "{:%Y-%m-%d}"
-        }
+    "group/group-power" = {
+        "orientation" = "inherit";
+        "drawer" = {
+            "transition-duration" = 500;
+            "children-class" = "not-power";
+            "transition-left-to-right" = false;
+        };
+        "modules" = [
+            "custom/power" # First element is the "group leader" and won't ever be hidden
+            "custom/quit"
+            "custom/lock"
+            "custom/reboot"
+        ]
+    };
+    "custom/quit" = {
+        "format" = "󰗼";
+        "tooltip" = false;
+        "on-click" = "hyprctl dispatch exit"
+    };
+    "custom/lock" = {
+        "format" = "󰍁";
+        "tooltip" = false;
+        "on-click" = "swaylock"
+    };
+    "custom/reboot" = {
+        "format" = "󰜉";
+        "tooltip" = false;
+        "on-click" = "reboot"
+    };
+    "custom/power" = {
+        "format" = "";
+        "tooltip" = false;
+        "on-click" = "shutdown now"
     }
 }
