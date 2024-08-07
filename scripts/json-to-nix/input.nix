@@ -1,5 +1,5 @@
 {
-    "group/group-power" = {
+    "group/group-virt-desktops" = {
         "orientation" = "inherit";
         "drawer" = {
             "transition-duration" = 500;
@@ -7,30 +7,30 @@
             "transition-left-to-right" = false;
         };
         "modules" = [
-            "custom/power" # First element is the "group leader" and won't ever be hidden
-            "custom/quit"
-            "custom/lock"
-            "custom/reboot"
-        ]
+            "custom/virt-desktop-1" # First element is the "group leader" and won't ever be hidden
+            "custom/virt-desktop-2"
+            "custom/virt-desktop-3"
+            "custom/virt-desktop-4"
+        ];
     };
-    "custom/quit" = {
-        "format" = "󰗼";
+    "custom/virt-desktop-1" = {
+        exec = "${customVirtDesktopsModuleScript}";
         "tooltip" = false;
-        "on-click" = "hyprctl dispatch exit"
+        "on-click" = "hyprctl dispatch vdesk 1";
     };
-    "custom/lock" = {
-        "format" = "󰍁";
+    "custom/virt-desktop-2" = {
+        exec = "${customVirtDesktopsModuleScript}";
         "tooltip" = false;
-        "on-click" = "swaylock"
+        "on-click" = "hyprctl dispatch vdesk 2";
     };
-    "custom/reboot" = {
-        "format" = "󰜉";
+    "custom/virt-desktop-3" = {
+        exec = "${customVirtDesktopsModuleScript}";
         "tooltip" = false;
-        "on-click" = "reboot"
+        "on-click" = "hyprctl dispatch vdesk 3";
     };
-    "custom/power" = {
-        "format" = "";
+    "custom/virt-desktop-4" = {
+        exec = "${customVirtDesktopsModuleScript}";
         "tooltip" = false;
-        "on-click" = "shutdown now"
-    }
+        "on-click" = "hyprctl dispatch vdesk 4";
+    };
 }

@@ -1,6 +1,7 @@
 { lib, pkgs, rootPath, ... }:
 
 let
+    customVirtDesktopsModuleScript = "${rootPath}/scripts/virt-desktops-waybar-module.sh";
     audioOuputSwitchScript = pkgs.pkgs.writeShellScriptBin "start" ''
         headphones="alsa_output.pci-0000_2f_00.4.analog-stereo"
         monitor="alsa_output.pci-0000_2d_00.1.hdmi-stereo-extra2"
@@ -34,7 +35,7 @@ in
         "spacing" = 10;
 
         "modules-left" = [ "pulseaudio" ];
-        "modules-center" = [ "group/group-power" ];
+        "modules-center" = [ "group/group-power" "group/group-virt-desktops" ];
         "modules-right" = [ "group/hardware" "clock" ];
 
         "clock" = {
@@ -134,6 +135,41 @@ in
             "format" = "  ";
             "tooltip" = false;
             "on-click" = "shutdown now";
+        };
+
+        "group/group-virt-desktops" = {
+            "orientation" = "inherit";
+            "drawer" = {
+                "transition-duration" = 500;
+                "children-class" = "virt-desk-group";
+                "transition-left-to-right" = false;
+            };
+            "modules" = [
+                "custom/virt-desktop-1" # First element is the "group leader" and won't ever be hidden
+                "custom/virt-desktop-2"
+                "custom/virt-desktop-3"
+                "custom/virt-desktop-4"
+            ];
+        };
+        "custom/virt-desktop-1" = {
+            exec = "${customVirtDesktopsModuleScript}";
+            "tooltip" = false;
+            "on-click" = "hyprctl dispatch vdesk 1";
+        };
+        "custom/virt-desktop-2" = {
+            exec = "${customVirtDesktopsModuleScript}";
+            "tooltip" = false;
+            "on-click" = "hyprctl dispatch vdesk 2";
+        };
+        "custom/virt-desktop-3" = {
+            exec = "${customVirtDesktopsModuleScript}";
+            "tooltip" = false;
+            "on-click" = "hyprctl dispatch vdesk 3";
+        };
+        "custom/virt-desktop-4" = {
+            exec = "${customVirtDesktopsModuleScript}";
+            "tooltip" = false;
+            "on-click" = "hyprctl dispatch vdesk 4";
         };
     };
 
