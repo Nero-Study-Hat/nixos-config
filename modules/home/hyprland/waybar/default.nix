@@ -139,11 +139,6 @@ in
 
         "group/group-virt-desktops" = {
             "orientation" = "inherit";
-            "drawer" = {
-                "transition-duration" = 500;
-                "children-class" = "virt-desk-group";
-                "transition-left-to-right" = false;
-            };
             "modules" = [
                 "custom/virt-desktop-1" # First element is the "group leader" and won't ever be hidden
                 "custom/virt-desktop-2"
@@ -152,24 +147,36 @@ in
             ];
         };
         "custom/virt-desktop-1" = {
-            exec = "${customVirtDesktopsModuleScript}";
+            "format" = "{}";
+            "return-type" = "json";
+            "interval" = "10";
             "tooltip" = false;
             "on-click" = "hyprctl dispatch vdesk 1";
+            "exec" = ''${customVirtDesktopsModuleScript} 1'';
         };
         "custom/virt-desktop-2" = {
-            exec = "${customVirtDesktopsModuleScript}";
+            "return-type" = "json";
+            "format" = "{}";
+            "interval" = "10";
             "tooltip" = false;
             "on-click" = "hyprctl dispatch vdesk 2";
+            "exec" = ''${customVirtDesktopsModuleScript} 2'';
         };
         "custom/virt-desktop-3" = {
-            exec = "${customVirtDesktopsModuleScript}";
+            "format" = "{}";
+            "return-type" = "json";
+            "interval" = "10";
             "tooltip" = false;
             "on-click" = "hyprctl dispatch vdesk 3";
+            "exec" = ''${customVirtDesktopsModuleScript} 3'';
         };
         "custom/virt-desktop-4" = {
-            exec = "${customVirtDesktopsModuleScript}";
+            "format" = "{}";
+            "return-type" = "json";
+            "interval" = "10";
             "tooltip" = false;
             "on-click" = "hyprctl dispatch vdesk 4";
+            "exec" = ''${customVirtDesktopsModuleScript} 4'';
         };
     };
 

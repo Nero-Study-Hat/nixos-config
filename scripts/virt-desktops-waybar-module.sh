@@ -21,4 +21,4 @@ if [ "$current_desk" == "$1" ]; then
     class="virt-desktop-active"
 fi
 
-echo "{"text": " ${text} ", "class": "$class"}"
+echo ''{\"text\": \" ${text} \", \"class\": \"${class}\"}''
