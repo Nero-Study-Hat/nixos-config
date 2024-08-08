@@ -178,6 +178,13 @@ in
             "on-click" = "hyprctl dispatch vdesk 4";
             "exec" = ''${customVirtDesktopsModuleScript} 4'';
         };
+
+        "custom/weather" = {
+            "exec" = '' curl wttr.in/?format="%c%t" | sed "s/+//" '';
+            "interval" = 3600;
+            "format" = "{}";
+            "tooltip" = false; # TODO: setup AGS widget for this later
+        };        
     };
 
     # CSS style of the bar

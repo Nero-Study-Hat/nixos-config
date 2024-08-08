@@ -2,7 +2,6 @@
 
 text="$1"
 
-
 class="virt-desktop-inactive"
 current_desk=$(hyprctl printdesk | awk '{print $3}' | sed 's/://')
 
