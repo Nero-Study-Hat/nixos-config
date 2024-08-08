@@ -12,58 +12,57 @@ in
 
         plugins = [
             # does not load because "/nix/store/8x6i3dndmna41ikshrp3jlgb5jw82wr6-hyprkool-0.7.0/lib/libhyprkool.so" DNE
-            # hyprkool.packages.${pkgs.system}.default
-            # hyprspace.packages.${pkgs.system}.Hyprspace # does not build (I did have the input)
+            inputs.hyprkool.packages.${pkgs.system}.hyprkool-plugin
 
-            inputs.hyprland-virtual-desktops.packages.${pkgs.system}.virtual-desktops
+            # inputs.hyprland-virtual-desktops.packages.${pkgs.system}.virtual-desktops
         ];
 
         # hyprlang config
         extraConfig = lib.concatStrings [
             ''
-                # animations {
-                #     animation = workspaces, 1, 2, default, fade
-                # }
+                animations {
+                    animation = workspaces, 1, 2, default, fade
+                }
 
-                # # Switch activity
-                # bind = $mainMod, TAB, exec, hyprkool next-activity -c
+                # Switch activity
+                bind = $mainMod, TAB, exec, hyprkool next-activity -c
 
-                # # Move active window to a different acitvity
-                # bind = $mainMod CTRL, TAB, exec, hyprkool next-activity -c -w
+                # Move active window to a different acitvity
+                bind = $mainMod CTRL, TAB, exec, hyprkool next-activity -c -w
 
-                # # Relative workspace jumps
-                # bind = CTRL ALT, left, exec, hyprkool move-left -c
-                # bind = CTRL ALT, right, exec, hyprkool move-right -c
-                # bind = CTRL ALT, down, exec, hyprkool move-down -c
-                # bind = CTRL ALT, up, exec, hyprkool move-up -c
+                # Relative workspace jumps
+                bind = CTRL ALT, left, exec, hyprkool move-left -c
+                bind = CTRL ALT, right, exec, hyprkool move-right -c
+                bind = CTRL ALT, down, exec, hyprkool move-down -c
+                bind = CTRL ALT, up, exec, hyprkool move-up -c
 
-                # # Move active window to a workspace
-                # bind = $mainMod CTRL, left, exec, hyprkool move-left -c -w
-                # bind = $mainMod CTRL, right, exec, hyprkool move-right -c -w
-                # bind = $mainMod CTRL, down, exec, hyprkool move-down -c -w
-                # bind = $mainMod CTRL, up, exec, hyprkool move-up -c -w
+                # Move active window to a workspace
+                bind = $mainMod CTRL, left, exec, hyprkool move-left -c -w
+                bind = $mainMod CTRL, right, exec, hyprkool move-right -c -w
+                bind = $mainMod CTRL, down, exec, hyprkool move-down -c -w
+                bind = $mainMod CTRL, up, exec, hyprkool move-up -c -w
 
-                # # this only works if you have the hyprkool plugin
-                # bind = $mainMod, a, exec, hyprkool toggle-overview
+                # this only works if you have the hyprkool plugin
+                bind = $mainMod, a, exec, hyprkool toggle-overview
 
-                # bind = SUPER, a, hyprexpo:expo, toggle # can be: toggle, off/disable or on/enable
+                bind = SUPER, a, hyprexpo:expo, toggle # can be: toggle, off/disable or on/enable
 
 
                 plugin {
-                    # hyprkool {
-                    #     overview {
-                    #         hover_border_color = rgba(33ccffee)
-                    #         focus_border_color = rgba(00ff99ee)
-                    #         workspace_gap_size = 10
-                    #     }
-                    # }
-                    virtual-desktops {
-                        names = 1:main, 2:tech, 3:slack 
-                        cycleworkspaces = 1
-                        rememberlayout = size
-                        notifyinit = 0
-                        verbose_logging = 0
+                    hyprkool {
+                        overview {
+                            hover_border_color = rgba(33ccffee)
+                            focus_border_color = rgba(00ff99ee)
+                            workspace_gap_size = 10
+                        }
                     }
+                    # virtual-desktops {
+                    #     names = 1:main, 2:tech, 3:slack 
+                    #     cycleworkspaces = 1
+                    #     rememberlayout = size
+                    #     notifyinit = 0
+                    #     verbose_logging = 0
+                    # }
                 }
             ''
         ];
@@ -168,7 +167,6 @@ in
                 "$mainMod, V, togglefloating"
                 "$mainMod, S, togglespecialworkspace, magic"
                 ",code:107, exec, $screenshot" # camera icon key on my keyboard
-                "SUPER, SUPER_L, exec, rofi -modi emoji -show emoji"
             ];
 
             bindm = [

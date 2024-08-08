@@ -3,7 +3,6 @@
 {
     home.packages = with pkgs; [
         adwaita-icon-theme
-        catppuccin-kvantum
 
         wlr-randr
         xorg.xrandr    # for XWayland windows
@@ -30,10 +29,6 @@
         mako
         libnotify
     ];
-
-    nixpkgs.overlays = [(final: prev: {
-        rofi-emoji = prev.rofi-emoji.override { rofi-unwrapped = prev.rofi-wayland-unwrapped; };
-    })];
 
     programs.rofi = {
         enable = true;

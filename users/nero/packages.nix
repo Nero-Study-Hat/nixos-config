@@ -41,7 +41,7 @@ in
 
         # Content Creation
         pkgs.blender-hip
-        pkgs-stable.davinci-resolve
+        # pkgs-stable.davinci-resolve
         pkgs.krita
         pkgs.aseprite
         pkgs.pureref  # currently requires manual setup, does not work on hyprland
