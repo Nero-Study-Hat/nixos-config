@@ -24,23 +24,21 @@
             type = "git";
             url = "https://github.com/hyprwm/Hyprland?ref=refs/tags/v0.41.2";
             submodules = true;
-            inputs.nixpkgs.follows = "nixpkgs-stable";
-        };
-        hyprland-plugins = {
-            url = "github:hyprwm/hyprland-plugins";
-            inputs.hyprland.follows = "hyprland";
+            inputs.nixpkgs.follows = "nixpkgs";
         };
         hyprland-virtual-desktops = {
             url = "github:levnikmyskin/hyprland-virtual-desktops/dev";
             inputs.hyprland.follows = "hyprland";
+            inputs.nixpkgs.follows = "nixpkgs";
         };
 
-        hyprkool = {
-            url = "github:thrombe/hyprkool/0.7.1";
-            inputs.nixpkgs.follows = "nixpkgs-stable";
-            inputs.nixpkgs-unstable.follows = "nixpkgs";
-            inputs.hyprland.follows = "hyprland";
-        };
+        # TODO: move to separate testing branch
+        # hyprkool = {
+        #     url = "github:thrombe/hyprkool/0.7.1";
+        #     inputs.nixpkgs.follows = "nixpkgs-stable";
+        #     inputs.nixpkgs-unstable.follows = "nixpkgs";
+        #     inputs.hyprland.follows = "hyprland";
+        # };
     };
 
     outputs = {
@@ -68,6 +66,24 @@
                     ./hosts/stardom/configuration.nix
                 ];
                 specialArgs = { inherit inputs; };
+            };
+
+            exampleIso = nixpkgs.lib.nixosSystem {
+                specialArgs = { inherit inputs; };
+                modules = [
+                    # stuff
+                ];
+            };
+
+            iso = nixos.lib.nixosSystem {
+                system = "x86_64-linux";
+                modules = [
+                    "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+                    ({ pkgs, ... }: {
+                        environment.systemPackages = [ pkgs.neovim ];
+                        isoImage.forceTextMode = true;
+                    })
+                ];
             };
         };
         

@@ -2,7 +2,7 @@
 
 {
     imports = [
-        ../../modules/home/hyprland.nix #TODO: conditional module for desktop
+        ../../modules/home/hyprland #TODO: conditional module for desktop
 
         ./packages.nix
         ../../modules/home/bash.nix

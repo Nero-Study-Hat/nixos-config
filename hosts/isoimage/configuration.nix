@@ -1,9 +1,10 @@
-{ inputs, outputs, lib, config, pkgs, ... }:
+{ inputs, outputs, lib, config, pkgs, modulesPath, ... }:
 
 {
 	# no hard-configuration.nix because this will be used by nixos-generator to
 	# build an iso which does its own thing to work on a bunch of different hardware
 	imports = [
+		"${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
 		../../modules/core/desktop.nix
 	];
 
@@ -23,7 +24,7 @@
         config.permittedInsecurePackages = [ "electron-25.9.0" ];
 	};
 
-	networking.hostName = "minimal-dev";
+	networking.hostName = "iso";
 	networking.useDHCP = lib.mkDefault true;
 	networking.networkmanager.enable = true;
 
