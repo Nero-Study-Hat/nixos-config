@@ -8,20 +8,33 @@ declare -i rows=2
 declare -a activities=("tech" "writing" "slack")
 # -------------------
 
-# activity=$(printf "%s\n"  "${activities[@]}" | rofi -dmenu -p 'Choose activity')
+activity=$(printf "%s\n"  "${activities[@]}" | rofi -dmenu -p 'Choose activity')
+declare -i cellNumber=$(( "$rows" * "$columns" ))
 # declare -i currentDesktop=$( hyprctl printdesk | awk '{print $3;}' | sed 's/.$//' )
-# declare -i currentActivityNum # ?
-# declare -i activityChangeDiff
+declare -i currentDesktop=(10)
 
-# for i in "${!activities[@]}"; do
-#    if [[ "${activities[$i]}" = "${activity}" ]]; then
-#        activityNum="$i"
-#        break
-#    fi
-# done
+declare -i currentActivityNum
+i=(1)
+while [ "$i" -le "${#activities[@]}" ]
+do
+    if [ "$currentDesktop" -le $(( "$cellNumber" * "$i" ))  ]; then
+        currentActivityNum="$i"
+        break
+    fi
+    i=$(( "$i" + 1 ))
+done
 
-# declare -i newDesktop=(( "$currentDesktop" + ( "$activityChangeDiff" * ("$rows" * "$columns")) ))
+declare -i targetActivityNum
+for i in "${!activities[@]}"; do
+   if [[ "${activities[$i]}" = "${activity}" ]]; then
+       targetActivityNum=$(( "$i" + 1 ))
+       break
+   fi
+done
 
-numerator=90
-denominator=7
-python -c "print (round(${numerator}.0 / ${denominator}.0))"
+declare -i activityChangeDiff=$(( "$targetActivityNum" - "$currentActivityNum" ))
+declare -i newDesktop=$(( "$currentDesktop" + ( "$activityChangeDiff" * "$cellNumber" ) ))
+
+echo "current desktop: ${currentDesktop}"
+echo "new desktop: ${newDesktop}"
+
