@@ -181,7 +181,7 @@ in
 
         "custom/weather" = {
             "exec" = '' curl wttr.in/?format="%c%t" | sed "s/+//" '';
-            "interval" = 3600;
+            "interval" = 600;
             "format" = "{}";
             "tooltip" = false; # TODO: setup AGS widget for this later
         };        

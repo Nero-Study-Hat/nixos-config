@@ -75,6 +75,7 @@
 
 	environment.systemPackages = with pkgs; [
 		dotnetCorePackages.sdk_8_0_1xx
+		python3
 	];
 
 	# # Virtualbox Setup

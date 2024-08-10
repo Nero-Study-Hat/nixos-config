@@ -1,4 +1,4 @@
-{ inputs, outputs, lib, config, pkgs, modulesPath, ... }:
+{ inputs, outputs, lib, config, pkgs, pkgs-stable, modulesPath, ... }:
 
 {
 	# no hard-configuration.nix because this will be used by nixos-generator to
@@ -26,7 +26,7 @@
 
 	networking.hostName = "iso";
 	networking.useDHCP = lib.mkDefault true;
-	networking.networkmanager.enable = true;
+	hardware.enableRedistributableFirmware = true;
 
 	time.timeZone = "America/New_York";
 

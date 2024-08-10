@@ -68,23 +68,45 @@
                 specialArgs = { inherit inputs; };
             };
 
-            exampleIso = nixpkgs.lib.nixosSystem {
-                specialArgs = { inherit inputs; };
+            isoimage = nixpkgs.lib.nixosSystem {
+                inherit system;
                 modules = [
-                    # stuff
+                    ./hosts/isoimage/configuration.nix
+                    home-manager.nixosModules.home-manager
+                    {
+                        home-manager.useGlobalPkgs = true;
+                        home-manager.useUserPackages = true;
+                        home-manager.users.iso = import ./users/iso/home.nix;
+
+                        home-manager.extraSpecialArgs = {
+                            inherit inputs;
+                            inherit rootPath;
+                            pkgs-stable = import nixpkgs-stable {
+                                inherit system;
+                                config.allowUnfree = true;
+                            };
+                        };
+                    }
                 ];
+                specialArgs = {
+                    inherit inputs;
+                    pkgs-stable = import nixpkgs-stable {
+                        inherit system;
+                        config.allowUnfree = true;
+                    };
+                };
             };
 
-            iso = nixos.lib.nixosSystem {
-                system = "x86_64-linux";
-                modules = [
-                    "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-                    ({ pkgs, ... }: {
-                        environment.systemPackages = [ pkgs.neovim ];
-                        isoImage.forceTextMode = true;
-                    })
-                ];
-            };
+            # iso = nixos.lib.nixosSystem {
+            #     system = "x86_64-linux";
+            #     modules = [
+            #         "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+            #         ({ pkgs, ... }: {
+            #             environment.systemPackages = [ pkgs.neovim ];
+            #             isoImage.forceTextMode = true;
+            #         })
+            #     ];
+            # };
         };
         
         homeConfigurations = {

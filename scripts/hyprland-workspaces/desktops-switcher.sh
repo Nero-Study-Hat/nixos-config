@@ -2,7 +2,7 @@
 
 # requirement: a virtual desktop for each cell in the table of rows*columns
 
-# USER SETTINGS
+# USER SETTINGS -- WARNING: keep in sync with activity-switcher script
 declare -i columns=2
 declare -i rows=2
 wrapEnable="true"
