@@ -22,6 +22,7 @@
             "editor.codeLensFontFamily" = "Cascadia Code";
             "editor.fontLigatures" = true;
             "editor.minimap.enabled" = false;
+            "workbench.iconTheme" = "material-icon-theme";
         };
     };
 }
