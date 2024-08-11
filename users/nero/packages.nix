@@ -24,7 +24,6 @@ in
         # godot4-mono
 
         # Sys Management
-        pkgs.bash
         pkgs.gparted
         pkgs.htop
         pkgs.cool-retro-term

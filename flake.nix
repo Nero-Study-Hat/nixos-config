@@ -21,9 +21,7 @@
         };
         
         hyprland = {
-            type = "git";
-            url = "https://github.com/hyprwm/Hyprland?ref=refs/tags/v0.41.2";
-            submodules = true;
+            url = "git+https://github.com/hyprwm/Hyprland/?ref=refs/tags/v0.41.2&rev=918d8340afd652b011b937d29d5eea0be08467f5&submodules=1";
             inputs.nixpkgs.follows = "nixpkgs";
         };
         hyprland-virtual-desktops = {

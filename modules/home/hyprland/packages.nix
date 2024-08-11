@@ -36,5 +36,6 @@
         package = pkgs.rofi-wayland;
         plugins = [ pkgs.rofi-emoji ];
         font = "cascadia-code";
+        location = "center";
     };
 }

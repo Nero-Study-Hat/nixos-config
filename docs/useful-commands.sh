@@ -4,6 +4,8 @@ nix run nixpkgs#python -- --version
 
 # --- NixOS ---
 sudo nixos-rebuild switch --flake /{path/to/flake/dir}#stardom
+# verbose log to file
+sudo nixos-rebuild switch --flake ~/.nixflake#stardom -v --show-trace >>nixos-rebuild-log.txt 2>&1
 
 # --- Home Manager ---
 # more verbose logging

@@ -35,7 +35,7 @@ in
                 "CTRL $mainMod, right, exec, ${virtualDesktopSwitchScript} right window"
                 "CTRL $mainMod, left, exec, ${virtualDesktopSwitchScript} left window"
             ];
-        }
+        };
 
-    }
+    };
 }

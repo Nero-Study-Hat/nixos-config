@@ -78,6 +78,8 @@
 		python3
 	];
 
+	environment.pathsToLink = [ "/share/bash-completion" ];
+
 	# # Virtualbox Setup
 	virtualisation.virtualbox.host.enable = true;
 	virtualisation.virtualbox.host.package = pkgs.virtualbox;

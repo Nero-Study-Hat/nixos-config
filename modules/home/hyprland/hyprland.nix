@@ -1,9 +1,11 @@
 { inputs, lib, pkgs, rootPath, ... }:
 
-let
-    virtualDesktopSwitchScript = "${rootPath}/scripts/hyprland-workspaces/desktops-switcher.sh";
-in
 {
+    imports = [
+        # "./plugins/hyprkool.nix"
+        ./plugins/virt-desktops.nix
+    ];
+
     wayland.windowManager.hyprland = {
         enable = true;
         package = inputs.hyprland.packages.${pkgs.system}.hyprland;
@@ -126,6 +128,7 @@ in
             exec-once = [
                 "waybar & swww"
                 "hypridle"
+                "wl-paste --watch cliphist store"
             ];
 
             env = [

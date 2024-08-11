@@ -9,8 +9,9 @@
 
         # ext ids must be all lowercase
         extensions = with pkgs.vscode-extensions; [
-            bbenoist.nix
             pkief.material-icon-theme
+            bbenoist.nix
+            ms-vscode.cpptools-extension-pack
         ];
 
         userSettings = {
