@@ -10,62 +10,6 @@ in
         xwayland.enable = true;
         systemd.enable = true;
 
-        plugins = [
-            # does not load because "/nix/store/8x6i3dndmna41ikshrp3jlgb5jw82wr6-hyprkool-0.7.0/lib/libhyprkool.so" DNE
-            # inputs.hyprkool.packages.${pkgs.system}.hyprkool-plugin
-
-            inputs.hyprland-virtual-desktops.packages.${pkgs.system}.virtual-desktops
-        ];
-
-        # hyprlang config
-        extraConfig = lib.concatStrings [
-            ''
-                # animations {
-                #     animation = workspaces, 1, 2, default, fade
-                # }
-
-                # # Switch activity
-                # bind = $mainMod, TAB, exec, hyprkool next-activity -c
-
-                # # Move active window to a different acitvity
-                # bind = $mainMod CTRL, TAB, exec, hyprkool next-activity -c -w
-
-                # # Relative workspace jumps
-                # bind = CTRL ALT, left, exec, hyprkool move-left -c
-                # bind = CTRL ALT, right, exec, hyprkool move-right -c
-                # bind = CTRL ALT, down, exec, hyprkool move-down -c
-                # bind = CTRL ALT, up, exec, hyprkool move-up -c
-
-                # # Move active window to a workspace
-                # bind = $mainMod CTRL, left, exec, hyprkool move-left -c -w
-                # bind = $mainMod CTRL, right, exec, hyprkool move-right -c -w
-                # bind = $mainMod CTRL, down, exec, hyprkool move-down -c -w
-                # bind = $mainMod CTRL, up, exec, hyprkool move-up -c -w
-
-                # # this only works if you have the hyprkool plugin
-                # bind = $mainMod, a, exec, hyprkool toggle-overview
-
-                # bind = SUPER, a, hyprexpo:expo, toggle # can be: toggle, off/disable or on/enable
-
-
-                plugin {
-                    # hyprkool {
-                    #     overview {
-                    #         hover_border_color = rgba(33ccffee)
-                    #         focus_border_color = rgba(00ff99ee)
-                    #         workspace_gap_size = 10
-                    #     }
-                    # }
-                    virtual-desktops {
-                        cycleworkspaces = 1
-                        rememberlayout = size
-                        notifyinit = 0
-                        verbose_logging = 0
-                    }
-                }
-            ''
-        ];
-
         settings = {
             debug = {
                 disable_logs = false;
@@ -147,16 +91,6 @@ in
 
             bind = [
                 "ALT, SPACE, exec, $menu"
-                
-                "CTRL ALT, up, exec, ${virtualDesktopSwitchScript} up focus"
-                "CTRL ALT, down, exec, ${virtualDesktopSwitchScript} down focus"
-                "CTRL ALT, right, exec, ${virtualDesktopSwitchScript} right focus"
-                "CTRL ALT, left, exec, ${virtualDesktopSwitchScript} left focus"
-
-                "CTRL $mainMod, up, exec, ${virtualDesktopSwitchScript} up window"
-                "CTRL $mainMod, down, exec, ${virtualDesktopSwitchScript} down window"
-                "CTRL $mainMod, right, exec, ${virtualDesktopSwitchScript} right window"
-                "CTRL $mainMod, left, exec, ${virtualDesktopSwitchScript} left window"
             ];
 
             bindr = [
@@ -197,14 +131,7 @@ in
             env = [
                 "XCURSOR_SIZE,24"
                 "HYPRCURSOR_SIZE,24"
-                "QT_QPA_PLATFORM,wayland"
-                "QT_QPA_PLATFORMTHEME,qt5ct"
                 "QT_STYLE_OVERRIDE,kvantum"
-
-                # for virtualizing
-                "WLR_NO_HARDWARE_CURSORS,1"
-                "WLR_RENDERER_ALLOW_SOFTWARE,1"
-
                 "USE_WAYLAND_GRIM,true"
             ];
         };

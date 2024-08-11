@@ -31,14 +31,12 @@
             inputs.hyprland.follows = "hyprland";
             inputs.nixpkgs.follows = "nixpkgs";
         };
-
-        # TODO: move to separate testing branch
-        # hyprkool = {
-        #     url = "github:thrombe/hyprkool/0.7.1";
-        #     inputs.nixpkgs.follows = "nixpkgs-stable";
-        #     inputs.nixpkgs-unstable.follows = "nixpkgs";
-        #     inputs.hyprland.follows = "hyprland";
-        # };
+        hyprkool = {
+            url = "github:thrombe/hyprkool/0.7.1";
+            inputs.nixpkgs.follows = "nixpkgs";
+            inputs.nixpkgs-unstable.follows = "nixpkgs";
+            inputs.hyprland.follows = "hyprland";
+        };
     };
 
     outputs = {

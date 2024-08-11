@@ -10,8 +10,7 @@ declare -a activities=("tech" "writing" "slack")
 
 activity=$(printf "%s\n"  "${activities[@]}" | rofi -dmenu -p 'Choose activity')
 declare -i cellNumber=$(( "$rows" * "$columns" ))
-# declare -i currentDesktop=$( hyprctl printdesk | awk '{print $3;}' | sed 's/.$//' )
-declare -i currentDesktop=(10)
+declare -i currentDesktop=$( hyprctl printdesk | awk '{print $3;}' | sed 's/.$//' )
 
 declare -i currentActivityNum
 i=(1)
@@ -35,6 +34,11 @@ done
 declare -i activityChangeDiff=$(( "$targetActivityNum" - "$currentActivityNum" ))
 declare -i newDesktop=$(( "$currentDesktop" + ( "$activityChangeDiff" * "$cellNumber" ) ))
 
-echo "current desktop: ${currentDesktop}"
-echo "new desktop: ${newDesktop}"
-
+cmd="$1"
+if [ "$cmd" == "focus" ]; then
+    hyprctl dispatch vdesk ${newDesktop}
+    exit 1
+elif [ "$cmd" == "window" ]; then
+    hyprctl dispatch movetodesk ${newDesktop}
+    exit 1
+fi

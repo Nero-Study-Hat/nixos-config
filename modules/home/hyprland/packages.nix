@@ -15,6 +15,7 @@
 
         wl-screenrec
         wl-clipboard
+        cliphist
 
         grim
         slurp
