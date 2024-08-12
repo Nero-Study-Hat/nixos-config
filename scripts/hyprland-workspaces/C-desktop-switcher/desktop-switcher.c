@@ -5,16 +5,33 @@
 
 // cmd for testing (dev dir): gcc desktop-switcher.c -o demo && ./demo && rm demo
 
-void getStdoutFromCommand(char* str)
-{
+static inline int getCurrentDesktopNum() {
+    char buffer[12];
     FILE *cmd=popen("hyprctl printdesk | awk '{print $3;}' | sed 's/.$//'", "r");
-    str = fgets(str, sizeof(str), cmd);
+    char* currentDesktop = fgets(buffer, sizeof(buffer), cmd);
     pclose(cmd);
+    int currentDesktopNum = atoi(currentDesktop);
+    return currentDesktopNum;
 }
 
+// TODO: need to test this function
+static inline void pluginCmd(char* userCmd, int target) {
+    if (strcmp(cmd, "focus") == 0) {
+        char execCmd[12];
+        sprintf(execCmd, "hyperctl dispatch vdesk %i", target);
+        system(execCmd);
+    }
+    if (strcmp(cmd, "window") == 0) {
+        char execCmd[12];
+        sprintf(execCmd, "hyperctl dispatch movetodesk %i", target);
+        system(execCmd);
+    }
+}
+
+
 /** 
- * @param   target_value - desired activity or desktop direction change
- * @param   {name} - {description}
+ * @param   target_value - desired activity or desktop direction change value for cmd
+ * @param   cmd - operation to do with target_value
  * @param   {name} - {description}
 */
 int main(int argc, char* argv[])
@@ -23,9 +40,7 @@ int main(int argc, char* argv[])
     const int rows = 2;
     const bool wrapEnable = true;
 
-    char currentDesktop[3];
-    getStdoutFromCommand(currentDesktop);
-    const int currentDesktopNum = atoi(currentDesktop);
+    const int currentDesktopNum = getCurrentDesktopNum();
     int targetDesktopNum;
     int modifierNum;
 
