@@ -1,5 +1,6 @@
 nix shell nixpkgs#git --command command-with-git-available
 nix shell nixpkgs#git --command nix flake check "github:Nero-Study-Hat/nixos-config/${branch}" --no-write-lock-file
+nix shell nixpkgs#file --command file {file-name}
 nix run nixpkgs#python -- --version
 
 # --- NixOS ---

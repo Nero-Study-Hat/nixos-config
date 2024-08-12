@@ -1,7 +1,7 @@
 { lib, pkgs, rootPath, ... }:
 
 let
-    customVirtDesktopsModuleScript = "${rootPath}/scripts/virt-desktops-waybar-module.sh";
+    customVirtDesktopsModuleExe = "${rootPath}/pkgs/waybar-modules/virt-desktops";
     audioOuputSwitchScript = pkgs.pkgs.writeShellScriptBin "start" ''
         headphones="alsa_output.pci-0000_2f_00.4.analog-stereo"
         monitor="alsa_output.pci-0000_2d_00.1.hdmi-stereo-extra2"
@@ -152,7 +152,7 @@ in
             "interval" = "10";
             "tooltip" = false;
             "on-click" = "hyprctl dispatch vdesk 1";
-            "exec" = ''${customVirtDesktopsModuleScript} 1'';
+            "exec" = ''${customVirtDesktopsModuleExe} 1'';
         };
         "custom/virt-desktop-2" = {
             "return-type" = "json";
@@ -160,7 +160,7 @@ in
             "interval" = "10";
             "tooltip" = false;
             "on-click" = "hyprctl dispatch vdesk 2";
-            "exec" = ''${customVirtDesktopsModuleScript} 2'';
+            "exec" = ''${customVirtDesktopsModuleExe} 2'';
         };
         "custom/virt-desktop-3" = {
             "format" = "{}";
@@ -168,7 +168,7 @@ in
             "interval" = "10";
             "tooltip" = false;
             "on-click" = "hyprctl dispatch vdesk 3";
-            "exec" = ''${customVirtDesktopsModuleScript} 3'';
+            "exec" = ''${customVirtDesktopsModuleExe} 3'';
         };
         "custom/virt-desktop-4" = {
             "format" = "{}";
@@ -176,7 +176,7 @@ in
             "interval" = "10";
             "tooltip" = false;
             "on-click" = "hyprctl dispatch vdesk 4";
-            "exec" = ''${customVirtDesktopsModuleScript} 4'';
+            "exec" = ''${customVirtDesktopsModuleExe} 4'';
         };
 
         "custom/weather" = {

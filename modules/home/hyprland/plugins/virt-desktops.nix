@@ -1,7 +1,7 @@
 { inputs, lib, pkgs, rootPath, ... }:
 
 let
-    virtualDesktopSwitchScript = "${rootPath}/scripts/hyprland-workspaces/desktops-switcher.sh";
+    virtualDesktopSwitchScript = "${rootPath}/pkgs/virt-desktop-switcher/desktop-switcher";
 in
 {
     wayland.windowManager.hyprland = {
