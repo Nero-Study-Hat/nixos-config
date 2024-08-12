@@ -149,7 +149,6 @@ in
         "custom/virt-desktop-1" = {
             "format" = "{}";
             "return-type" = "json";
-            "interval" = "10";
             "tooltip" = false;
             "on-click" = "hyprctl dispatch vdesk 1";
             "exec" = ''${customVirtDesktopsModuleExe} 1'';
@@ -157,7 +156,6 @@ in
         "custom/virt-desktop-2" = {
             "return-type" = "json";
             "format" = "{}";
-            "interval" = "10";
             "tooltip" = false;
             "on-click" = "hyprctl dispatch vdesk 2";
             "exec" = ''${customVirtDesktopsModuleExe} 2'';
@@ -165,7 +163,6 @@ in
         "custom/virt-desktop-3" = {
             "format" = "{}";
             "return-type" = "json";
-            "interval" = "10";
             "tooltip" = false;
             "on-click" = "hyprctl dispatch vdesk 3";
             "exec" = ''${customVirtDesktopsModuleExe} 3'';
@@ -173,7 +170,6 @@ in
         "custom/virt-desktop-4" = {
             "format" = "{}";
             "return-type" = "json";
-            "interval" = "10";
             "tooltip" = false;
             "on-click" = "hyprctl dispatch vdesk 4";
             "exec" = ''${customVirtDesktopsModuleExe} 4'';
