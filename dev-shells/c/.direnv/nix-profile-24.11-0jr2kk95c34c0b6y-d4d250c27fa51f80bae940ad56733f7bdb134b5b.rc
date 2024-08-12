@@ -43,7 +43,7 @@ NIX_ENFORCE_NO_NATIVE='1'
 export NIX_ENFORCE_NO_NATIVE
 NIX_HARDENING_ENABLE='bindnow format fortify fortify3 pic relro stackprotector strictoverflow zerocallusedregs'
 export NIX_HARDENING_ENABLE
-NIX_LDFLAGS='-rpath /home/nero/.nixflake/scripts/hyprland-workspaces/C-desktop-switcher/outputs/out/lib '
+NIX_LDFLAGS='-rpath /home/nero/.nixflake/dev-shells/c/outputs/out/lib '
 export NIX_LDFLAGS
 NIX_NO_SELF_RPATH='1'
 NIX_STORE='/nix/store'
@@ -128,7 +128,7 @@ declare -a envHostHostHooks=('ccWrapper_addCVars' 'bintoolsWrapper_addLDVars' 'a
 declare -a envHostTargetHooks=('ccWrapper_addCVars' 'bintoolsWrapper_addLDVars' 'addCMakeParams' 'ccWrapper_addCVars' )
 declare -a envTargetTargetHooks=()
 declare -a fixupOutputHooks=('if [ -z "${dontPatchELF-}" ]; then patchELF "$prefix"; fi' 'if [[ -z "${noAuditTmpdir-}" && -e "$prefix" ]]; then auditTmpdir "$prefix"; fi' 'if [ -z "${dontGzipMan-}" ]; then compressManPages "$prefix"; fi' '_moveLib64' '_moveSbin' '_moveSystemdUserUnits' 'patchShebangsAuto' '_pruneLibtoolFiles' '_doStrip' )
-flag='/home/nero/.nixflake/scripts/hyprland-workspaces/C-desktop-switcher/outputs/out/lib'
+flag='/home/nero/.nixflake/dev-shells/c/outputs/out/lib'
 guess='24'
 iframework_seen=''
 initialPath='/nix/store/cnknp3yxfibxjhila0sjd1v3yglqssng-coreutils-9.5 /nix/store/5my5b6mw7h9hxqknvggjla1ci165ly21-findutils-4.10.0 /nix/store/fy6s9lk05yjl1cz2dl8gs0sjrd6h9w5f-diffutils-3.10 /nix/store/9zsm74npdqq2lgjzavlzaqrz8x44mq9d-gnused-4.9 /nix/store/k8zpadqbwqwalggnhqi74gdgrlf3if9l-gnugrep-3.11 /nix/store/2ywpssz17pj0vr4vj7by6aqx2gk01593-gawk-5.2.2 /nix/store/nzzl7dnay9jzgfv9fbwg1zza6ji7bjvr-gnutar-1.35 /nix/store/7m0l19yg0cb1c29wl54y24bbxsd85f4s-gzip-1.13 /nix/store/cx1220ll0pgq6svfq7bmhpdzp0avs09w-bzip2-1.0.8-bin /nix/store/70anjdzz5rj9lcamll62lvp5ib3yqzzr-gnumake-4.4.1 /nix/store/i1x9sidnvhhbbha2zhgpxkhpysw6ajmr-bash-5.2p26 /nix/store/6rv8ckk0hg6s6q2zay2aaxgirrdy4l6v-patch-2.7.6 /nix/store/xzdawyw3njki7gx2yx4bkmhdzymgjawm-xz-5.6.2-bin /nix/store/rnndls2fiid1sic81i06dkqjhh24lpvr-file-5.45'
@@ -139,7 +139,7 @@ name='virtual-desktop-switcher-C-project-env'
 export name
 nativeBuildInputs='/nix/store/62zpnw69ylcfhcpy1di8152zlzmbls91-gcc-wrapper-13.3.0 /nix/store/aqckch626lg0vxh41dabyzrq0jx7gdk5-cmake-3.29.6'
 export nativeBuildInputs
-out='/home/nero/.nixflake/scripts/hyprland-workspaces/C-desktop-switcher/outputs/out'
+out='/home/nero/.nixflake/dev-shells/c/outputs/out'
 export out
 outputBin='out'
 outputDev='out'
@@ -171,7 +171,7 @@ preConfigurePhases=' updateAutotoolsGnuConfigScriptsPhase'
 declare -a preFixupHooks=('_moveToShare' '_multioutDocs' '_multioutDevs' )
 preferLocalBuild='1'
 export preferLocalBuild
-prefix='/home/nero/.nixflake/scripts/hyprland-workspaces/C-desktop-switcher/outputs/out'
+prefix='/home/nero/.nixflake/dev-shells/c/outputs/out'
 declare -a propagatedBuildDepFiles=('propagated-build-build-deps' 'propagated-native-build-inputs' 'propagated-build-target-deps' )
 propagatedBuildInputs=''
 export propagatedBuildInputs

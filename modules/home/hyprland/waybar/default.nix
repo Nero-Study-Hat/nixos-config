@@ -1,7 +1,8 @@
 { lib, pkgs, rootPath, ... }:
 
 let
-    customVirtDesktopsModuleExe = "${rootPath}/pkgs/waybar-modules/virt-desktops";
+    # customVirtDesktopsModuleExe = "${rootPath}/pkgs/waybar-modules/virt-desktops";
+    customVirtDesktopsModuleExe = "${rootPath}/scripts/virt-desktops-waybar-module.sh";
     audioOuputSwitchScript = pkgs.pkgs.writeShellScriptBin "start" ''
         headphones="alsa_output.pci-0000_2f_00.4.analog-stereo"
         monitor="alsa_output.pci-0000_2d_00.1.hdmi-stereo-extra2"

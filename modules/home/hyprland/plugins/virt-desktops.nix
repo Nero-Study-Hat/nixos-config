@@ -1,7 +1,7 @@
 { inputs, lib, pkgs, rootPath, ... }:
 
 let
-    virtualDesktopSwitchScript = "${rootPath}/pkgs/virt-desktop-switcher/desktop-switcher";
+    virtualDesktopSwitchExe = "${rootPath}/pkgs/virt-desktop-switcher/desktop-switcher";
 in
 {
     wayland.windowManager.hyprland = {
@@ -25,15 +25,15 @@ in
 
         settings = {
             bind = [
-                "CTRL ALT, up, exec, ${virtualDesktopSwitchScript} up focus"
-                "CTRL ALT, down, exec, ${virtualDesktopSwitchScript} down focus"
-                "CTRL ALT, right, exec, ${virtualDesktopSwitchScript} right focus"
-                "CTRL ALT, left, exec, ${virtualDesktopSwitchScript} left focus"
+                "CTRL ALT, up, exec, ${virtualDesktopSwitchExe} up focus"
+                "CTRL ALT, down, exec, ${virtualDesktopSwitchExe} down focus"
+                "CTRL ALT, right, exec, ${virtualDesktopSwitchExe} right focus"
+                "CTRL ALT, left, exec, ${virtualDesktopSwitchExe} left focus"
 
-                "CTRL $mainMod, up, exec, ${virtualDesktopSwitchScript} up window"
-                "CTRL $mainMod, down, exec, ${virtualDesktopSwitchScript} down window"
-                "CTRL $mainMod, right, exec, ${virtualDesktopSwitchScript} right window"
-                "CTRL $mainMod, left, exec, ${virtualDesktopSwitchScript} left window"
+                "CTRL $mainMod, up, exec, ${virtualDesktopSwitchExe} up window"
+                "CTRL $mainMod, down, exec, ${virtualDesktopSwitchExe} down window"
+                "CTRL $mainMod, right, exec, ${virtualDesktopSwitchExe} right window"
+                "CTRL $mainMod, left, exec, ${virtualDesktopSwitchExe} left window"
             ];
         };
 

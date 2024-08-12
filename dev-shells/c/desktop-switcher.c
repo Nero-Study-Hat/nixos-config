@@ -4,6 +4,7 @@
 #include <string.h>
 
 // cmd for testing (dev dir): gcc desktop-switcher.c -o demo && ./demo "arg1" "arg2" && rm demo
+// use `which gcc` to get compiler path for vscode
 
 static inline int getCurrentDesktopNum() {
     char buffer[12];
@@ -18,21 +19,19 @@ static inline void pluginCmd(char* userCmd, const int target) {
     char execCmd[50];
     if (strcmp(userCmd, "focus") == 0) {
         sprintf(execCmd, "hyprctl dispatch vdesk %i", target);
-        const int result = system(execCmd);
-        exit(1);
     }
     if (strcmp(userCmd, "window") == 0) {
         sprintf(execCmd, "hyprctl dispatch movetodesk %i", target);
-        const int result = system(execCmd);
-        exit(1);
     }
+    // printf("%s", execCmd);
+    const int result = system(execCmd);
+    exit(1);
 }
 
 
 /** 
  * @param   target_value - desired activity or desktop direction change value for cmd
  * @param   cmd - operation to do with target_value
- * @param   {name} - {description}
 */
 int main(int argc, char* argv[])
 {
@@ -49,8 +48,8 @@ int main(int argc, char* argv[])
     const int limit = rows + 1;
     for (int i = 1; i < limit; i++) {
         // left most colum
-        const int x = i * columns - (columns - 1);
-        if (x == currentDesktopNum && 0 == strcmp(argv[1], "left")) {
+        const int leftColNum = i * columns - (columns - 1);
+        if (leftColNum == currentDesktopNum && 0 == strcmp(argv[1], "left")) {
             if (wrapEnable == true) {
                 targetDesktopNum = currentDesktopNum + (columns - 1);
                 pluginCmd(argv[2], targetDesktopNum);
@@ -60,8 +59,8 @@ int main(int argc, char* argv[])
             }
         }
         // right most column
-        const int y = i * columns;
-        if (x == currentDesktopNum && 0 == strcmp(argv[1], "right")) {
+        const int rightColNum = i * columns;
+        if (rightColNum == currentDesktopNum && 0 == strcmp(argv[1], "right")) {
             if (wrapEnable == true) {
                 targetDesktopNum = currentDesktopNum - (columns - 1);
                 pluginCmd(argv[2], targetDesktopNum);
@@ -100,10 +99,10 @@ int main(int argc, char* argv[])
         modifierNum = -1;
     }
     else if (strcmp(argv[1], "up") == 0) {
-        modifierNum = -1;
+        modifierNum = rows * -1;
     }
     else if (strcmp(argv[1], "down") == 0) {
-        modifierNum = -1;
+        modifierNum = rows;
     }
 
     targetDesktopNum = currentDesktopNum + modifierNum;
@@ -111,4 +110,3 @@ int main(int argc, char* argv[])
 
     return 0;
 }
-
