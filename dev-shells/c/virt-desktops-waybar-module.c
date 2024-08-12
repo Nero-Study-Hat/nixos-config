@@ -35,9 +35,10 @@ int main(int argc, char* argv[])
             text = "◈";
             class = "virt-desktop-active";
         }
-        printf("{\"text\": \" %s \", \"class\": \"%s\"}\n", text, class);
-        // sleep(1); // whole seconds
-        usleep(milliseconds * 1000);
+        printf("{\"text\": \" %s \", \"class\": \"%s\"}", text, class);
+        fflush(stdout);
+        sleep(1); // whole seconds
+        // usleep(milliseconds * 1000);
     }
     return 0; // should never be reached
 }
