@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
     int currentDesktopNum;
     char* text;
     char* class;
-    const int milliseconds = 700;
+    const int milliseconds = 550;
     // infinite loop
     for(;;) {
         if (argv[1][0] == '1') {
