@@ -22,16 +22,16 @@
         
         hyprland = {
             url = "git+https://github.com/hyprwm/Hyprland/?ref=refs/tags/v0.41.2&rev=918d8340afd652b011b937d29d5eea0be08467f5&submodules=1";
-            inputs.nixpkgs.follows = "nixpkgs";
+            inputs.nixpkgs.follows = "nixpkgs-stable";
         };
         hyprland-virtual-desktops = {
             url = "github:levnikmyskin/hyprland-virtual-desktops/dev";
             inputs.hyprland.follows = "hyprland";
-            inputs.nixpkgs.follows = "nixpkgs";
+            inputs.nixpkgs.follows = "nixpkgs-stable";
         };
         hyprkool = {
             url = "github:thrombe/hyprkool/0.7.1";
-            inputs.nixpkgs.follows = "nixpkgs";
+            inputs.nixpkgs.follows = "nixpkgs-stable";
             inputs.nixpkgs-unstable.follows = "nixpkgs";
             inputs.hyprland.follows = "hyprland";
         };
