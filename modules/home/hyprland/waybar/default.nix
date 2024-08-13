@@ -36,8 +36,8 @@ in
         "spacing" = 10;
 
         "modules-left" = [ "pulseaudio" ];
-        "modules-center" = [ "custom/weather" "group/group-power" ];
-        # "modules-center" = [ "custom/weather" "group/group-power" "group/group-virt-desktops" ];
+        # "modules-center" = [ "custom/weather" "group/group-power" ];
+        "modules-center" = [ "custom/weather" "group/group-power" "group/group-virt-desktops" ];
         "modules-right" = [ "group/hardware" "clock" ];
 
         "clock" = {

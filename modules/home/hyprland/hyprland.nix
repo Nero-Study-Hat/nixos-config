@@ -2,8 +2,8 @@
 
 {
     imports = [
-        ./plugins/hyprkool.nix
-        # ./plugins/virt-desktops.nix
+        # ./plugins/hyprkool.nix
+        ./plugins/virt-desktops.nix
     ];
 
     wayland.windowManager.hyprland = {
