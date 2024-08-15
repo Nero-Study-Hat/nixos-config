@@ -3,7 +3,7 @@
 let
     virtualDesktopSwitchExe = "${rootPath}/pkgs/virt-desktop-switcher/desktop-switcher";
     customVirtDesktopsModuleExe = "${rootPath}/pkgs/waybar-modules/virt-desktops";
-    customActivityModuleExe = "${rootPath}/pkgs/waybar-modules/virt-desktops";
+    customActivityModuleExe = "${rootPath}/pkgs/waybar-modules/activity";
 in
 {
     # for right of modules center: [ "custom/activity" "group/group-virt-desktops" ]
@@ -13,7 +13,7 @@ in
             "return-type" = "json";
             "tooltip" = false;
             "on-click" = "${virtualDesktopSwitchExe} focus activityRofi";
-            "exec" = "${customActivityModuleExe}"
+            "exec" = "${customActivityModuleExe}";
         };
 
         "group/group-virt-desktops" = {
@@ -54,5 +54,5 @@ in
             "on-click" = "${virtualDesktopSwitchExe} 4";
             "exec" = ''${customVirtDesktopsModuleExe} 4'';
         };
-    }
+    };
 }
