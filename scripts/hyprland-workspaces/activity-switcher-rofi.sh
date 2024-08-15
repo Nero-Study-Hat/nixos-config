@@ -25,7 +25,7 @@ done
 
 declare -i targetActivityNum
 for i in "${!activities[@]}"; do
-   if [[ "${activities[$i]}" = "${activity}" ]]; then
+   if [[ "${activities[$i]}" == "${activity}" ]]; then
        targetActivityNum=$(( "$i" + 1 ))
        break
    fi

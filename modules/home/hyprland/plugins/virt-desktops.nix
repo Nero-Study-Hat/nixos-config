@@ -25,15 +25,17 @@ in
 
         settings = {
             bind = [
-                "CTRL ALT, up, exec, ${virtualDesktopSwitchExe} up focus"
-                "CTRL ALT, down, exec, ${virtualDesktopSwitchExe} down focus"
-                "CTRL ALT, right, exec, ${virtualDesktopSwitchExe} right focus"
-                "CTRL ALT, left, exec, ${virtualDesktopSwitchExe} left focus"
+                "SUPER, Q, exec, ${virtualDesktopSwitchExe} focus activityRofi"
+                
+                "CTRL ALT, up, exec, ${virtualDesktopSwitchExe} focus up"
+                "CTRL ALT, down, exec, ${virtualDesktopSwitchExe} focus down"
+                "CTRL ALT, right, exec, ${virtualDesktopSwitchExe} focus right"
+                "CTRL ALT, left, exec, ${virtualDesktopSwitchExe} focus left"
 
-                "CTRL $mainMod, up, exec, ${virtualDesktopSwitchExe} up window"
-                "CTRL $mainMod, down, exec, ${virtualDesktopSwitchExe} down window"
-                "CTRL $mainMod, right, exec, ${virtualDesktopSwitchExe} right window"
-                "CTRL $mainMod, left, exec, ${virtualDesktopSwitchExe} left window"
+                "CTRL $mainMod, up, exec, ${virtualDesktopSwitchExe} window up"
+                "CTRL $mainMod, down, exec, ${virtualDesktopSwitchExe} window down"
+                "CTRL $mainMod, right, exec, ${virtualDesktopSwitchExe} window right"
+                "CTRL $mainMod, left, exec, ${virtualDesktopSwitchExe} window left"
             ];
         };
 

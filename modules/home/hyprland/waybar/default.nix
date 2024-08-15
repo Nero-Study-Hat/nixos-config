@@ -1,6 +1,7 @@
 { lib, pkgs, rootPath, ... }:
 
 let
+    virtualDesktopSwitchExe = "${rootPath}/pkgs/virt-desktop-switcher/desktop-switcher";
     customVirtDesktopsModuleExe = "${rootPath}/pkgs/waybar-modules/virt-desktops";
     # customVirtDesktopsModuleExe = "${rootPath}/scripts/virt-desktops-waybar-module.sh";
     audioOuputSwitchScript = pkgs.pkgs.writeShellScriptBin "start" ''
@@ -14,6 +15,10 @@ let
     '';
 in
 {
+    imports = [
+        ./virt-desktop-modules
+    ];
+    
     programs.waybar.enable = true;
     programs.waybar.package = (pkgs.waybar.overrideAttrs (oldAttrs: {
                                 mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
@@ -35,9 +40,9 @@ in
         "height" = 30;
         "spacing" = 10;
 
-        "modules-left" = [ "pulseaudio" ];
+        "modules-left" = [ "group/group-power" "pulseaudio" ];
         # "modules-center" = [ "custom/weather" "group/group-power" ];
-        "modules-center" = [ "custom/weather" "group/group-power" "group/group-virt-desktops" ];
+        "modules-center" = [ "custom/weather" "custom/activity" "group/group-virt-desktops" ];
         "modules-right" = [ "group/hardware" "clock" ];
 
         "clock" = {
@@ -111,6 +116,11 @@ in
 
         "group/group-power" = {
             "orientation" = "inherit";
+            "drawer" = {
+                "transition-duration" = 500;
+                "children-class" = "not-power";
+                "transition-left-to-right" = false;
+            };
             "modules" = [
                 "custom/power" # First element is the "group leader" and won't ever be hidden
                 "custom/reboot"
@@ -137,44 +147,6 @@ in
             "format" = "  ";
             "tooltip" = false;
             "on-click" = "shutdown now";
-        };
-
-        "group/group-virt-desktops" = {
-            "orientation" = "inherit";
-            "modules" = [
-                "custom/virt-desktop-1" # First element is the "group leader" and won't ever be hidden
-                "custom/virt-desktop-2"
-                "custom/virt-desktop-3"
-                "custom/virt-desktop-4"
-            ];
-        };
-        "custom/virt-desktop-1" = {
-            "format" = "{}";
-            "return-type" = "json";
-            "tooltip" = false;
-            "on-click" = "hyprctl dispatch vdesk 1";
-            "exec" = ''${customVirtDesktopsModuleExe} 1'';
-        };
-        "custom/virt-desktop-2" = {
-            "return-type" = "json";
-            "format" = "{}";
-            "tooltip" = false;
-            "on-click" = "hyprctl dispatch vdesk 2";
-            "exec" = ''${customVirtDesktopsModuleExe} 2'';
-        };
-        "custom/virt-desktop-3" = {
-            "format" = "{}";
-            "return-type" = "json";
-            "tooltip" = false;
-            "on-click" = "hyprctl dispatch vdesk 3";
-            "exec" = ''${customVirtDesktopsModuleExe} 3'';
-        };
-        "custom/virt-desktop-4" = {
-            "format" = "{}";
-            "return-type" = "json";
-            "tooltip" = false;
-            "on-click" = "hyprctl dispatch vdesk 4";
-            "exec" = ''${customVirtDesktopsModuleExe} 4'';
         };
 
         "custom/weather" = {
