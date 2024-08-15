@@ -16,9 +16,9 @@ let
 in
 {
     imports = [
-        ./virt-desktop-modules
+        ./virt-desktop-modules.nix
     ];
-    
+
     programs.waybar.enable = true;
     programs.waybar.package = (pkgs.waybar.overrideAttrs (oldAttrs: {
                                 mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
