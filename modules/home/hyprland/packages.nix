@@ -15,12 +15,9 @@
 
         wl-screenrec
 
-        # clipboard managers (and associated tools) I'm trying
         wl-clipboard
-        cliphist
         xdg-utils
         copyq
-        clipman
 
         grim
         slurp

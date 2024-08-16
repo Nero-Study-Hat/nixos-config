@@ -21,7 +21,7 @@ nix build {path/to/flake/dir}#isoimage -o {target/output/path}
 
 # --- cleaning ---
 nix-collect-garbage
-sudo nix-collectgarbage -d
+sudo nix-collect-garbage -d
 nix-collect-garbage --delete-older-than {number of days}d
 nix-store --gc
 sudo nix-store --optimise

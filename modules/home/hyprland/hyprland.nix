@@ -146,7 +146,7 @@
                 # "sleep 3 && wl-paste --type text --watch cliphist store"
                 # "sleep 3 && wl-paste --type image --watch cliphist store"
                 # "sleep 3 && wl-paste --watch cliphist store"
-                # "sleep 3 && copyq --start-server"
+                "sleep 3 && copyq --start-server"
             ];
 
             env = [
