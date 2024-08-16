@@ -2,8 +2,8 @@
 
 {
     imports = [
-        ./plugins/hyprkool.nix
-        # ./plugins/virt-desktops.nix
+        # ./plugins/hyprkool.nix
+        ./plugins/virt-desktops.nix
     ];
 
     # TODO: fix qt theme for (dolphin is theme is broken right now)
@@ -143,7 +143,10 @@
             exec-once = [
                 "waybar & swww"
                 "hypridle"
-                "wl-paste --watch cliphist store"
+                # "sleep 3 && wl-paste --type text --watch cliphist store"
+                # "sleep 3 && wl-paste --type image --watch cliphist store"
+                # "sleep 3 && wl-paste --watch cliphist store"
+                # "sleep 3 && copyq --start-server"
             ];
 
             env = [

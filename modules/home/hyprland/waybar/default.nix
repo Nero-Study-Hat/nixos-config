@@ -16,7 +16,7 @@ let
 in
 {
     imports = [
-        # ./virt-desktop-modules.nix
+        ./virt-desktop-modules.nix
     ];
 
     programs.waybar.enable = true;
@@ -41,8 +41,8 @@ in
         "spacing" = 10;
 
         "modules-left" = [ "group/group-power" "pulseaudio" ];
-        "modules-center" = [ "custom/weather" ];
-        # "modules-center" = [ "custom/weather" "custom/activity" "group/group-virt-desktops" ];
+        # "modules-center" = [ "custom/weather" ];
+        "modules-center" = [ "custom/weather" "custom/activity" "group/group-virt-desktops" ];
         "modules-right" = [ "group/hardware" "clock" ];
 
         "clock" = {

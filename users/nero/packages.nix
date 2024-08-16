@@ -30,6 +30,7 @@ in
         pkgs.curl
         pkgs.wget
         pkgs.ncdu
+        pkgs.file
 
         # productivitya
         pkgs.morgen

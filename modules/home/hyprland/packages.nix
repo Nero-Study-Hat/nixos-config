@@ -14,12 +14,18 @@
         hyprcursor
 
         wl-screenrec
+
+        # clipboard managers (and associated tools) I'm trying
         wl-clipboard
         cliphist
+        xdg-utils
+        copyq
+        clipman
 
         grim
         slurp
         swappy
+        imagemagick
 
         pulseaudio
         killall # Restart processes
@@ -34,7 +40,9 @@
     programs.rofi = {
         enable = true;
         package = pkgs.rofi-wayland;
-        plugins = [ pkgs.rofi-emoji ];
+        plugins = [ 
+            pkgs.rofi-emoji-wayland
+        ];
         font = "cascadia-code";
         location = "center";
     };
