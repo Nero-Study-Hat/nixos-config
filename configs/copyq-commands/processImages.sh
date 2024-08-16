@@ -21,3 +21,5 @@ copyq tab "clipboard" remove
 # remember to uncheck execute automatic commands on select in preferences
 # https://miro.medium.com/v2/resize:fit:4388/format:webp/1*4kDk9CZEEJBllqd3Fx549A.png
 # https://search.nixos.org/images/nix-logo.png
+
+# link to regex for matching image address: https://regex101.com/r/TinoaL/1
