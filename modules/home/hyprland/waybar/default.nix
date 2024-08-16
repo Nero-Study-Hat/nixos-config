@@ -40,10 +40,10 @@ in
         "height" = 30;
         "spacing" = 10;
 
-        "modules-left" = [ "group/group-power" "pulseaudio" ];
+        "modules-left" = [ "group/group-power" "pulseaudio" "group/hardware" ];
         # "modules-center" = [ "custom/weather" ];
         "modules-center" = [ "custom/weather" "custom/activity" "group/group-virt-desktops" ];
-        "modules-right" = [ "group/hardware" "clock" ];
+        "modules-right" = [ "tray" "clock" ];
 
         "clock" = {
             "interval" = 60;
@@ -68,6 +68,11 @@ in
                 "on-click-forward" = "tz_up";
                 "on-click-backward" = "tz_down";
             };
+        };
+
+        "tray" = {
+            "icon-size"=  21;
+            "spacing" = 10;
         };
 
         "group/hardware" = {

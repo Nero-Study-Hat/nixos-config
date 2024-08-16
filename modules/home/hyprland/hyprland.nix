@@ -138,6 +138,7 @@
 
             windowrulev2 = [
                 "suppressevent maximize, class:.*"
+                "float, class:(com.github.hluk.copyq)"
             ];
 
             exec-once = [
