@@ -23,8 +23,7 @@ char* getCurrentActivity(const int currentDesktopNum, const int numOfActivities,
     return currentActivity;
 }
 
-
-int main()
+int main(int argc, char* argv[])
 {
     const int numOfActivities = 3;
     const int desktopsInActivity = 4;
@@ -32,8 +31,14 @@ int main()
     setbuf(stdout, NULL); // disable buffering on stdout, required by waybar
     char* text;
     const char* class = "activity";
-    const int milliseconds = 550;
+    const int milliseconds = 1500;
     char* currentActivity;
+    if (argv[1] != NULL && argv[1][0] == '1') {
+        currentActivity = getCurrentActivity(getCurrentDesktopNum(), numOfActivities, desktopsInActivity, activities);
+        text = currentActivity;
+        printf("%s", text);
+        exit(1);        
+    }
     // infinite loop
     for(;;) {
         currentActivity = getCurrentActivity(getCurrentDesktopNum(), numOfActivities, desktopsInActivity, activities);

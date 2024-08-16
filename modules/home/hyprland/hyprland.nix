@@ -2,9 +2,24 @@
 
 {
     imports = [
-        # ./plugins/hyprkool.nix
-        ./plugins/virt-desktops.nix
+        ./plugins/hyprkool.nix
+        # ./plugins/virt-desktops.nix
     ];
+
+    # TODO: fix qt theme for (dolphin is theme is broken right now)
+    # qt = {
+    #     enable = true;
+    #     platformTheme.name = "qtct";
+    #     style.name = "kvantum";
+    # };
+
+    # xdg.configFile."Kvantum/kvantum.kvconfig".source = (pkgs.formats.ini {}).generate "kvantum.kvconfig" {
+    #     General.theme = "Nordic-Darker-Solid";
+    # };
+
+    # xdg.configFile."qt5ct/qt5ct.conf".source = (pkgs.formats.ini {}).generate "kvantum.kvconfig" {
+    #     Appearance.icon_theme = "Nordic-darker";
+    # };
 
     wayland.windowManager.hyprland = {
         enable = true;

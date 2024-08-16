@@ -18,6 +18,11 @@ in
 			services.xserver.enable = true;
 			services.xserver.videoDrivers = [ "amdgpu" ];
 			services.displayManager.sddm.enable = true;
+			# qt = {
+			# 	enable = true;
+			# 	platformTheme = "qt5ct";
+			# 	style = "kvantum";
+			# };
 		})
 
 		( lib.mkIf (cfg.choice == "kde" || cfg.choice == "all")

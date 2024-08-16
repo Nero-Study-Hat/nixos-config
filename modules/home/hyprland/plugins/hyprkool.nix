@@ -1,5 +1,13 @@
-{ inputs, lib, pkgs, ... }:
+{ inputs, lib, pkgs, rootPath, ... }:
 
+let
+    checkSettingsFile = pkgs.pkgs.writeShellScriptBin "start" ''
+        if [[ ! -e "~/.config/hypr/hyprkool.toml" ]]; then
+            mkdir -p /Scripts
+            cp "${rootPath}/configs/hyprkool.toml" "~/.config/hypr/hyprkool.toml"
+        fi
+    '';
+in
 {
     home.packages = with pkgs; [ inputs.hyprkool.packages."${system}".default ];
 
@@ -7,6 +15,13 @@
         plugins = [
             inputs.hyprkool.packages.${pkgs.system}.hyprkool-plugin
         ];
+
+        settings = {
+            exec-once = [
+                ''${checkSettingsFile}/bin/start''
+                "hyprkool daemon -m"
+            ];
+        };
 
         # hyprlang config
         extraConfig = lib.concatStrings [
@@ -35,8 +50,6 @@
 
                 # this only works if you have the hyprkool plugin
                 bind = $mainMod, a, exec, hyprkool toggle-overview
-
-                bind = SUPER, a, hyprexpo:expo, toggle # can be: toggle, off/disable or on/enable
 
                 plugin {
                     hyprkool {
