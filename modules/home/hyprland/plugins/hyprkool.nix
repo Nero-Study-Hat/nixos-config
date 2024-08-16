@@ -1,12 +1,7 @@
 { inputs, lib, pkgs, rootPath, ... }:
 
 let
-    checkSettingsFile = pkgs.pkgs.writeShellScriptBin "start" ''
-        if [[ ! -e "~/.config/hypr/hyprkool.toml" ]]; then
-            mkdir -p /Scripts
-            cp "${rootPath}/configs/hyprkool.toml" "~/.config/hypr/hyprkool.toml"
-        fi
-    '';
+    handleHyprkoolTomlScript = "${rootPath}/scripts/handleHyprkoolToml.sh";
 in
 {
     home.packages = with pkgs; [ inputs.hyprkool.packages."${system}".default ];
@@ -18,7 +13,7 @@ in
 
         settings = {
             exec-once = [
-                ''${checkSettingsFile}/bin/start''
+                ''${handleHyprkoolTomlScript}/bin/start "${rootPath}"''
                 "hyprkool daemon -m"
             ];
         };
