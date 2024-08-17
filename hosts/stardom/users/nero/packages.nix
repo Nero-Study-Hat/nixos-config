@@ -16,7 +16,6 @@ in
 
         # Development
         pkgs.vscode
-        pkgs.git
         pkgs.github-desktop
 
         # # Game Dev
@@ -25,12 +24,7 @@ in
 
         # Sys Management
         pkgs.gparted
-        pkgs.htop
         pkgs.cool-retro-term
-        pkgs.curl
-        pkgs.wget
-        pkgs.ncdu
-        pkgs.file
 
         # productivitya
         pkgs.morgen
@@ -48,20 +42,8 @@ in
 
 
         # Utilities
-        pkgs.neofetch
-        pkgs.tldr
         pkgs.flameshot
         pkgs.simplescreenrecorder
         pkgs.yt-dlp
     ];
-
-    programs.tmux = {
-        enable = true;
-        package = pkgs.tmux;
-    };
-
-    programs.htop = {
-        enable = true;
-        package = pkgs.htop;
-    };
 }

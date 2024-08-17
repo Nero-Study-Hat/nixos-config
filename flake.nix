@@ -72,7 +72,7 @@
                     {
                         home-manager.useGlobalPkgs = true;
                         home-manager.useUserPackages = true;
-                        home-manager.users.iso = import ./users/iso/home.nix;
+                        home-manager.users.iso = import ./hosts/isoimage/user/home.nix;
 
                         home-manager.extraSpecialArgs = {
                             inherit inputs;
@@ -118,7 +118,7 @@
                 };
 
                 modules = [
-                    ./users/nero/home.nix
+                    ./hosts/stardom/users/nero/home.nix
                     inputs.plasma-manager.homeManagerModules.plasma-manager
                 ];
             };
