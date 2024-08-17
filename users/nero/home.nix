@@ -7,9 +7,7 @@
         ../../modules/home/hyprland
 
         ./packages.nix
-        ../../modules/home/bash.nix
-        ../../modules/home/git.nix
-        ../../modules/home/vscode.nix
+        ../../modules/home/shell
     ];
 
 	nixpkgs = {
