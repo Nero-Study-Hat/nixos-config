@@ -1,0 +1,5 @@
+command to get open brave windows
+hyprctl clients | grep "\- Brave"
+
+command to get workspace of active window
+hyprctl activewindow | grep "workspace: " | cut -d' ' -f2

@@ -1,1 +1,0 @@
-[A series on getting started with NixOS.](https://cola-gang.industries/nixos-for-the-confused-part-0)
