@@ -8,8 +8,7 @@
         ./test.nix
     ];
 
-    home-modules.shell = {
-        defaults-enable = true;
-        test-pkg = pkgs.cowsay;
+    home-modules = {
+        shell.enable-all = true;
     };
 }
