@@ -8,15 +8,18 @@ in
     options.home-modules.shell = with types; {
         defaults-enable = mkEnableOption "Enable condition one.";
         extra-enable = mkEnableOption "Enable condition two.";
-        test-pkg = mkPackageOption {
-            description = "What package to use.";
+        test-pkg = mkOption {
+            type = package;
             default = pkgs.cowsay;
+            description = ''
+                Package derivation to use.
+            '';
         };
     };
 
-    config = mkIf cfg.defaults-enable || cfg.extra-enable (mkMerge [
+    config = mkIf cfg.defaults-enable (mkMerge [
         ({
-            home.packages = [ cfg.mullvad-pkg ];
+            home.packages = [ cfg.test-pkg ];
         })
     ]);
 }

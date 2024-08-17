@@ -10,6 +10,6 @@
 
     home-modules.shell = {
         defaults-enable = true;
-        extra-enable = true;
-    }
+        test-pkg = pkgs.cowsay;
+    };
 }

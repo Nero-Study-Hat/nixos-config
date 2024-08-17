@@ -3,11 +3,11 @@
 {
     imports = [ 
         #TODO: conditional module for desktop
-        ../../modules/home/plasma-manager.nix
-        ../../modules/home/hyprland
+        ../../../../modules/home/plasma-manager.nix
+        ../../../../modules/home/hyprland
 
         ./packages.nix
-        ../../modules/home/shell
+        ../../../../modules/home/shell
     ];
 
 	nixpkgs = {
