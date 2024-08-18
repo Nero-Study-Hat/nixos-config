@@ -10,17 +10,11 @@ in
     imports = [
         ./git.nix
         ./packages.nix
-        ./test.nix
+        ./language.nix
     ];
 
     options.home-modules.shell = with types; {
         enable-all = mkEnableOption "Enable all shell packages here.";
-        
-        bash-enable = mkEnableOption "Enable bash.";
-        bash-pkg = mkOption {
-            type = package;
-            default = pkgs.bash;
-        };
 
         direnv-enable = mkEnableOption "Enable direnv.";
         direnv-pkg = mkOption {
@@ -30,21 +24,9 @@ in
     };
 
     config = mkMerge [
-        ( mkIf (cfg.enable-all || cfg.bash-enable)
+        ( mkIf (cfg.enable-all)
         {
-            home.packages = [
-                cfg.bash-pkg
-                pkgs.bash-completion
-            ];
-            programs.bash = {
-                enable = true;
-                enableCompletion = true;
-                shellAliases = {
-                    cl = "clear";
-                };
-                historyIgnore = [ "ls" "cd" "cl" "clear" "exit" ];
-                bashrcExtra = ''eval "$(direnv hook bash)"'';
-            };
+            home-modules.shell.language.bash-enable = true;
         })
         ( mkIf (cfg.enable-all || cfg.direnv-enable)
         {

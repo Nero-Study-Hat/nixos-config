@@ -1,31 +1,26 @@
 { options, config, lib, pkgs, ... }:
 
+### NOTE: default user shell is set by nixos-configuration, not home-manager
+
 with lib;
 let
     cfg = config.home-modules.shell.language;
+    chosen-pkgs = if (cfg.pkgs-stable == true) then pkgs-stable else pkgs;
 in
 {
     options.home-modules.shell.language = with types; {
-        
+        pkgs-stable = mkEnableOption "Whether to us nixpkgs-stable as opposed to unstable.";
+        enable-all = mkEnableOption "Enable all shell languages here.";
         bash-enable = mkEnableOption "Enable and configure bash.";
-        bash-pkg = mkOption {
-            type = package;
-            default = pkgs.bash;
-        };
-
-        # zsh-enable = mkEnableOption "Enable direnv.";
-        # zsh-pkg = mkOption {
-        #     type = package;
-        #     default = pkgs.nix-direnv;
-        # };
+        zsh-enable = mkEnableOption "Enable and configure zsh.";
     };
 
     config = mkMerge [
         ( mkIf (cfg.enable-all || cfg.bash-enable)
         {
             home.packages = [
-                cfg.bash-pkg
-                pkgs.bash-completion
+                chosen-pkgs.bash
+                chosen-pkgs.bash-completion
             ];
             programs.bash = {
                 enable = true;
@@ -35,6 +30,20 @@ in
                 };
                 historyIgnore = [ "ls" "cd" "cl" "clear" "exit" ];
                 bashrcExtra = ''eval "$(direnv hook bash)"'';
+            };
+        })
+        ( mkIf (cfg.enable-all || cfg.zsh-enable)
+        {
+            home.packages = [
+                chosen-pkgs.zsh
+            ];
+            programs.zsh = {
+                enable = true;
+                enableCompletion = true;
+                shellAliases = {
+                    cl = "clear";
+                };
+                # bashrcExtra = ''eval "$(direnv hook bash)"''; # switch with hook for zsh
             };
         })
     ];
