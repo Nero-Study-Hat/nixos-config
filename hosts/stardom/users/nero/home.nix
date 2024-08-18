@@ -20,6 +20,14 @@
 
     home.keyboard.layout = "us";
 
+    home-modules = {
+        shell.enable-all = true;
+        shell.test = {
+            enable = true;
+            # pkgs-stable = true;
+        };
+    };
+
     home.packages = with pkgs; [
         cascadia-code
         source-code-pro

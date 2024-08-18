@@ -1,10 +1,7 @@
 { pkgs, ... }:
 
 {
-    home.packages = with pkgs; [ 
-        git
-        github-desktop
-     ];
+    home.packages = with pkgs; [ git ];
 
     programs.git = {
         enable = true;
