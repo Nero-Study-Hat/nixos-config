@@ -7,7 +7,7 @@
         ../../../../modules/home/hyprland
 
         ./packages.nix
-        ../../../../modules/home/shell
+        ../../../../modules/roles/workstation/home-modules.nix
     ];
 
 	nixpkgs = {
