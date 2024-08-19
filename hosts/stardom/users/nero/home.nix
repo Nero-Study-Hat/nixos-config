@@ -4,31 +4,30 @@
     imports = [ 
         #TODO: conditional module for desktop
         ../../../../modules/home/desktop/kde/plasma-manager.nix
-        ../../../../modules/home/hyprland
+        ../../../../modules/home/desktop/hyprland
 
         ./packages.nix
-        ../../../../modules/roles/workstation/home-modules.nix
+        ../../../../modules/roles/workstation/home-modules.nix # causes infinite recursion error currently
+        # ../../../../modules/home/shell
     ];
-
-	nixpkgs = {
-		config.allowUnfree = true;
-        config.permittedInsecurePackages = [ "electron-25.9.0" ];
-	};
 
     home.username = "nero";
     home.homeDirectory = "/home/nero";
 
     home.keyboard.layout = "us";
 
-    roles.workstation = {
-        home.enable = true;
-        home.desktop = "all";
+    # home-modules.shell.git-enable = true; successfully installs
 
-        # home = {
-        #     enable = true;
-        #     desktop = "all";
-        #     default-creative-apps = false;
-        # };
+    nixpkgs = {
+        config.allowUnfree = true;
+        config.permittedInsecurePackages = [ "electron-25.9.0" ];
+    };
+
+    roles.workstation = {
+        home = {
+            enable = true;
+            desktop = "all";
+        };
     };
 
     programs.home-manager.enable = true;

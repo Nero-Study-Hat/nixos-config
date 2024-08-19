@@ -5,11 +5,6 @@ let
 in
 {
     home.packages = [
-        # Basics
-        pkgs.brave
-        pkgs.mullvad-browser
-        pkgs.vesktop
-        pkgs.libsForQt5.dolphin
         pkgs-stable.libsForQt5.bismuth
         pkgs.kdePackages.fcitx5-with-addons
         pkgs.protonvpn-cli_2

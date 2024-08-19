@@ -10,7 +10,7 @@ in
     imports = [ 
         #TODO: conditional module for desktop
         ../../home/shell
-        ../../home/desktop/apps/basic
+        ../../home/desktop/apps/basics
         ../../home/desktop/apps/creative
     ];
 
@@ -25,24 +25,29 @@ in
 			example = "hyprland";
 			description = "The DE or WM with associated packages and config to setup.";
 		};
-
         # groups below
-        default-shell = mkEnableOption {
+        default-shell = mkOption {
+            type = bool;
             default = true;
             description = "Enable all default shell packages and config.";
         };
-        default-basic-apps = mkEnableOption {
+        default-basics-apps = mkOption {
+            type = bool;
             default = true;
             description = "Enable all default basic (near-fundamental) desktop apps and config.";
         };
-        default-creative-apps = mkEnableOption {
+        default-creative-apps = mkOption {
+            type = bool;
             default = true;
             description = "Enable all default creative desktop apps and config.";
         };
     };
 
-    config = cfg.enable (mkMerge [
-        ({
+    # importing modules with a mkIf before the main mkMerge that holds everything
+    # in the config causes infinite recusion so cfg.enable is used in side the main mkMerge
+    config = mkMerge [
+        ( mkIf (cfg.enable)
+        {
             nixpkgs = {
                 config.allowUnfree = true;
                 config.permittedInsecurePackages = [ "electron-25.9.0" ];
@@ -62,43 +67,48 @@ in
             fonts.fontconfig.defaultFonts.emoji = ["Noto Color Emoji"];
         })
 
-        ( mkIf (cfg.default-shell)
-        {
-            home-modules.shell = {
-                    language.bash-enable = true;
-                    direnv-enable = true;
-                    git-enable = true;
-                    tmux-enable = true;
-                    htop-enable = true;
-                    curl-enable = true;
-                    wget-enable = true;
-                    ncdu-enable = true;
-                    file-enable = true;
-                    neofetch-enable = true;
-                    tldr-enable = true;
-                };
-        })
+        (mkIf cfg.enable (mkMerge [
+            ( mkIf (cfg.default-shell)
+            {
+                # home.packages = with pkgs; [ cowsay ];
+                home-modules.shell = {
+                        language.bash-enable = true;
+                        direnv-enable = true;
+                        git-enable = true;
+                        tmux-enable = true;
+                        htop-enable = true;
+                        curl-enable = true;
+                        wget-enable = true;
+                        ncdu-enable = true;
+                        file-enable = true;
+                        neofetch-enable = true;
+                        tldr-enable = true;
+                    };
+            })
 
-        ( mkIf (cfg.default-creative-apps)
-        {
-            home-modules.desktop.apps.creative = {
-                    blender-enable = true;
-                    krita-enable = true;
-                    aseprite-enable = true;
-                    davinci-resolve-enable = true;
-                    pureref-enable = false;
-                };
-        })
-        ( mkIf (cfg.default-basic-apps)
-        {
-            home-modules.desktop.apps.basic = {
-                    brave-browser-enable = true;
-                    mullvad-browser-enable = true;
-                    dolphin-enable = true;
-                    vesktop-enable = true;
-                    cool-retro-term-enable = true;
-                };
-        })
-    ]);
+            ( mkIf (cfg.default-basics-apps)
+            {
+                home-modules.desktop.apps.basic = {
+                        brave-browser-enable = true;
+                        mullvad-browser-enable = true;
+                        dolphin-enable = true;
+                        vesktop-enable = true;
+                        cool-retro-term-enable = true;
+                    };
+            })
+
+            ( mkIf (cfg.default-creative-apps)
+            {
+                home-modules.desktop.apps.creative = {
+                        blender-enable = true;
+                        krita-enable = true;
+                        aseprite-enable = true;
+                        davinci-resolve-enable = true;
+                        pureref-enable = false;
+                    };
+            })
+        ]))
+
+    ];
 
 }

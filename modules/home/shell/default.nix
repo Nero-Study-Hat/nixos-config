@@ -8,7 +8,6 @@ in
     # if something grows in complexity and/or size then move it from this file to its own file to import
     # and extend the namespace declared in this file
     imports = [
-        ./packages.nix
         ./language.nix
     ];
 
