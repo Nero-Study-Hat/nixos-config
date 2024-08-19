@@ -4,30 +4,44 @@ with lib;
 # try the below
 # with home-modules;
 let
-    cfg = config.roles.workstation;
+    cfg = config.roles.workstation.home;
 in
 {
     imports = [ 
         #TODO: conditional module for desktop
-        ../../shell
+        ../../home/shell
+        ../../home/desktop/apps/basic
+        ../../home/desktop/apps/creative
     ];
 
     # have an option enable all groups by single option default and an option for each group
     # if the caller wants fine control within a group then they can use defaults for other groups
     # and specify themselves the settings they want for the group they want fine control over
-    options.roles.workstation = with types; {
-        enable-all-defaults = mkEnableOption "Enable all default shell packages and config.";
+    options.roles.workstation.home = with types; {
+        enable = mkEnableOption "Enable all packages and config.";
 		desktop = lib.mkOption {
 			type = lib.types.str;
 			default = "kde";
 			example = "hyprland";
 			description = "The DE or WM with associated packages and config to setup.";
 		};
+
         # groups below
-        default-shell = mkEnableOption "Enable all default shell packages and config.";
+        default-shell = mkEnableOption {
+            default = true;
+            description = "Enable all default shell packages and config.";
+        };
+        default-basic-apps = mkEnableOption {
+            default = true;
+            description = "Enable all default basic (near-fundamental) desktop apps and config.";
+        };
+        default-creative-apps = mkEnableOption {
+            default = true;
+            description = "Enable all default creative desktop apps and config.";
+        };
     };
 
-    config = mkMerge [
+    config = cfg.enable (mkMerge [
         ({
             nixpkgs = {
                 config.allowUnfree = true;
@@ -48,7 +62,7 @@ in
             fonts.fontconfig.defaultFonts.emoji = ["Noto Color Emoji"];
         })
 
-        ( mkIf (cfg.default-shell || cfg.default-shell)
+        ( mkIf (cfg.default-shell)
         {
             home-modules.shell = {
                     language.bash-enable = true;
@@ -64,6 +78,27 @@ in
                     tldr-enable = true;
                 };
         })
-    ];
+
+        ( mkIf (cfg.default-creative-apps)
+        {
+            home-modules.desktop.apps.creative = {
+                    blender-enable = true;
+                    krita-enable = true;
+                    aseprite-enable = true;
+                    davinci-resolve-enable = true;
+                    pureref-enable = false;
+                };
+        })
+        ( mkIf (cfg.default-basic-apps)
+        {
+            home-modules.desktop.apps.basic = {
+                    brave-browser-enable = true;
+                    mullvad-browser-enable = true;
+                    dolphin-enable = true;
+                    vesktop-enable = true;
+                    cool-retro-term-enable = true;
+                };
+        })
+    ]);
 
 }

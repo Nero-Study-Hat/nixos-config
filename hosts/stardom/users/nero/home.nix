@@ -3,7 +3,7 @@
 {
     imports = [ 
         #TODO: conditional module for desktop
-        ../../../../modules/home/plasma-manager.nix
+        ../../../../modules/home/desktop/kde/plasma-manager.nix
         ../../../../modules/home/hyprland
 
         ./packages.nix
@@ -20,22 +20,16 @@
 
     home.keyboard.layout = "us";
 
-    home-modules.shell = {
-        enable-all = true;
+    roles.workstation = {
+        home.enable = true;
+        home.desktop = "all";
+
+        # home = {
+        #     enable = true;
+        #     desktop = "all";
+        #     default-creative-apps = false;
+        # };
     };
-
-    home.packages = with pkgs; [
-        cascadia-code
-        source-code-pro
-        noto-fonts
-        noto-fonts-extra
-        noto-fonts-cjk
-        noto-fonts-cjk-sans
-        noto-fonts-emoji
-        font-awesome
-    ];
-
-    fonts.fontconfig.defaultFonts.emoji = ["Noto Color Emoji"];
 
     programs.home-manager.enable = true;
     home.stateVersion = "24.05";
