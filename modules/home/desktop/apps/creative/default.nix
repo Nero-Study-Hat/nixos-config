@@ -31,10 +31,21 @@ in
             type = package;
             default = pkgs.davinci-resolve;
         };
+        # currently requires manual setup, does not work on hyprland
         pureref-enable = mkEnableOption "Enable pureref.";
         pureref-pkg = mkOption {
             type = package;
             default = pkgs.pureref;
+        };
+        remnote-enable = mkEnableOption "Enable remnote.";
+        remnote-pkg = mkOption {
+            type = package;
+            default = pkgs.remnote;
+        };
+        obsidian-enable = mkEnableOption "Enable obsidian.";
+        obsidian-pkg = mkOption {
+            type = package;
+            default = pkgs.obsidian;
         };
     };
 
@@ -58,6 +69,14 @@ in
         ( mkIf (cfg.pureref-enable)
         {
             home.packages = [ cfg.pureref-pkg ];
+        })
+        ( mkIf (cfg.remnote-enable)
+        {
+            home.packages = [ cfg.remnote-pkg ];
+        })
+        ( mkIf (cfg.obsidian-enable)
+        {
+            home.packages = [ cfg.obsidian-pkg ];
         })
     ];
 }

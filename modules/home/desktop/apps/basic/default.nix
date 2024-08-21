@@ -35,6 +35,11 @@ in
             type = package;
             default = pkgs.cool-retro-term;
         };
+        morgen-enable = mkEnableOption "Enable morgen calendar.";
+        morgen-pkg = mkOption {
+            type = package;
+            default = pkgs.morgen;
+        };
     };
 
     config = mkMerge [
@@ -57,6 +62,10 @@ in
         ( mkIf (cfg.cool-retro-term-enable)
         {
             home.packages = [ cfg.cool-retro-term-pkg ];
+        })
+        ( mkIf (cfg.morgen-enable)
+        {
+            home.packages = [ cfg.morgen-pkg ];
         })
     ];
 }

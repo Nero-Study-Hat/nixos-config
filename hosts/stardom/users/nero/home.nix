@@ -7,7 +7,7 @@
         ../../../../modules/home/desktop/hyprland
 
         ./packages.nix
-        ../../../../modules/roles/workstation/home-modules.nix # causes infinite recursion error currently
+        ../../../../modules/roles/workstation/home-modules.nix
         # ../../../../modules/home/shell
     ];
 

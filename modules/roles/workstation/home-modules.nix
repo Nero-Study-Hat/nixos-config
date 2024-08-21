@@ -41,6 +41,11 @@ in
             default = true;
             description = "Enable all default creative desktop apps and config.";
         };
+        default-dev-apps = mkOption {
+            type = bool;
+            default = true;
+            description = "Enable all default developer desktop apps and config.";
+        };
     };
 
     # importing modules with a mkIf before the main mkMerge that holds everything
@@ -72,40 +77,48 @@ in
             {
                 # home.packages = with pkgs; [ cowsay ];
                 home-modules.shell = {
-                        language.bash-enable = true;
-                        direnv-enable = true;
-                        git-enable = true;
-                        tmux-enable = true;
-                        htop-enable = true;
-                        curl-enable = true;
-                        wget-enable = true;
-                        ncdu-enable = true;
-                        file-enable = true;
-                        neofetch-enable = true;
-                        tldr-enable = true;
-                    };
+                    language.bash-enable = true;
+                    direnv-enable = true;
+                    git-enable = true;
+                    tmux-enable = true;
+                    htop-enable = true;
+                    curl-enable = true;
+                    wget-enable = true;
+                    ncdu-enable = true;
+                    file-enable = true;
+                    neofetch-enable = true;
+                    tldr-enable = true;
+                };
             })
 
             ( mkIf (cfg.default-basics-apps)
             {
                 home-modules.desktop.apps.basic = {
-                        brave-browser-enable = true;
-                        mullvad-browser-enable = true;
-                        dolphin-enable = true;
-                        vesktop-enable = true;
-                        cool-retro-term-enable = true;
-                    };
+                    brave-browser-enable = true;
+                    mullvad-browser-enable = true;
+                    dolphin-enable = true;
+                    vesktop-enable = true;
+                    cool-retro-term-enable = true;
+                };
             })
 
             ( mkIf (cfg.default-creative-apps)
             {
                 home-modules.desktop.apps.creative = {
-                        blender-enable = true;
-                        krita-enable = true;
-                        aseprite-enable = true;
-                        davinci-resolve-enable = true;
-                        pureref-enable = false;
-                    };
+                    blender-enable = true;
+                    krita-enable = true;
+                    aseprite-enable = true;
+                    davinci-resolve-enable = true;
+                    pureref-enable = false;
+                };
+            })
+            ( mkIf (cfg.default-dev-apps)
+            {
+                home-modules.desktop.apps.dev = {
+                    editor = "vscode";
+                    githup-desktop-enable = true;
+                    godot4-mono-enable = true;
+                };
             })
         ]))
 

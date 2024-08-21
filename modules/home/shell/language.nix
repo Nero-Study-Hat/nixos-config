@@ -1,4 +1,4 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, pkgs-stable, ... }:
 
 ### NOTE: default user shell is set by nixos-configuration, not home-manager
 
