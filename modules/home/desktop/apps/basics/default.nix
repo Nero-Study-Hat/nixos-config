@@ -40,6 +40,11 @@ in
             type = package;
             default = pkgs.morgen;
         };
+        zoom-enable = mkEnableOption "Enable morgen calendar.";
+        zoom-pkg = mkOption {
+            type = package;
+            default = pkgs.zoom-us;
+        };
     };
 
     config = mkMerge [
@@ -66,6 +71,10 @@ in
         ( mkIf (cfg.morgen-enable)
         {
             home.packages = [ cfg.morgen-pkg ];
+        })
+        ( mkIf (cfg.zoom-enable)
+        {
+            home.packages = [ cfg.zoom-pkg ];
         })
     ];
 }

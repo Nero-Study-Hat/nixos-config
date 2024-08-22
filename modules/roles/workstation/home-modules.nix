@@ -10,8 +10,10 @@ in
     imports = [ 
         #TODO: conditional module for desktop
         ../../home/shell
+        ./../home/desktop/kde
         ../../home/desktop/apps/basics
         ../../home/desktop/apps/creative
+        ../../home/desktop/apps/dev
     ];
 
     # have an option enable all groups by single option default and an option for each group
@@ -19,12 +21,13 @@ in
     # and specify themselves the settings they want for the group they want fine control over
     options.roles.workstation.home = with types; {
         enable = mkEnableOption "Enable all packages and config.";
-		desktop = lib.mkOption {
-			type = lib.types.str;
-			default = "kde";
-			example = "hyprland";
-			description = "The DE or WM with associated packages and config to setup.";
-		};
+        kde.enable = true;
+        hyprland = {
+            enable = true;
+            waybar = true;
+            virt-desktops = true;
+            hyprkool = false;
+        };
         # groups below
         default-shell = mkOption {
             type = bool;
@@ -99,6 +102,8 @@ in
                     dolphin-enable = true;
                     vesktop-enable = true;
                     cool-retro-term-enable = true;
+                    morgen-enable = true;
+                    zoom-enable = false;
                 };
             })
 
@@ -117,7 +122,7 @@ in
                 home-modules.desktop.apps.dev = {
                     editor = "vscode";
                     githup-desktop-enable = true;
-                    godot4-mono-enable = true;
+                    godot4-mono-enable = false; # currently doesn't work
                 };
             })
         ]))

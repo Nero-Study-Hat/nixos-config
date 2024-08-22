@@ -3,7 +3,6 @@
 {
     imports = [ 
         #TODO: conditional module for desktop
-        ../../../../modules/home/desktop/kde/plasma-manager.nix
         ../../../../modules/home/desktop/hyprland
 
         ./packages.nix
@@ -23,11 +22,9 @@
         config.permittedInsecurePackages = [ "electron-25.9.0" ];
     };
 
-    roles.workstation = {
-        home = {
-            enable = true;
-            desktop = "all";
-        };
+    roles.workstation.home = {
+        enable = true;
+        desktop = "all";
     };
 
     programs.home-manager.enable = true;

@@ -9,11 +9,14 @@ in
         githup-desktop-enable = mkEnableOption "Enable githup-desktop.";
         githup-desktop-pkg = mkOption {
             type = package;
-            default = pkgs.githup-desktop;
+            default = pkgs.github-desktop;
         };
     };
 
-    config = cfg.github-desktop-enable {
-        home.packages = [ cfg.githup-desktop-pkg ];
-    };
+    config = mkMerge [
+        ( mkIf (cfg.githup-desktop-enable)
+        {
+            home.packages = [ cfg.githup-desktop-pkg ];
+        })
+    ];
 }

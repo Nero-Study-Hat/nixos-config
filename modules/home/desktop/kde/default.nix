@@ -1,7 +1,11 @@
-{ plasma-manager, ... }:
+{ options, config, lib, plasma-manager, pkgs, pkgs-stable, ... }:
 
 {
-    # home.packages = with pkgs; [ hollywood ];
+    home.packages = with pkgs; [
+        pkgs-stable.libsForQt5.bismuth
+        pkgs.kdePackages.fcitx5-with-addons
+        pkgs.flameshot
+    ];
 
     programs.plasma = {
         enable = true;

@@ -5,19 +5,9 @@ let
 in
 {
     home.packages = [
-        pkgs-stable.libsForQt5.bismuth
-        pkgs.kdePackages.fcitx5-with-addons
+        # utilities
         pkgs.protonvpn-cli_2
-
-        # Sys Management
         pkgs.gparted
-
-        # productivity
-        pkgs.zoom-us
-
-
-        # Utilities
-        pkgs.flameshot
         pkgs.simplescreenrecorder
         pkgs.yt-dlp
     ];
