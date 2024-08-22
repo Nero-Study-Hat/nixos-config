@@ -2,7 +2,7 @@
 
 {
     imports = [
-        ./main-modules.nix
-        ./virt-desktops-modules.nix
+        ./hyprkool.nix
+        ./virt-desktops.nix
     ];
 }

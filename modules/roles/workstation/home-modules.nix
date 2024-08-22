@@ -10,7 +10,8 @@ in
     imports = [ 
         #TODO: conditional module for desktop
         ../../home/shell
-        ./../home/desktop/kde
+        ../../home/desktop/kde
+        ../../home/desktop/hyprland
         ../../home/desktop/apps/basics
         ../../home/desktop/apps/creative
         ../../home/desktop/apps/dev
@@ -24,7 +25,10 @@ in
         kde.enable = true;
         hyprland = {
             enable = true;
-            waybar = true;
+            waybar = {
+                enable = true;
+                virt-desktops-modules.enable = true
+            };
             virt-desktops = true;
             hyprkool = false;
         };

@@ -1,46 +1,56 @@
 { pkgs, pkgs-stable, ... }:
 
+with lib;
+let
+    cfg = config.home-modules.desktop.hyprland;
+in
 {
-    home.packages = with pkgs; [
-        adwaita-icon-theme
+    options.home-modules.desktop.hyprland = with types; {
+        enable = mkEnableOption "Whether to setup hyprland with associated packages and config on this desktop.";
+    };
 
-        wlr-randr
-        xorg.xrandr    # for XWayland windows
-        nwg-look
-        kdePackages.breeze-icons
-        kdePackages.qtstyleplugin-kvantum
+    config = mkIf cfg.enable {
+        home.packages = with pkgs; [
+            adwaita-icon-theme
 
-        swww           # wallpaper daemon
-        hyprcursor
+            wlr-randr
+            xorg.xrandr    # for XWayland windows
+            nwg-look
+            kdePackages.breeze-icons
+            kdePackages.qtstyleplugin-kvantum
 
-        wl-screenrec
+            swww           # wallpaper daemon
+            hyprcursor
 
-        wl-clipboard
-        xdg-utils
-        copyq
+            wl-screenrec
 
-        grim
-        slurp
-        swappy
-        imagemagick
+            wl-clipboard
+            xdg-utils
+            copyq
 
-        pulseaudio
-        killall # Restart processes
-        pavucontrol # Audio panel
-        sway-contrib.grimshot # Screenshots
+            grim
+            slurp
+            swappy
+            imagemagick
 
-        # notifications
-        mako
-        libnotify
-    ];
+            pulseaudio
+            killall # Restart processes
+            pavucontrol # Audio panel
+            sway-contrib.grimshot # Screenshots
 
-    programs.rofi = {
-        enable = true;
-        package = pkgs.rofi-wayland;
-        plugins = [ 
-            pkgs.rofi-emoji-wayland
+            # notifications
+            mako
+            libnotify
         ];
-        font = "cascadia-code";
-        location = "center";
+
+        programs.rofi = {
+            enable = true;
+            package = pkgs.rofi-wayland;
+            plugins = [ 
+                pkgs.rofi-emoji-wayland
+            ];
+            font = "cascadia-code";
+            location = "center";
+        };
     };
 }
