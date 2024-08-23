@@ -7,6 +7,14 @@ in
 {
     options.home-modules.desktop.hyprland = with types; {
         enable = mkEnableOption "Whether to setup hyprland with associated packages and config on this desktop.";
+        monitors = mkOption {
+            type = listOf str;
+            # main PC
+            default = [
+                "DP-2, 3440x1440@100, auto-left, 1"
+                "HDMI-A-1, 1680x1050@60, 0x0, 1, transform, 1"
+            ];
+        };
     };
 
     config = mkIf cfg.enable {
@@ -26,10 +34,7 @@ in
                 "$menu" = "rofi -show drun -show-icons";
                 "$screenshot" = ''grim -g "$(slurp)" - | swappy -f -'';
 
-                monitor = [
-                    "DP-2, 3440x1440@100, auto-left, 1"
-                    "HDMI-A-1, 1680x1050@60, 0x0, 1, transform, 1"
-                ];
+                monitor = cfg.monitors;
 
                 xwayland = {
                     force_zero_scaling = true;

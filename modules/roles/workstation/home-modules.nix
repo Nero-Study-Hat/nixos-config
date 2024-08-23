@@ -105,6 +105,11 @@ in
             {
                 home-modules.desktop.hyprland = {
                     enable = true;
+                    # main PC
+                    monitors = [
+                        "DP-2, 3440x1440@100, auto-left, 1"
+                        "HDMI-A-1, 1680x1050@60, 0x0, 1, transform, 1"
+                    ];
                     default-pkgs.install = true;
                     waybar = {
                         enable = true;
