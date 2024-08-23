@@ -1,4 +1,4 @@
-{ inputs, options, config, lib, pkgs, rootPath, ... }:
+{ inputs, options, config, lib, pkgs, pkgs-stable, rootPath, ... }:
 
 {
     imports = [
@@ -7,5 +7,6 @@
         ./hyprlock.nix
         ./hypridle.nix
         ./packages.nix
+        ./plugins
     ];
 }

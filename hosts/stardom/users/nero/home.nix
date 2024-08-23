@@ -3,7 +3,6 @@
 {
     imports = [ 
         #TODO: conditional module for desktop
-        ../../../../modules/home/desktop/hyprland
 
         ./packages.nix
         ../../../../modules/roles/workstation/home-modules.nix
@@ -24,7 +23,6 @@
 
     roles.workstation.home = {
         enable = true;
-        desktop = "all";
     };
 
     programs.home-manager.enable = true;

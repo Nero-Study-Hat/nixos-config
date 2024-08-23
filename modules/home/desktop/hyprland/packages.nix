@@ -1,15 +1,15 @@
-{ pkgs, pkgs-stable, ... }:
+{ config, options, lib, pkgs, pkgs-stable, ... }:
 
 with lib;
 let
-    cfg = config.home-modules.desktop.hyprland;
+    cfg = config.home-modules.desktop.hyprland.default-pkgs;
 in
 {
-    options.home-modules.desktop.hyprland = with types; {
-        enable = mkEnableOption "Whether to setup hyprland with associated packages and config on this desktop.";
+    options.home-modules.desktop.hyprland.default-pkgs = with types; {
+        install = mkEnableOption "Whether to setup hyprland with associated packages and config on this desktop.";
     };
 
-    config = mkIf cfg.enable {
+    config = mkIf cfg.install {
         home.packages = with pkgs; [
             adwaita-icon-theme
 

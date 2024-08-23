@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ options, config, lib, pkgs, ... }:
 
 # TODO: asset hyprlock module is enabled
 

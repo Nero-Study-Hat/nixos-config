@@ -1,5 +1,6 @@
-{ lib, pkgs, rootPath, ... }:
+{ options, config, lib, pkgs, rootPath, ... }:
 
+with lib;
 let
     virtualDesktopSwitchExe = "${rootPath}/pkgs/virt-desktop-switcher/desktop-switcher";
     customVirtDesktopsModuleExe = "${rootPath}/pkgs/waybar-modules/virt-desktops";

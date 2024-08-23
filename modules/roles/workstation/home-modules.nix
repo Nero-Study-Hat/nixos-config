@@ -1,8 +1,6 @@
-{ inputs, lib, config, pkgs, pkgs-stable, plasma-manager, rootPath, ... }:
+{ inputs, options, config, lib, pkgs, pkgs-stable, plasma-manager, rootPath, ... }:
 
 with lib;
-# try the below
-# with home-modules;
 let
     cfg = config.roles.workstation.home;
 in
@@ -11,10 +9,13 @@ in
         #TODO: conditional module for desktop
         ../../home/shell
         ../../home/desktop/kde
+
         ../../home/desktop/hyprland
+
         ../../home/desktop/apps/basics
         ../../home/desktop/apps/creative
         ../../home/desktop/apps/dev
+        ../../home/desktop/apps/utility
     ];
 
     # have an option enable all groups by single option default and an option for each group
@@ -22,15 +23,15 @@ in
     # and specify themselves the settings they want for the group they want fine control over
     options.roles.workstation.home = with types; {
         enable = mkEnableOption "Enable all packages and config.";
-        kde.enable = true;
-        hyprland = {
-            enable = true;
-            waybar = {
-                enable = true;
-                virt-desktops-modules.enable = true
-            };
-            virt-desktops = true;
-            hyprkool = false;
+        kde = mkOption {
+            type = bool;
+            default = true;
+            description = "Enable kde desktop environment with associated packages and config.";
+        };
+        hyprland = mkOption {
+            type = bool;
+            default = true;
+            description = "Enable hypr with associated packages and config.";
         };
         # groups below
         default-shell = mkOption {
@@ -52,6 +53,11 @@ in
             type = bool;
             default = true;
             description = "Enable all default developer desktop apps and config.";
+        };
+        default-utility-apps = mkOption {
+            type = bool;
+            default = true;
+            description = "Enable all default desktop utilities and config.";
         };
     };
 
@@ -80,6 +86,25 @@ in
         })
 
         (mkIf cfg.enable (mkMerge [
+            ( mkIf (cfg.kde)
+            {
+                home-modules.desktop.kde.enable = true;
+            })
+
+            ( mkIf (cfg.hyprland)
+            {
+                home-modules.desktop.hyprland = {
+                    enable = true;
+                    default-pkgs.install = true;
+                    waybar = {
+                        enable = true;
+                        virt-desktops-modules.enable = true;
+                    };
+                    virt-desktops.enable = true;
+                    # hyprkool.enable = false;
+                };
+            })
+
             ( mkIf (cfg.default-shell)
             {
                 # home.packages = with pkgs; [ cowsay ];
@@ -127,6 +152,15 @@ in
                     editor = "vscode";
                     githup-desktop-enable = true;
                     godot4-mono-enable = false; # currently doesn't work
+                };
+            })
+            ( mkIf (cfg.default-utility-apps)
+            {
+                home-modules.desktop.apps.utility = {
+                    protonvpn-enable = true;
+                    gparted-enable = true;
+                    simplescreenrecorder-enable = true;
+                    yt-dlp-enable = true;
                 };
             })
         ]))

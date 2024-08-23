@@ -3,6 +3,6 @@
 {
     imports = [
         ./main-modules.nix
-        ./virt-desktops-modules.nix
+        ./virt-desktop-modules.nix
     ];
 }
