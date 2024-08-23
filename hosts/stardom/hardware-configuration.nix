@@ -1,11 +1,26 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-	boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
-	boot.initrd.kernelModules = [ "amdgpu" ];
+	boot = {
+		initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
+		initrd.kernelModules = [ "amdgpu" ];
+		kernelModules = [ "kvm-amd" ];
+		extraModulePackages = [ ];
 
-	boot.kernelModules = [ "kvm-amd" ];
-	boot.extraModulePackages = [ ];
+		kernelPackages = pkgs.linuxPackages_6_8;
+		supportedFilesystems = [ "ntfs" ];
+		loader = {
+			efi = {
+				efiSysMountPoint = "/boot/efi";
+			};
+			grub = {
+				efiSupport = true;
+				efiInstallAsRemovable = true;
+				device = "nodev";
+			};
+		};
+	};
+
 
 	fileSystems."/".device = "/dev/disk/by-label/nixos";
 	fileSystems."/boot/efi".device = "/dev/disk/by-label/NIXOS_EFI";
@@ -26,8 +41,6 @@
 	};
 
 	swapDevices = [{ device = "/dev/disk/by-uuid/fa2d35b2-c349-42bd-b735-a5c71417f950"; }];
-
-	networking.useDHCP = lib.mkDefault true;
 
 	nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 	hardware.enableRedistributableFirmware = true;

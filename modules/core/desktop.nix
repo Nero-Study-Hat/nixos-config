@@ -1,36 +1,45 @@
 { inputs, lib, config, options, pkgs, ... }:
 
+with lib;
 let
-    cfg = config.desktop;
+    cfg = config.system-modules.desktop;
 in
 {
-    options.desktop = {
-		choice = lib.mkOption {
-			type = lib.types.str;
-			default = "kde";
-			example = "hyprland";
-			description = "The DE or WM with associated packages and config to setup.";
-		};
+    options.system-modules.desktop = with types; {
+        kde = mkOption {
+            type = bool;
+            default = true;
+            description = "Enable kde desktop environment with associated packages and config.";
+        };
+        hyprland = mkOption {
+            type = bool;
+            default = true;
+            description = "Enable hyprland with associated packages and config.";
+        };
+        sddm = mkOption {
+            type = bool;
+            default = true;
+            description = "Enable sddm.";
+        };
     };
 
-	config = lib.mkMerge [
+	config = mkMerge [
 		({
 			services.xserver.enable = true;
 			services.xserver.videoDrivers = [ "amdgpu" ];
-			services.displayManager.sddm.enable = true;
-			# qt = {
-			# 	enable = true;
-			# 	platformTheme = "qt5ct";
-			# 	style = "kvantum";
-			# };
 		})
 
-		( lib.mkIf (cfg.choice == "kde" || cfg.choice == "all")
+		( mkIf (cfg.sddm)
+		{
+			services.displayManager.sddm.enable = true;
+		})
+
+		( mkIf (cfg.kde)
 		{
 			services.xserver.desktopManager.plasma5.enable = true;
 		})
 
-		( lib.mkIf (cfg.choice == "hyprland" || cfg.choice == "all")
+		( mkIf (cfg.hyprland)
 		{
 			services.displayManager.sddm.wayland.enable = true;			
 

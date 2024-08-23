@@ -7,8 +7,8 @@ in
 {
     imports = [
         ../../home/shell
+        
         ../../home/desktop/kde
-
         ../../home/desktop/hyprland
 
         ../../home/desktop/apps/basics
@@ -34,7 +34,7 @@ in
         hyprland = mkOption {
             type = bool;
             default = true;
-            description = "Enable hypr with associated packages and config.";
+            description = "Enable hyprland with associated packages and config.";
         };
         # groups below
         default-shell = mkOption {
