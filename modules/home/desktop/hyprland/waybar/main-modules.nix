@@ -19,6 +19,11 @@ in
 {
     options.home-modules.desktop.hyprland.waybar = with types; {
         enable = mkEnableOption "Whether to setup waybar.";
+        c-modules = mkOption {
+            type = listOf str;
+            example = [ "custom/weather" ];
+            default = [ "custom/weather" "custom/activity" "group/group-virt-desktops" ];
+        };
     };
 
     config = mkIf cfg.enable {
@@ -44,8 +49,7 @@ in
             "spacing" = 10;
 
             "modules-left" = [ "group/group-power" "pulseaudio" "group/hardware" ];
-            # "modules-center" = [ "custom/weather" ];
-            "modules-center" = [ "custom/weather" "custom/activity" "group/group-virt-desktops" ];
+            "modules-center" = cfg.c-modules;
             "modules-right" = [ "tray" "clock" ];
 
             "clock" = {

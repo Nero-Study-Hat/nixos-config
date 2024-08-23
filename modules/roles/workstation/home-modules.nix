@@ -109,9 +109,11 @@ in
                     waybar = {
                         enable = true;
                         virt-desktops-modules.enable = true;
+                        c-modules = [ "custom/weather" "custom/activity" "group/group-virt-desktops" ];
+                        # c-modules = [ "custom/weather" ];
                     };
                     virt-desktops.enable = true;
-                    # hyprkool.enable = false;
+                    hyprkool.enable = false;
                 };
             })
 
