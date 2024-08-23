@@ -5,8 +5,7 @@ let
     cfg = config.roles.workstation.home;
 in
 {
-    imports = [ 
-        #TODO: conditional module for desktop
+    imports = [
         ../../home/shell
         ../../home/desktop/kde
 
@@ -23,6 +22,10 @@ in
     # and specify themselves the settings they want for the group they want fine control over
     options.roles.workstation.home = with types; {
         enable = mkEnableOption "Enable all packages and config.";
+        user = mkOption {
+            type = str;
+            default = "nero";
+        };
         kde = mkOption {
             type = bool;
             default = true;
@@ -63,9 +66,13 @@ in
 
     # importing modules with a mkIf before the main mkMerge that holds everything
     # in the config causes infinite recusion so cfg.enable is used in side the main mkMerge
+    #TODO: create assertion caller input to build successfully
     config = mkMerge [
         ( mkIf (cfg.enable)
         {
+            home.username = cfg.user;
+            home.homeDirectory = "/home/${cfg.user}";
+
             nixpkgs = {
                 config.allowUnfree = true;
                 config.permittedInsecurePackages = [ "electron-25.9.0" ];
@@ -83,6 +90,9 @@ in
             ];
 
             fonts.fontconfig.defaultFonts.emoji = ["Noto Color Emoji"];
+
+            programs.home-manager.enable = true;
+            home.stateVersion = "24.05";
         })
 
         (mkIf cfg.enable (mkMerge [
