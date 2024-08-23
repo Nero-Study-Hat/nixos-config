@@ -5,6 +5,11 @@ let
     cfg = config.roles.workstation.system;
 in
 {
+    imports = [
+        ../../core/virtualization.nix
+        ../../core/desktop.nix
+    ];
+
     options.roles.workstation.system = with types; {
         enable = mkEnableOption "";
         hostname = mkOption {

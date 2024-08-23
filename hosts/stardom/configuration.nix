@@ -5,13 +5,13 @@
 		../../modules/core/desktop.nix
 		./hardware-configuration.nix
 
-		../../../modules/roles/workstation/system-modules.nix
+		../../modules/roles/workstation/system-modules.nix
 	];
 
-    roles.workstation.home = {
+    roles.workstation.system = {
         enable = true;
         hostname = "stardom";
-		virtualisation = true;
+		virtualization = true;
 		desktop = true;
     };
 
@@ -27,8 +27,6 @@
 	boot.tmp.cleanOnBoot = true;
 
 
-
-### --------------------------------------------------------------------------
 	#TODO: add package to home-modules gaming
     # programs.steam = {
     #     enable = true;
