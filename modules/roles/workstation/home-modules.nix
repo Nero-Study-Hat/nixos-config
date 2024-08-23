@@ -15,6 +15,7 @@ in
         ../../home/desktop/apps/creative
         ../../home/desktop/apps/dev
         ../../home/desktop/apps/utility
+        ../../home/desktop/gaming
     ];
 
     # have an option enable all groups by single option default and an option for each group
@@ -61,6 +62,11 @@ in
             type = bool;
             default = true;
             description = "Enable all default desktop utilities and config.";
+        };
+        default-gaming = mkOption {
+            type = bool;
+            default = true;
+            description = "Enable all default gaming packages and config.";
         };
     };
 
@@ -178,6 +184,15 @@ in
                     gparted-enable = true;
                     simplescreenrecorder-enable = true;
                     yt-dlp-enable = true;
+                };
+            })
+            ( mkIf (cfg.default-gaming-apps)
+            {
+                home-modules.desktop.gaming = {
+                    steam = true;
+                    #TODO: bottles
+                    #TODO: wine
+                    #TODO: lutris
                 };
             })
         ]))

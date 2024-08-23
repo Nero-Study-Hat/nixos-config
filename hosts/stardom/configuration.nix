@@ -12,7 +12,6 @@
         enable = true;
         hostname = "stardom";
 		virtualization = true;
-		desktop = true;
     };
 
 	users.users = {
