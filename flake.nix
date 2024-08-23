@@ -122,6 +122,22 @@
                     inputs.plasma-manager.homeManagerModules.plasma-manager
                 ];
             };
+            bo = home-manager.lib.homeManagerConfiguration {
+                inherit pkgs;
+                extraSpecialArgs = {
+                    inherit inputs;
+                    inherit rootPath;
+                    pkgs-stable = import nixpkgs-stable {
+                        inherit system;
+                        config.allowUnfree = true;
+                    };
+                };
+
+                modules = [
+                    ./hosts/stardom/users/bo/home.nix
+                    inputs.plasma-manager.homeManagerModules.plasma-manager
+                ];
+            };
         };
 
         packages.x86_64-linux = {

@@ -4,6 +4,9 @@ nix shell nixpkgs#file --command file {file-name}
 nix run nixpkgs#python -- --version
 
 # --- NixOS ---
+# if you only want to update a single flake input, then the below command can be used
+nix flake lock --update-input <input>
+
 sudo nixos-rebuild switch --flake /{path/to/flake/dir}#stardom
 # verbose log to file
 sudo nixos-rebuild switch --flake ~/.nixflake#stardom -v --show-trace >>nixos-rebuild-log.txt 2>&1
