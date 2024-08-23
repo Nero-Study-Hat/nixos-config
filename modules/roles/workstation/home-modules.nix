@@ -186,10 +186,10 @@ in
                     yt-dlp-enable = true;
                 };
             })
-            ( mkIf (cfg.default-gaming-apps)
+            ( mkIf (cfg.default-gaming)
             {
                 home-modules.desktop.gaming = {
-                    steam = true;
+                    steam-enable = true;
                     #TODO: bottles
                     #TODO: wine
                     #TODO: lutris
