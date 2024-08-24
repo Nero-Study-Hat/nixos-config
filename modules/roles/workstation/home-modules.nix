@@ -167,6 +167,8 @@ in
                     aseprite-enable = true;
                     davinci-resolve-enable = true;
                     pureref-enable = false;
+                    remnote-enable = true;
+                    obsidian-enable = true;
                 };
             })
             ( mkIf (cfg.default-dev-apps)
@@ -181,7 +183,7 @@ in
             {
                 home-modules.desktop.apps.utility = {
                     protonvpn-enable = true;
-                    gparted-enable = true;
+                    gparted-enable = false;
                     simplescreenrecorder-enable = true;
                     yt-dlp-enable = true;
                 };
