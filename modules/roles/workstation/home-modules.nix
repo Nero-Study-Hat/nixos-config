@@ -186,6 +186,7 @@ in
                     gparted-enable = false;
                     simplescreenrecorder-enable = true;
                     yt-dlp-enable = true;
+                    yubico-authenticator-enable = true;
                 };
             })
             ( mkIf (cfg.default-gaming)

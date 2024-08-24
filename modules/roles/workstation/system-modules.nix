@@ -8,6 +8,7 @@ in
     imports = [
         ../../core/virtualization.nix
         ../../core/desktop.nix
+        ../../core/yubikey.nix
     ];
 
     options.roles.workstation.system = with types; {
@@ -25,6 +26,11 @@ in
             type = bool;
             default = true;
             description = "Enable desktop with associated packages and config.";
+        };
+        yubikey = mkOption {
+            type = bool;
+            default = true;
+            description = "Enable yubikey support with associated packages and config.";
         };
     };
 
@@ -81,6 +87,12 @@ in
                     user = "nero";
                     virtualbox = true;
                     kvm-qemu = false;
+                };
+            })
+            ( mkIf (cfg.yubikey)
+            {
+                system-modules.yubikey = {
+                    enable = true;
                 };
             })
         ]))

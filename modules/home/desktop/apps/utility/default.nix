@@ -33,6 +33,12 @@ in
             type = package;
             default = pkgs.yt-dlp;
         };
+
+        yubico-authenticator-enable = mkEnableOption "Enable simplescreenrecorder.";
+        yubico-authenticator-pkg = mkOption {
+            type = package;
+            default = pkgs.yubioath-flutter;
+        };
     };
 
     config = mkMerge [
@@ -47,5 +53,8 @@ in
 
         ( mkIf (cfg.yt-dlp-enable)
         { home.packages = [ cfg.yt-dlp-pkg ]; })
+
+        ( mkIf (cfg.yubico-authenticator-enable)
+        { home.packages = [ cfg.yubico-authenticator-pkg ]; })
     ];
 }

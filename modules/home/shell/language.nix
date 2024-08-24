@@ -16,6 +16,11 @@ in
     };
 
     config = mkMerge [
+        ({
+            home.sessionVariables = {
+                FLAKE = "/.nixflake";
+            };
+        })
         ( mkIf (cfg.enable-all || cfg.bash-enable)
         {
             home.packages = [
