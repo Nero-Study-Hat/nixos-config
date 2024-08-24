@@ -18,7 +18,12 @@
 		nero = {
 			initialPassword = "nixisreallycool";
 			isNormalUser = true;
-			extraGroups = [ "wheel" "video" "audio" "disk" "networkmanager" ];
+			extraGroups = [ "wheel" "video" "audio" "disk" "networkmanager" "users" ];
+		};
+		bo = {
+			initialPassword = "nixisreallycool";
+			isNormalUser = true;
+			extraGroups = [ "wheel" "video" "audio" "disk" "networkmanager" "users" ];
 		};
 	};
 

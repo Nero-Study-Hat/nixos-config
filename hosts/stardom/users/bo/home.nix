@@ -13,9 +13,9 @@
 
         hyprland = false;
         default-shell = false;
-        default-creative = false;
+        default-creative-apps = false;
         default-dev-apps = false;
-        default-utility = false;
+        default-utility-apps = false;
     };
 
     home-modules.shell.language.bash-enable = true;
