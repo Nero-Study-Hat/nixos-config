@@ -46,6 +46,8 @@ rmdir "$EFI_MNT"
 echo -e $'\n**SETTING UP LVM Partitions**\n'
 
 LUKSROOT="nixos-enc"
+LUKSROOT=nixos-enc
+echo -n "$LUKS_KEY" | hextorb | cryptsetup luksOpen $LUKS_PART $LUKSROOT --key-file=-
 pvcreate "/dev/mapper/$LUKSROOT"
 
 VGNAME="partitions"
@@ -66,12 +68,12 @@ mount "$EFI_PART" "$EFI_MNT"
 swapon /dev/partitions/swap
 
 ### ---
-echo -e $'\n**GETTING THE FLAKE REPO**\n'
-export NIX_CONFIG="experimental-features = nix-command flakes"
-export branch="main"
-export proj_dir=".nixflake"
-nix shell nixpkgs#git --command nix flake clone "github:Nero-Study-Hat/nixos-config/${branch}" --dest "/mnt/${proj_dir}"
+# echo -e $'\n**GETTING THE FLAKE REPO**\n'
+# export NIX_CONFIG="experimental-features = nix-command flakes"
+# export branch="main"
+# export proj_dir=".nixflake"
+# nix shell nixpkgs#git --command nix flake clone "github:Nero-Study-Hat/nixos-config/${branch}" --dest "/mnt/${proj_dir}"
 
-# Install
-echo $'\n**INSTALLING**\n'
-nix shell nixpkgs#git --command nixos-install --impure --flake /mnt/${proj_dir}#starfief
+# # Install
+# echo $'\n**INSTALLING**\n'
+# nix shell nixpkgs#git --command nixos-install --impure --flake /mnt/${proj_dir}#starfief
