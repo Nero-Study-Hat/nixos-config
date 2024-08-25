@@ -10,7 +10,11 @@ in
     };
 
     config = mkIf cfg.enable {
-        environment.systemPackages = [ pkgs.yubikey-touch-detector ];
+        environment.systemPackages = [
+            pkgs.yubikey-touch-detector
+            pkgs.yubikey-personalization-gui
+            pkgs.yubikey-personalization
+        ];
         services.udev.packages = [ pkgs.yubikey-personalization ];
         services.pcscd.enable = true;
     };
