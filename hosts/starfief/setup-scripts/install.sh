@@ -71,7 +71,7 @@ swapon /dev/partitions/swap
 echo -e $'\n**GETTING THE FLAKE REPO**\n'
 export NIX_CONFIG="experimental-features = nix-command flakes"
 export branch="main"
-export proj_dir=".n"
+export proj_dir=".nixflake"
 nix shell nixpkgs#git --command nix flake clone "github:Nero-Study-Hat/nixos-config/${branch}" \
 --dest "/mnt/${proj_dir}"
 

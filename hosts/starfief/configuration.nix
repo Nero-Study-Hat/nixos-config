@@ -11,7 +11,6 @@
     roles.workstation.system = {
         enable = true;
         hostname = "starfief";
-		virtualization = true;
     };
 
 	users.users = {
@@ -26,16 +25,8 @@
 	services.printing.enable = true;
 	boot.tmp.cleanOnBoot = true;
 
-	# gparted has to be installed in system config it seems
-	#TODO: move gparted install into system-module
 	environment.systemPackages = [
 		pkgs.gparted
 	];
-
-
-	#TODO: add package to home-modules gaming
-    # programs.steam = {
-    #     enable = true;
-    # };
 
 }
