@@ -37,3 +37,6 @@ echo -ne "$SALT\n$ITERATIONS" > "${EFI_MNT}${STORAGE}"
 LUKS_PART="/dev/nvme0n1p2"
 # multi-line command didn't work
 echo -n "$LUKS_KEY" | hextorb | cryptsetup luksFormat --cipher="$CIPHER" --key-size="$KEY_LENGTH" --hash="$HASH" --key-file=- "$LUKS_PART"
+
+LUKSROOT="nixos-enc"
+echo -n "$LUKS_KEY" | hextorb | cryptsetup luksOpen $LUKS_PART $LUKSROOT --key-file=-

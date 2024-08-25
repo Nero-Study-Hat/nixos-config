@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
 
 # Setup LVM Partitioning
-LUKSROOT="nixos-enc"
-echo -n "$LUKS_KEY" | hextorb | cryptsetup luksOpen $LUKS_PART $LUKSROOT --key-file=-
 
+EFI_PART="/dev/nvme0n1p1"
+EFI_MNT="/mnt/boot/efi"
+
+umount "$EFI_PART"
+rmdir "$EFI_MNT"
+
+LUKSROOT="nixos-enc"
 pvcreate "/dev/mapper/$LUKSROOT"
 
 VGNAME="partitions"
@@ -19,9 +24,6 @@ mkswap -L swap "/dev/partitions/swap"
 mkfs.ext4 -L "$FSROOT" "/dev/partitions/$FSROOT"
 
 # Final Partition Mounts Handling
-umount "$EFI_PART"
-rmdir "$EFI_MNT"
-
 mount "/dev/partitions/$FSROOT" "/mnt"
 mkdir -p "$EFI_MNT"
 mount "$EFI_PART" "$EFI_MNT"
