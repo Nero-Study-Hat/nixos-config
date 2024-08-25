@@ -5,7 +5,7 @@
 		../../modules/core/desktop.nix
 		./hardware-configuration.nix
 
-		../../modules/roles/workstation/system-modules.nix
+		../../modules/roles/minimal-workstation/system-modules.nix
 	];
 
     roles.workstation.system = {
