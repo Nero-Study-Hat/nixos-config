@@ -31,7 +31,7 @@
 			# Support for Yubikey PBA
 			yubikeySupport = true;
 			devices."encrypted" = {
-				device = "/dev/sdb5"; # encrypted lvm volume
+				device = "/dev/nvme0n1p2"; # encrypted lvm volume
 				yubikey = {
 					slot = 2;
 					twoFactor = false;
@@ -40,7 +40,7 @@
 					saltLength = 16;
 
 					storage = {
-						device = "/dev/sdb1"; # contains current salt
+						device = "/dev/nvme0n1p1"; # contains current salt
 						fsType = "vfat";
 						path = "/crypt-storage/default"; # path to file that contains salt and iterations on given device
 					};
