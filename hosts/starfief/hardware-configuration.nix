@@ -1,5 +1,7 @@
 { config, lib, pkgs, modulesPath, ... }:
 
+### THIS CONFIG WORKED ###
+
 {
 	boot = {
 		initrd = {
