@@ -1,7 +1,5 @@
 { config, lib, pkgs, modulesPath, ... }:
 
-### THIS CONFIG WORKED ###
-
 {
 	boot = {
 		initrd = {
@@ -12,7 +10,7 @@
 				# Support for Yubikey PBA
 				yubikeySupport = true;
 				devices."encrypted" = {
-					device = "/dev/disk/by-uuid/33e4b793-8e49-4f01-836d-a9db50af1b62"; # luks device
+					device = "/dev/nvme0n1p2"; # luks device
 					allowDiscards = true;
 					yubikey = {
 						slot = 2;
