@@ -18,7 +18,7 @@ in
         };
         yubikey = mkOption {
             type = bool;
-            default = true;
+            default = false;
             description = "Enable yubikey support with associated packages and config.";
         };
     };

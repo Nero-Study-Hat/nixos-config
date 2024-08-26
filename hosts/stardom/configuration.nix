@@ -11,7 +11,6 @@
     roles.workstation.system = {
         enable = true;
         hostname = "stardom";
-		virtualization = true;
     };
 
 	users.users = {
