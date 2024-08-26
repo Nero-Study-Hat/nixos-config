@@ -15,6 +15,7 @@
 				efiSupport = true;
 				efiInstallAsRemovable = true;
 				device = "nodev";
+				enableCryptodisk = true;
 			};
 		};
 	};
