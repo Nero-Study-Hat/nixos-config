@@ -1,7 +1,7 @@
 { inputs, lib, config, pkgs, pkgs-stable, plasma-manager, rootPath, ... }:
 
 {
-    imports = [ ../../../../modules/roles/minimal-workstation/home-modules.nix ];
+    imports = [ ../../../../modules/roles/workstation/home-modules.nix ];
 
     home.keyboard.layout = "us";
 
@@ -9,6 +9,4 @@
         enable = true;
         user = "nero";
     };
-
-    home-modules.desktop.apps.utility.yubico-authenticator-enable = true;
 }
