@@ -17,7 +17,7 @@ CHALLENGE="$(echo -n $SALT | openssl dgst -binary -sha512 | rbtohex)"
 RESPONSE=$(ykchalresp -2 -x $CHALLENGE 2>/dev/null)
 
 KEY_LENGTH=512
-ITERATIONS=10000
+ITERATIONS=100000
 
 LUKS_KEY="$(echo | pbkdf2-sha512 $(($KEY_LENGTH / 8)) $ITERATIONS $RESPONSE | rbtohex)"
 
@@ -26,7 +26,7 @@ HASH="sha512"
 
 # Key Storing (use pre-existing efi partition)
 EFI_PART="/dev/nvme0n1p1"
-EFI_MNT="/mnt/boot/efi"
+EFI_MNT="/mnt/boot"
 mkdir -p "$EFI_MNT"
 mount "$EFI_PART" "$EFI_MNT"
 
@@ -46,7 +46,6 @@ rmdir "$EFI_MNT"
 echo -e $'\n**SETTING UP LVM Partitions**\n'
 
 LUKSROOT="nixos-enc"
-LUKSROOT=nixos-enc
 echo -n "$LUKS_KEY" | hextorb | cryptsetup luksOpen $LUKS_PART $LUKSROOT --key-file=-
 pvcreate "/dev/mapper/$LUKSROOT"
 
