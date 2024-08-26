@@ -89,6 +89,22 @@
                     inputs.plasma-manager.homeManagerModules.plasma-manager
                 ];
             };
+            alaric = home-manager.lib.homeManagerConfiguration {
+                inherit pkgs;
+                extraSpecialArgs = {
+                    inherit inputs;
+                    inherit rootPath;
+                    pkgs-stable = import nixpkgs-stable {
+                        inherit system;
+                        config.allowUnfree = true;
+                    };
+                };
+
+                modules = [
+                    ./hosts/starfief/home.nix
+                    inputs.plasma-manager.homeManagerModules.plasma-manager
+                ];
+            };
             bo = home-manager.lib.homeManagerConfiguration {
                 inherit pkgs;
                 extraSpecialArgs = {

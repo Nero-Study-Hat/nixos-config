@@ -7,6 +7,6 @@
 
     roles.workstation.home = {
         enable = true;
-        user = "nero";
+        user = "alaric";
     };
 }
