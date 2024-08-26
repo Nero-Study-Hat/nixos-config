@@ -45,7 +45,7 @@ rmdir "$EFI_MNT"
 ### ---
 echo -e $'\n**SETTING UP LVM Partitions**\n'
 
-LUKSROOT="nixos-enc"
+LUKSROOT="encrypted"
 echo -n "$LUKS_KEY" | hextorb | cryptsetup luksOpen $LUKS_PART $LUKSROOT --key-file=-
 pvcreate "/dev/mapper/$LUKSROOT"
 

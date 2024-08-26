@@ -9,8 +9,8 @@
 			luks = {
 				# Support for Yubikey PBA
 				yubikeySupport = true;
-				devices."nixos-enc" = {
-					device = "/dev/disk/by-label/encrypted"; # luks device
+				devices."encrypted" = {
+					device = "/dev/disk/by-uuid/33e4b793-8e49-4f01-836d-a9db50af1b62"; # luks device
 					allowDiscards = true;
 					yubikey = {
 						slot = 2;
