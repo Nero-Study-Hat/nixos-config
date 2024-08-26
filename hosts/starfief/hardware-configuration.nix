@@ -52,7 +52,7 @@
 	# TODO: adjust for lvm partitioning
 	fileSystems."/".device = "/dev/disk/by-label/nixos";
 	fileSystems."/boot/efi".device = "/dev/disk/by-label/UEFI";
-	swapDevices = [{ device = "/dev/disk/by-uuid/1e18da5a-e60d-4c90-b8ad-4c9c0e2782ca"; }];
+	swapDevices = [{ device = "/dev/disk/by-uuid/31f4e844-b5f0-4c88-b1b8-e35f29340f65"; }];
 
 	nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 	hardware.enableRedistributableFirmware = true;
