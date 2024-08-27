@@ -12,15 +12,13 @@ in
     config = mkIf cfg.enable {
         programs.ssh = {
             enable = true;
-            addKeysToAgent = "confirm";
-
-            extraConfig = ''
-                Host github.com
-                    User git
-                    Hostname github.com
-                    PreferredAuthentications publickey
-                    IdentityFile ~/.ssh/id_ed25519_github
-            '';
+            addKeysToAgent = "yes";
+            matchBlocks.github = {
+                host = "github.com";
+                hostname = "github.com";
+                user = "git";
+                identityFile = "~/.ssh/id_ed25519_github";
+            };
         };
     };
 }
