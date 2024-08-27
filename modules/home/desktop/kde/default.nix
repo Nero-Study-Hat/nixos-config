@@ -14,6 +14,7 @@ in
             pkgs-stable.libsForQt5.bismuth
             pkgs.kdePackages.fcitx5-with-addons
             pkgs.flameshot
+            pkgs.kdePackages.yakuake
         ];
 
         programs.plasma = {

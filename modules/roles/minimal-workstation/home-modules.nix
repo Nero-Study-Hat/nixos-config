@@ -81,6 +81,7 @@ in
                 # home.packages = with pkgs; [ cowsay ];
                 home-modules.shell = {
                     language.bash-enable = true;
+                    ssh-client.enable = true;
                     direnv-enable = true;
                     git-enable = true;
                     tmux-enable = true;

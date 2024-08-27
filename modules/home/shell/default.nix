@@ -9,6 +9,7 @@ in
     # and extend the namespace declared in this file
     imports = [
         ./language.nix
+        ./ssh.nix
     ];
 
     options.home-modules.shell = with types; {
