@@ -34,9 +34,9 @@ in
                     cl = "clear";
                     res = "result/activate && rm -r result";
                     stardom = "sudo nixos-rebuild switch --flake $FLAKE#stardom";
-                    nero = "cd ~/tmp && nix run home-manager -- build --flake $FLAKE#nero";
+                    nero = "nix run home-manager -- build --flake $FLAKE#nero";
                     stardfief = "sudo nixos-rebuild switch --flake $FLAKE#starfief";
-                    alaric = "cd ~/tmp && nix run home-manager -- build --flake $FLAKE#alaric";
+                    alaric = "nix run home-manager -- build --flake $FLAKE#alaric";
                 };
                 historyIgnore = [ "ls" "cd" "cl" "clear" "exit" ];
                 bashrcExtra = ''eval "$(direnv hook bash)"'';

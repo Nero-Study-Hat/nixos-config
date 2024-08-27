@@ -5,7 +5,18 @@ let
     cfg = config.roles.workstation.home;
 in
 {
-    imports = [ ../../home ];
+    imports = [
+        ../../home/shell
+        
+        ../../home/desktop/kde
+        ../../home/desktop/hyprland
+
+        ../../home/desktop/apps/basics
+        ../../home/desktop/apps/creative
+        ../../home/desktop/apps/dev
+        ../../home/desktop/apps/utility
+        ../../home/desktop/gaming
+    ];
 
     # have an option enable all groups by single option default and an option for each group
     # if the caller wants fine control within a group then they can use defaults for other groups

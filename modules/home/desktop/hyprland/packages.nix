@@ -9,7 +9,6 @@ in
         install = mkEnableOption "Whether to setup hyprland with associated packages and config on this desktop.";
     };
 
-    # try the following: mkIf config.home-modules.desktop.hyprland.enable
     config = mkIf cfg.install {
         home.packages = with pkgs; [
             adwaita-icon-theme

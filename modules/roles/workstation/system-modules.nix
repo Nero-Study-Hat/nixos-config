@@ -6,7 +6,9 @@ let
 in
 {
     imports = [
-        ../../core
+        ../../core/virtualization.nix
+        ../../core/desktop.nix
+        ../../core/yubikey.nix
     ];
 
     options.roles.workstation.system = with types; {
