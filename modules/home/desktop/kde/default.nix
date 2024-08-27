@@ -15,6 +15,7 @@ in
             pkgs.kdePackages.fcitx5-with-addons
             pkgs.flameshot
             pkgs.kdePackages.yakuake
+            kdePackages.konsole
         ];
 
         programs.plasma = {
