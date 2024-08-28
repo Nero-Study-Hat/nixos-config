@@ -14,6 +14,11 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
 
+        sops-nix = {
+            url = "github:Mic92/sops-nix";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
+
         plasma-manager = {
             url = "github:pjones/plasma-manager";
             inputs.nixpkgs.follows = "nixpkgs";
@@ -43,6 +48,7 @@
         nixpkgs-stable,
         home-manager,
         nixos-generators,
+        sops-nix,
         ... 
     }@inputs:
     let
@@ -60,6 +66,7 @@
                 inherit system;
                 modules = [ 
                     ./hosts/stardom/configuration.nix
+                    inputs.sops-nix.nixosModules.sops
                 ];
                 specialArgs = { inherit inputs; };
             };
@@ -67,6 +74,7 @@
                 inherit system;
                 modules = [ 
                     ./hosts/starfief/configuration.nix
+                    inputs.sops-nix.nixosModules.sops
                 ];
                 specialArgs = { inherit inputs; };
             };

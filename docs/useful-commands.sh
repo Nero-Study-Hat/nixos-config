@@ -35,3 +35,4 @@ cd / && ncdu --exclude "nero-priv-data" --exclude "nero-pub-data"
 # --- ssh ---
 eval `ssh-agent`;ssh-add id_rsa
 ssh-keygen -t ed25519-sk -C "your_email@example.com" -f {output-path} # generating github ssh key pair
+ssh-keygen -t ed25519 -C "your_email@example.com" -f {output-path} # no hardware key requirement

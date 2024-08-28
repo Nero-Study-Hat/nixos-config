@@ -72,6 +72,8 @@ in
             type = package;
             default = pkgs.tldr;
         };
+
+        sops-nix-tools-install = mkEnableOption "Enable sops-nix with associated packages..";
     };
 
     config = mkMerge [
@@ -128,5 +130,14 @@ in
 
         ( mkIf (cfg.tldr-enable)
         { home.packages = [ cfg.tldr-pkg ]; })
+
+        ( mkIf (cfg.sops-nix-tools-install)
+        {
+            home.packages = with pkgs; [
+                sops
+                age
+                ssh-to-age
+            ];
+        })
     ];
 }

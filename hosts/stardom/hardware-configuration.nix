@@ -7,7 +7,7 @@
 		kernelModules = [ "kvm-amd" ];
 		extraModulePackages = [ ];
 
-		kernelPackages = pkgs.linuxPackages_6_8;
+		kernelPackages = pkgs.linuxPackages_latest; #TODO: test if latest still breaks virtualbox
 		supportedFilesystems = [ "ntfs" ];
 		loader = {
 			efi = {

@@ -1,4 +1,4 @@
-{ inputs, lib, config, options, pkgs, ... }:
+{ inputs, lib, config, options, pkgs, sops, ... }:
 
 with lib;
 let
@@ -54,6 +54,8 @@ in
             networking.useDHCP = lib.mkDefault true;
 
             environment.pathsToLink = [ "/share/bash-completion" ];
+            environment.variables.EDITOR = "code --wait";
+
             fonts.fontDir.enable = true;
             fonts.enableDefaultPackages = true;
             fonts.enableGhostscriptFonts = true;
