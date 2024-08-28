@@ -2,6 +2,11 @@
     description = "My initial system flake.";
 
     inputs = {
+        mysecrets = {
+            url = "git+ssh://git@github.com/Nero-Study-Hat/nixos-secrets?rev=6dee3dc218572718a860a757ee65a9476d0757d1";
+            flake = false;
+        };
+
         nixpkgs.url = "nixpkgs/nixos-unstable";
         nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
         home-manager = {

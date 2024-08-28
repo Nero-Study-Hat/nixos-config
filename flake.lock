@@ -255,6 +255,22 @@
         "type": "github"
       }
     },
+    "mysecrets": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1724866241,
+        "narHash": "sha256-Jgj7gJF5ycAABKcxK12g4W6zQ9/luCutlqzCSvIMtZk=",
+        "rev": "6dee3dc218572718a860a757ee65a9476d0757d1",
+        "revCount": 2,
+        "type": "git",
+        "url": "ssh://git@github.com/Nero-Study-Hat/nixos-secrets"
+      },
+      "original": {
+        "rev": "6dee3dc218572718a860a757ee65a9476d0757d1",
+        "type": "git",
+        "url": "ssh://git@github.com/Nero-Study-Hat/nixos-secrets"
+      }
+    },
     "nixlib": {
       "locked": {
         "lastModified": 1724547350,
@@ -367,6 +383,7 @@
         "hyprkool": "hyprkool",
         "hyprland": "hyprland",
         "hyprland-virtual-desktops": "hyprland-virtual-desktops",
+        "mysecrets": "mysecrets",
         "nixos-generators": "nixos-generators",
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",

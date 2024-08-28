@@ -144,7 +144,6 @@ in
                     file-enable = true;
                     neofetch-enable = true;
                     tldr-enable = true;
-                    sops-nix-tools-install = true;
                 };
             })
 

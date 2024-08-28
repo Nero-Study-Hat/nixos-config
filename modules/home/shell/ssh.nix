@@ -13,11 +13,13 @@ in
         programs.ssh = {
             enable = true;
             addKeysToAgent = "yes";
-            matchBlocks.github = {
-                host = "github.com";
-                hostname = "github.com";
-                user = "git";
-                identityFile = "~/.ssh/id_ed25519_github";
+            matchBlocks = {
+                "github" = {
+                    host = "github.com";
+                    identitiesOnly = true;
+                    user = "git";
+                    identityFile = "~/.ssh/id_ed25519_github";
+                };
             };
         };
     };

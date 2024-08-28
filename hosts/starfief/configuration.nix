@@ -25,9 +25,6 @@
 	services.printing.enable = true;
 	boot.tmp.cleanOnBoot = true;
 
-	programs.ssh.startAgent = true;
-	programs.ssh.agentTimeout = "2h";
-
 	environment.systemPackages = [
 		pkgs.gparted
 	];

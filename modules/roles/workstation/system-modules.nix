@@ -53,6 +53,9 @@ in
             networking.networkmanager.enable = true;
             networking.useDHCP = lib.mkDefault true;
 
+            programs.ssh.startAgent = true;
+            programs.ssh.agentTimeout = "2h";
+
             environment.pathsToLink = [ "/share/bash-completion" ];
             environment.variables.EDITOR = "code --wait";
 
