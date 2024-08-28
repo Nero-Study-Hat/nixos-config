@@ -1,4 +1,4 @@
-{ inputs, lib, config, options, pkgs, sops, ... }:
+{ inputs, lib, config, options, pkgs, ... }:
 
 with lib;
 let
@@ -9,6 +9,7 @@ in
         ../../core/virtualization.nix
         ../../core/desktop.nix
         ../../core/yubikey.nix
+        ../../core/sops.nix
     ];
 
     options.roles.workstation.system = with types; {
@@ -31,6 +32,11 @@ in
             type = bool;
             default = true;
             description = "Enable yubikey support with associated packages and config.";
+        };
+        sops = mkOption {
+            type = bool;
+            default = true;
+            description = "Setup sops-nix with associated packages and config.";
         };
     };
 
@@ -97,6 +103,12 @@ in
             ( mkIf (cfg.yubikey)
             {
                 system-modules.yubikey = {
+                    enable = true;
+                };
+            })
+            ( mkIf (cfg.sops)
+            {
+                system-modules.sops = {
                     enable = true;
                 };
             })
