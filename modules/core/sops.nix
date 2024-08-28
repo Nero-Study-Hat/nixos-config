@@ -55,7 +55,14 @@ in
                 generateKey = true;
             };
 
+            # all secrets must have an owner
             secrets = {
+                "password" = {
+                    owner = "nero";
+                };
+                example-key = {
+                    owner = "nero";
+                };
                 "myservice/my_subdir/my_secret" = {
                     owner = "sometestservice";
                 };

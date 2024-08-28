@@ -2,8 +2,9 @@
     description = "My initial system flake.";
 
     inputs = {
+        # if old version of an input is needed, you can check the commit hash in the flake.lock
         mysecrets = {
-            url = "git+ssh://git@github.com/Nero-Study-Hat/nixos-secrets?rev=6dee3dc218572718a860a757ee65a9476d0757d1";
+            url = "git+ssh://git@github.com/Nero-Study-Hat/nixos-secrets";
             flake = false;
         };
 
