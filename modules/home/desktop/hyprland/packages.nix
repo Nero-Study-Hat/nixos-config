@@ -5,6 +5,7 @@ let
     cfg = config.home-modules.desktop.hyprland.default-pkgs;
 in
 {
+    # option exists because importing hyprland to check if enabled would be a recursive import issue
     options.home-modules.desktop.hyprland.default-pkgs = with types; {
         install = mkEnableOption "Whether to setup hyprland with associated packages and config on this desktop.";
     };

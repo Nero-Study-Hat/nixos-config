@@ -18,15 +18,15 @@ in
             type = str;
             default = "nero";
         };
+        desktop-defaults = mkOption {
+            type = bool;
+            default = true;
+            description = "Enable desktop with associated packages and config.";
+        };
         virtualization = mkOption {
             type = bool;
             default = true;
             description = "Enable virtualization with associated packages and config.";
-        };
-        desktop = mkOption {
-            type = bool;
-            default = true;
-            description = "Enable desktop with associated packages and config.";
         };
         yubikey = mkOption {
             type = bool;
@@ -56,7 +56,6 @@ in
             time.timeZone = "America/New_York";
 
             networking.hostName = cfg.hostname;
-            # networking.networkmanager.enable = true;
             networking.useDHCP = lib.mkDefault true;
 
             programs.ssh.startAgent = true;
@@ -83,7 +82,7 @@ in
         })
 
         (mkIf cfg.enable (mkMerge [
-            ( mkIf (cfg.desktop)
+            ( mkIf (cfg.desktop-defaults)
             {
                 system-modules.desktop = {
                     sddm = true;

@@ -102,33 +102,6 @@ in
         })
 
         (mkIf cfg.enable (mkMerge [
-            ( mkIf (cfg.kde)
-            {
-                home-modules.desktop.kde.enable = true;
-            })
-
-            ( mkIf (cfg.hyprland)
-            {
-                home-modules.desktop.hyprland = {
-                    enable = true;
-                    # main PC
-                    # FIXME: move to stardom users and create for starfief
-                    monitors = [
-                        "DP-2, 3440x1440@100, auto-left, 1"
-                        "HDMI-A-1, 1680x1050@60, 0x0, 1, transform, 1"
-                    ];
-                    default-pkgs.install = true;
-                    waybar = {
-                        enable = true;
-                        virt-desktops-modules.enable = true;
-                        c-modules = [ "custom/weather" "custom/activity" "group/group-virt-desktops" ];
-                        # c-modules = [ "custom/weather" ];
-                    };
-                    virt-desktops.enable = true;
-                    hyprkool.enable = false;
-                };
-            })
-
             ( mkIf (cfg.default-shell)
             {
                 # home.packages = with pkgs; [ cowsay ];

@@ -26,6 +26,8 @@
 		};
 	};
 
+	networking.networkmanager.enable = true;
+
 	security.polkit.enable = true;
 	services.printing.enable = true;
 	boot.tmp.cleanOnBoot = true;
