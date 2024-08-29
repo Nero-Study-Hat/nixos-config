@@ -258,11 +258,11 @@
     "mysecrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1724888812,
-        "narHash": "sha256-K5cLpDpFecIi2v4fcIRDTQtaZH2n7epe+XmU/OiNJ+Q=",
+        "lastModified": 1724896577,
+        "narHash": "sha256-s9bWLcKtmldwwzvtSMlzXYcdWi3NPzFae+T/zsk61Kc=",
         "ref": "refs/heads/main",
-        "rev": "c108ac27b74ef33e9d384bcd161975fc2995b1bd",
-        "revCount": 10,
+        "rev": "cc5cfac631068abfaff0b4fb253f09e64f57ba40",
+        "revCount": 12,
         "type": "git",
         "url": "ssh://git@github.com/Nero-Study-Hat/nixos-secrets"
       },
@@ -294,11 +294,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1724633759,
-        "narHash": "sha256-CwZPEHqIxyEcHlrQ2Rb8pnpj1OWZkxUJBRjmeh0OQ34=",
+        "lastModified": 1724893087,
+        "narHash": "sha256-M3+Z8SSpzKPQ+/vw9a99G9HfqKWbVGzhFz4p3KAX0NI=",
         "owner": "nix-community",
         "repo": "nixos-generators",
-        "rev": "3f4c041744a1dbfbef426580a31d07e19dba6a3c",
+        "rev": "0dd0205bc3f6d602ddb62aaece5f62a8715a9e85",
         "type": "github"
       },
       "original": {

@@ -36,8 +36,7 @@ in
             secrets = {
                 "nero-user-password".neededForUsers = true;
                 "home-location" = { };
-                "wifi/home-name" = { };
-                "wifi/home-password" = { };
+                "wifi-secrets-file" = { };
             };
         };
     };
