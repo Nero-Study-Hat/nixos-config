@@ -26,13 +26,16 @@
 	boot.tmp.cleanOnBoot = true;
 
 	networking.wireless.enable = true;
+	networking.wireless.environmentFile = config.sops.secrets.wifi-secrets-file.path;
 	networking.wireless.networks = {
 		"home" = {
 			hidden = true;
+			authProtocols = "WPA-PSK";
+			priority = 1;
 			auth = ''
 				key_mgmt=WPA-PSK
-				identity=${config.sops.secrets."wifi/home-name".content}
-				password=${config.sops.secrets."wifi/home-password".content}
+				identity="@HOME_SSID"
+				password="@HOME_PSK@"
 			'';
 		};
 	};
