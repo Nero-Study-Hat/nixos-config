@@ -28,15 +28,11 @@
 	networking.wireless.enable = true;
 	networking.wireless.environmentFile = config.sops.secrets.wifi-secrets-file.path;
 	networking.wireless.networks = {
-		"home" = {
+		"@HOME_SSID@" = {
 			hidden = true;
-			authProtocols = "WPA-PSK";
 			priority = 1;
-			auth = ''
-				key_mgmt=WPA-PSK
-				identity="@HOME_SSID"
-				password="@HOME_PSK@"
-			'';
+			authProtocols = [ "WPA-PSK" ];
+			pskRaw = "@HOME_PSK@";
 		};
 	};
 

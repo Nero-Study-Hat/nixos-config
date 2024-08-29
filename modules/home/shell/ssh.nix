@@ -18,6 +18,7 @@ in
                     host = "github.com";
                     identitiesOnly = true;
                     user = "git";
+                    #TODO: change ssh to to -sk with hardware key being used
                     identityFile = "~/.ssh/id_ed25519_github";
                 };
             };
