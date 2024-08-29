@@ -258,11 +258,11 @@
     "mysecrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1724877190,
-        "narHash": "sha256-JLdfQyXhDMbBCO6bGUyFhTxgKorQSIcD5bgzNCNvFE0=",
+        "lastModified": 1724888812,
+        "narHash": "sha256-K5cLpDpFecIi2v4fcIRDTQtaZH2n7epe+XmU/OiNJ+Q=",
         "ref": "refs/heads/main",
-        "rev": "aba27b538f09f7cc63e1a45152f1794f4aca85ba",
-        "revCount": 8,
+        "rev": "c108ac27b74ef33e9d384bcd161975fc2995b1bd",
+        "revCount": 10,
         "type": "git",
         "url": "ssh://git@github.com/Nero-Study-Hat/nixos-secrets"
       },

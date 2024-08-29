@@ -11,36 +11,14 @@ in
     };
 
     config = mkIf cfg.enable {
+        # TODO: test if sops command can be used to edit encrypted file in seprate user's home directory
         environment.systemPackages = with pkgs; [
             sops
             age
             ssh-to-age
         ];
 
-        systemd.services."sometestservice" = {
-            script = ''
-                echo "
-                Hey bro! I'm a service, and imma send this secure password:
-                $(cat ${config.sops.secrets."myservice/my_subdir/my_secret".path})
-                located in:
-                ${config.sops.secrets."myservice/my_subdir/my_secret".path}
-                to database and hack the mainframe
-                " > /var/lib/sometestservice/testfile
-            '';
-            serviceConfig = {
-                User = "sometestservice";
-                WorkingDirectory = "/var/lib/sometestservice";
-            };
-        };
-
-        users.users.sometestservice = {
-            home = "/var/lib/sometestservice";
-            createHome = true;
-            isSystemUser = true;
-            group = "sometestservice";
-        };
-        users.groups.sometestservice = { };
-
+        # options nicely documented https://dl.thalheim.io/
         sops = {
             defaultSopsFile = "${secretspath}/secrets.yaml";
             defaultSopsFormat = "yaml";
@@ -55,17 +33,11 @@ in
                 generateKey = true;
             };
 
-            # all secrets must have an owner
             secrets = {
-                "password" = {
-                    owner = "nero";
-                };
-                example-key = {
-                    owner = "nero";
-                };
-                "myservice/my_subdir/my_secret" = {
-                    owner = "sometestservice";
-                };
+                "nero-user-password".neededForUsers = true;
+                "home-location" = { };
+                "wifi/home-name" = { };
+                "wifi/home-password" = { };
             };
         };
     };

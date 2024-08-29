@@ -1,4 +1,4 @@
-{ inputs, outputs, lib, config, pkgs, sops, ... }:
+{ inputs, outputs, lib, config, pkgs, ... }:
 
 {
 	imports = [
@@ -15,8 +15,8 @@
 
 	users.users = {
 		nero = {
-			initialPassword = "nixisreallycool";
 			isNormalUser = true;
+			hashedPasswordFile = config.sops.secrets."nero-user-password".path;
 			extraGroups = [ "wheel" "video" "audio" "disk" "networkmanager" "users" ];
 		};
 		bo = {
