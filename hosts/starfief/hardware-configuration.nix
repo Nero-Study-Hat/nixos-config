@@ -4,7 +4,7 @@
 	boot = {
 		initrd.availableKernelModules = [ "nvme" "xhci_pci" "usb_storage" "sd_mod" "sdhci_pci" ];
         kernelModules = [ "kvm-amd" ];
-		kernelPackages = pkgs.linuxPackages_6_8;
+		kernelPackages = pkgs.linuxPackages_latest;
 		supportedFilesystems = [ "ntfs" ];
 		loader = {
 			grub = {

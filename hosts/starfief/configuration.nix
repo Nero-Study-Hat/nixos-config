@@ -25,16 +25,19 @@
 	services.printing.enable = true;
 	boot.tmp.cleanOnBoot = true;
 
-	networking.wireless.enable = true;
-	networking.wireless.environmentFile = config.sops.secrets.wifi-secrets-file.path;
+	networking.wireless = {
+		enable = true;
+		environmentFile = config.sops.secrets.wifi-secrets-file.path;
+		interfaces = [ "wlp2s0" ];
+		userControlled.enable = true;
+	};
 	networking.wireless.networks = {
 		"@HOME_SSID@" = {
 			hidden = true;
-			priority = 1;
-			authProtocols = [ "WPA-PSK" ];
 			pskRaw = "@HOME_PSK@";
 		};
 	};
+	networking.networkmanager.enable = false;
 
 	environment.systemPackages = [
 		pkgs.gparted

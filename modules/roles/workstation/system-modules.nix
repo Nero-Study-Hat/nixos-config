@@ -56,7 +56,7 @@ in
             time.timeZone = "America/New_York";
 
             networking.hostName = cfg.hostname;
-            networking.networkmanager.enable = true;
+            # networking.networkmanager.enable = true;
             networking.useDHCP = lib.mkDefault true;
 
             programs.ssh.startAgent = true;
