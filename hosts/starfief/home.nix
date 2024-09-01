@@ -29,6 +29,7 @@
 			default-pkgs.install = true;
 			waybar = {
 				enable = true;
+				output-monitor = "eDP-1";
 				virt-desktops-modules.enable = true;
 				c-modules = [ "custom/weather" "custom/activity" "group/group-virt-desktops" ];
 				# c-modules = [ "custom/weather" ];

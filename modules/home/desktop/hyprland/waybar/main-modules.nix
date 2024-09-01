@@ -24,6 +24,9 @@ in
             example = [ "custom/weather" ];
             default = [ "custom/weather" "custom/activity" "group/group-virt-desktops" ];
         };
+        output-monitor = mkOption {
+            type = str;
+        };
     };
 
     config = mkIf cfg.enable {
@@ -42,7 +45,7 @@ in
 
         # nixlang specific
         programs.waybar.settings."mainbar" = {
-            "output" = "HDMI-A-1";
+            "output" = cfg.output-monitor;
             "layer" = "top";
             "position" = "top";
             "height" = 30;
