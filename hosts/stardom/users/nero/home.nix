@@ -14,6 +14,12 @@
 		kde.enable = true;
 		hyprland = {
 			enable = true;
+			hyprlock = {
+				enable = true;
+				wallpaper = "/home/nero/Pictures/Wallpapers/bench.jpg";
+				profile = "/home/nero/Pictures/Icons/neroProfile.png";
+			};
+			hypridle.enable = true;
 			# main PC
 			# FIXME: move to stardom users and create for starfief
 			monitors = [

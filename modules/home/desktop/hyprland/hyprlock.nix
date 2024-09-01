@@ -7,6 +7,12 @@ in
 {
     options.home-modules.desktop.hyprland.hyprlock = with types; {
         enable = mkEnableOption "Whether to setup hyprlock.";
+        wallpaper = mkOption {
+            type = path;
+        };
+        profile = mkOption {
+            type = path;
+        };
     };
 
     config = mkIf cfg.enable {
@@ -24,7 +30,7 @@ in
 
                 background = {
                     monitor = "";
-                    path = "~/Pictures/Wallpapers/bench.jpg";
+                    path = cfg.wallpaper;
 
                     # blur
                     blur_passes = 2;
@@ -45,7 +51,7 @@ in
                 # Profie-Photo
                 image = {
                     monitor = "";
-                    path = "~/Pictures/Icons/neroProfile.png";
+                    path = cfg.profile;
                     border_size = 2;
                     border_color = "rgba(255, 255, 255, .65)";
                     size = 130;

@@ -14,6 +14,12 @@
 		kde.enable = true;
 		hyprland = {
 			enable = true;
+			hyprlock = {
+				enable = true;
+				wallpaper = "/home/alaric/...";
+				profile = "/home/alaric/...";
+			};
+			hypridle.enable = true;
 			# main PC
 			# FIXME: move to stardom users and create for starfief
 			monitors = [
