@@ -1,4 +1,4 @@
-{ inputs, lib, config, options, pkgs, ... }:
+{ inputs, lib, config, options, pkgs, pkgs-stable, ... }:
 
 with lib;
 let
@@ -46,7 +46,7 @@ in
 			programs.hyprland = {
 				enable = true;
 				xwayland.enable = true;
-				portalPackage = pkgs.xdg-desktop-portal-hyprland;
+				portalPackage = pkgs-stable.xdg-desktop-portal-hyprland;
 				package = inputs.hyprland.packages.${pkgs.system}.hyprland;
 			};
 

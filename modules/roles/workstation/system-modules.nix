@@ -1,4 +1,4 @@
-{ inputs, lib, config, options, pkgs, ... }:
+{ inputs, lib, config, options, pkgs, pkgs-stable, ... }:
 
 with lib;
 let

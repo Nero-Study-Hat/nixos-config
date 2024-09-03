@@ -1,4 +1,4 @@
-{ inputs, outputs, lib, config, pkgs, ... }:
+{ inputs, outputs, lib, config, pkgs, pkgs-stable, ... }:
 
 {
 	imports = [
@@ -28,6 +28,7 @@
 	networking.wireless = {
 		enable = true;
 		environmentFile = config.sops.secrets.wifi-secrets-file.path;
+		# environmentFile = "/etc/tmp_wifi_secrets";
 		interfaces = [ "wlp2s0" ];
 		userControlled.enable = true;
 	};
@@ -35,6 +36,21 @@
 		"@HOME_SSID@" = {
 			hidden = true;
 			pskRaw = "@HOME_PSK@";
+		};
+		"@DND_SSID@" = {
+			hidden = true;
+			pskRaw = "@DND_PSK@";
+		};
+		"@RCOLLEGE_SSID@" = {
+			hidden = true;
+			# FIXME: below indentation not being created
+			# in conf file "/run/wpa_supplicant/wpa_supplicant.conf" properly
+			auth =
+            ''
+                eap=PEAP
+                identity="@RCOLLEGE_ID@"
+                password="@RCOLLEGE_PSWD@"
+            '';
 		};
 	};
 	networking.networkmanager.enable = false;

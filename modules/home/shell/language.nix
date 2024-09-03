@@ -33,9 +33,10 @@ in
                 shellAliases = {
                     cl = "clear";
                     res = "result/activate && rm -r result";
-                    stardom = "sudo nixos-rebuild switch --flake $FLAKE#stardom";
+                    flake-update = "cd $FLAKE && nix flake update";
+                    stardom = "sudo nixos-rebuild switch --flake $FLAKE#stardom --no-update-lock-file";
                     nero = "cd ~/tmp && nix run home-manager -- build --flake $FLAKE#nero";
-                    starfief = "sudo nixos-rebuild switch --flake $FLAKE#starfief";
+                    starfief = "sudo nixos-rebuild switch --flake $FLAKE#starfief --no-update-lock-file";
                     alaric = "cd ~/tmp && nix run home-manager -- build --flake $FLAKE#alaric";
                 };
                 historyIgnore = [ "ls" "cd" "cl" "clear" "exit" ];

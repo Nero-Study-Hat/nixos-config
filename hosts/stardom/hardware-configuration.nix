@@ -1,4 +1,4 @@
-{ config, lib, pkgs, modulesPath, ... }:
+{ config, lib, pkgs, pkgs-stable, modulesPath, ... }:
 
 {
 	boot = {

@@ -32,10 +32,10 @@ in
 
             shortcuts = {
                 kwin = {
-                    "Switch Window Down" = "Ctrl+Alt+Down";
-                    "Switch Window Left" = "Ctrl+Alt+Left";
-                    "Switch Window Right" = "Ctrl+Alt+Right";
-                    "Switch Window Up" = "Ctrl+Alt+Up";
+                    "Switch One Desktop to the Left" = "Ctrl+Alt+Left";
+                    "Switch One Desktop to the Right" = "Ctrl+Alt+Right";
+                    "Switch One Desktop Up" = "Ctrl+Alt+Up";
+                    "Switch One Desktop Down" = "Ctrl+Alt+Down";
                     "ShowDesktopGrid" = "Meta+A";
                     "Window Close" = "Alt+Q";
                     "Window Operations Menu" = "Alt+R";

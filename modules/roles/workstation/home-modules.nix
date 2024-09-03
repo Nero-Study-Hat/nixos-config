@@ -27,16 +27,6 @@ in
             type = str;
             default = "nero";
         };
-        kde = mkOption {
-            type = bool;
-            default = true;
-            description = "Enable kde desktop environment with associated packages and config.";
-        };
-        hyprland = mkOption {
-            type = bool;
-            default = true;
-            description = "Enable hyprland with associated packages and config.";
-        };
         # groups below
         default-shell = mkOption {
             type = bool;

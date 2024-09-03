@@ -1,3 +1,5 @@
+# make sure not to use tabs, always spaces with nix
+
 nix shell nixpkgs#git --command command-with-git-available
 nix shell nixpkgs#git --command nix flake check "github:Nero-Study-Hat/nixos-config/${branch}" --no-write-lock-file
 nix shell nixpkgs#file --command file {file-name}
@@ -8,6 +10,8 @@ nix run nixpkgs#python -- --version
 nix flake lock --update-input <input>
 
 sudo nixos-rebuild switch --flake /{path/to/flake/dir}#stardom
+# for situation without internet; TODO: make this the default so flake update only happens when specifically wanted
+sudo nixos-rebuild switch --flake $FLAKE#starfief --no-update-lock-file
 # verbose log to file
 sudo nixos-rebuild switch --flake ~/.nixflake#stardom -v --show-trace >>nixos-rebuild-log.txt 2>&1
 
