@@ -96,12 +96,12 @@ char* getChosenActivity(char* inputCmd) {
     char rofiCmd[] = "rofi -dmenu -p 'Choose activity'";
     sprintf(execCmd, "%s | %s", inputCmd, rofiCmd);
 
-    char buffer[150];
+    char buffer[50];
     FILE *cmd=popen(execCmd, "r");
     char* chosenActivity = fgets(buffer, sizeof(buffer), cmd);
     pclose(cmd);
     chosenActivity[strcspn ( chosenActivity, "\n" )] = '\0';
-    char* rtnPtr = malloc(150);
+    char* rtnPtr = malloc(500);
     strcpy(rtnPtr, chosenActivity);
     return rtnPtr;
 }
@@ -111,7 +111,7 @@ int changeDesktopActivity(const int currentDesktopNum, const int numOfActivities
     bool targetFound = false;
     int targetActivityNum;
     if (chooseActivity == 0) {
-        char echoCmd[50];
+        char echoCmd[500];
         sprintf(echoCmd, "printf ");
         strcat(echoCmd, "\"");
         for(int index = 0; index < numOfActivities; index++) {
@@ -180,11 +180,11 @@ int main(int argc, char* argv[])
 
     const bool activitiesEnable = true;
     // can comment out below settings if activitiesEnable is set to false
-    const int numOfActivities = 3;
-    const char* activities[] = {"tech", "writing", "slack"};
+    const int numOfActivities = 5;
+    const char* activities[] = {"tech", "writing", "school", "productivity", "free"};
     // --
 
-    const int numOfDesktopsInActivity = 4;
+    const int numOfDesktopsInActivity = columns * rows;
     if (argv[1] == NULL) {
         const char debugArg[] = "exe-path arg-one debug\nexe-path arg-one arg-two debug\n";
         printf("you can enable input checking if things go wrong with the 'debug' arg like below\n%s\n", debugArg);
@@ -227,6 +227,7 @@ int main(int argc, char* argv[])
         const int newDesktop = changeDesktopActivity(currentDesktopNum, numOfActivities, desktopsInActivity, 0, activities);
         pluginCmd(inputCmd, newDesktop);
     }
+    // normalizedCurrentDesktop found for grid wrapping
     else if (activitiesEnable == true) {
         normalizedCurrentDesktop = changeDesktopActivity(currentDesktopNum, numOfActivities, desktopsInActivity, 1, activities);
     }

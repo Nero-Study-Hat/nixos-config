@@ -33,6 +33,7 @@ in
             settings = {
                 bind = [
                     "SUPER, Q, exec, ${virtualDesktopSwitchExe} focus activityRofi"
+                    "ALT, R, exec, ${virtualDesktopSwitchExe} window activityRofi"
                     
                     "CTRL ALT, up, exec, ${virtualDesktopSwitchExe} focus up"
                     "CTRL ALT, down, exec, ${virtualDesktopSwitchExe} focus down"

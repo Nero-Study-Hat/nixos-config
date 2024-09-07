@@ -30,7 +30,7 @@ int getCurrentDesktopNum(const int numOfActivities, const int desktopsInActivity
 
 int main(int argc, char* argv[])
 {
-    const int numOfActivities = 3;
+    const int numOfActivities = 5;
     const int desktopsInActivity = 4;
     const int moduleDesktopNum = atoi(argv[1]);
     setbuf(stdout, NULL); // disable buffering on stdout, required by waybar

@@ -25,9 +25,9 @@ char* getCurrentActivity(const int currentDesktopNum, const int numOfActivities,
 
 int main(int argc, char* argv[])
 {
-    const int numOfActivities = 3;
     const int desktopsInActivity = 4;
-    const char* activities[] = {"TECH", "WRITING", "SLACK"};
+    const int numOfActivities = 5;
+    const char* activities[] = {"TECH", "WRITING", "SCHOOL", "PRODUCTIVITY", "FREE"};
     setbuf(stdout, NULL); // disable buffering on stdout, required by waybar
     char* text;
     const char* class = "activity";
