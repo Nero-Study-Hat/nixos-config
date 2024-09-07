@@ -27,6 +27,9 @@ in
         output-monitor = mkOption {
             type = str;
         };
+        height = mkOption {
+            type = int;
+        };
     };
 
     config = mkIf cfg.enable {
@@ -48,12 +51,24 @@ in
             "output" = cfg.output-monitor;
             "layer" = "top";
             "position" = "top";
-            "height" = 30;
+            "height" = cfg.height;
             "spacing" = 10;
 
             "modules-left" = [ "group/group-power" "pulseaudio" "group/hardware" ];
             "modules-center" = cfg.c-modules;
-            "modules-right" = [ "tray" "clock" ];
+            "modules-right" = [ "idle_inhibitor" "tray" "clock" ];
+
+            "battery" = {
+                "bat" = "BAT2";
+                "interval" = 60;
+                "states" = {
+                    "warning" = 30;
+                    "critical" = 15;
+                };
+                "format" = "{capacity}% {icon}";
+                "format-icons" = ["" "" "" "" ""];
+                "max-length" = 25;
+            };
 
             "clock" = {
                 "interval" = 60;
@@ -127,6 +142,14 @@ in
                 "on-click" = "pavucontrol";
                 "on-click-right" = ''${audioOuputSwitchScript}/bin/start'';
                 "ignored-sinks" = ["Easy Effects Sink"];
+            };
+
+            "idle_inhibitor" = {
+                "format"= "{icon}";
+                "format-icons" = {
+                    "activated" = "";
+                    "deactivated" = "";
+                };
             };
 
             "group/group-power" = {

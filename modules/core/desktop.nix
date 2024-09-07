@@ -46,7 +46,7 @@ in
 			programs.hyprland = {
 				enable = true;
 				xwayland.enable = true;
-				portalPackage = pkgs-stable.xdg-desktop-portal-hyprland;
+				portalPackage = pkgs.xdg-desktop-portal-hyprland;
 				package = inputs.hyprland.packages.${pkgs.system}.hyprland;
 			};
 

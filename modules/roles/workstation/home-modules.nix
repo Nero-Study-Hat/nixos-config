@@ -40,7 +40,7 @@ in
         };
         default-creative-apps = mkOption {
             type = bool;
-            default = true;
+            default = false; #FIXME
             description = "Enable all default creative desktop apps and config.";
         };
         default-dev-apps = mkOption {
@@ -130,7 +130,7 @@ in
                     blender-enable = true;
                     krita-enable = true;
                     aseprite-enable = true;
-                    davinci-resolve-enable = true;
+                    davinci-resolve-enable = false; #FIXME
                     pureref-enable = false;
                     remnote-enable = true;
                     obsidian-enable = true;

@@ -29,6 +29,8 @@ in
                     disable_logs = false;
                 };
 
+                #TODO: mouse sensitivity
+
                 "$terminal" = "cool-retro-term";
                 "$mainMod" = "SUPER";
                 "$menu" = "rofi -show drun -show-icons";

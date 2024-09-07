@@ -1,5 +1,13 @@
 { inputs, options, config, lib, pkgs, rootPath, ... }:
 
+# resources I used for my secrets setup
+# - https://0xda.de/blog/2024/07/framework-and-nixos-sops-nix-secrets-management/
+# - https://lgug2z.com/articles/handling-secrets-in-nixos-an-overview/
+# - https://github.com/Mic92/sops-nix
+# - https://youtu.be/G5f6GC7SnhU
+# - https://unmovedcentre.com/posts/secrets-management/
+# - https://youtu.be/6EMNHDOY-wo
+
 with lib;
 let
     cfg = config.system-modules.sops;

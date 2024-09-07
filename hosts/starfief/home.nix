@@ -22,17 +22,15 @@
 			hypridle.enable = true;
 			# main PC
 			# FIXME: move to stardom users and create for starfief
-			monitors = [
-				", preferred, auto, 1" # main screen
-				# "" # second monitor sometimes attached
-			];
+			monitors = [ ", preferred, auto, 1" ];
 			default-pkgs.install = true;
 			waybar = {
 				enable = true;
 				output-monitor = "eDP-1";
 				virt-desktops-modules.enable = true;
-				c-modules = [ "custom/weather" "custom/activity" "group/group-virt-desktops" ];
+				c-modules = [ "battery" "custom/weather" "custom/activity" "group/group-virt-desktops" ];
 				# c-modules = [ "custom/weather" ];
+				height = 40;
 			};
 			virt-desktops.enable = true;
 			hyprkool.enable = false;
