@@ -40,6 +40,7 @@ in
 
                 xwayland = {
                     force_zero_scaling = true;
+                    use_nearest_neighbor = true;
                 };
 
                 general = { 
@@ -151,6 +152,7 @@ in
                     "HYPRCURSOR_SIZE,24"
                     "QT_STYLE_OVERRIDE,kvantum"
                     "USE_WAYLAND_GRIM,true"
+                    "GDK_SCALE,1"
                 ];
             };
         };
