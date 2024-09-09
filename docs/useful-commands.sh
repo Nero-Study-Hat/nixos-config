@@ -7,6 +7,9 @@ nix shell nixpkgs#git --command nix flake check "github:Nero-Study-Hat/nixos-con
 nix shell nixpkgs#file --command file {file-name}
 nix run nixpkgs#python -- --version
 
+nix shell nixpkgs#brightnessctl --command brightnessctl set 100%
+
+
 # --- NixOS ---
 # if you only want to update a single flake input, then the below command can be used
 nix flake lock --update-input <input>
