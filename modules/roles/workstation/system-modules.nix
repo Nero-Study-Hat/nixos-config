@@ -5,12 +5,7 @@ let
     cfg = config.roles.workstation.system;
 in
 {
-    imports = [
-        ../../core/virtualization.nix
-        ../../core/desktop.nix
-        ../../core/yubikey.nix
-        ../../core/sops.nix
-    ];
+    imports = [ ../../core ];
 
     options.roles.workstation.system = with types; {
         enable = mkEnableOption "";

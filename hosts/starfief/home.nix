@@ -20,12 +20,8 @@
 				profile = "/home/alaric/...";
 			};
 			hypridle.enable = true;
-			# main PC
-			# FIXME: move to stardom users and create for starfief
             monitors = [
-                "eDP-1, 2240x1400@60, auto-left, 1" # main screen
-                # "eDP-1, highres, auto-left, 2" # main screen
-                # "" # second monitor sometimes attached
+                "eDP-1, 2240x1400@60, auto-left, 1.25" # main screen
             ];
 			default-pkgs.install = true;
 			waybar = {
