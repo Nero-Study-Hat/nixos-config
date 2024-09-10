@@ -29,7 +29,11 @@ in
                     disable_logs = false;
                 };
 
-                #TODO: mouse sensitivity
+                input = {
+                    sensitivity = 0.25;
+                    force_no_accel = 0; 
+                };
+
 
                 "$terminal" = "cool-retro-term";
                 "$mainMod" = "SUPER";
@@ -101,6 +105,7 @@ in
                 dwindle = {
                     pseudotile = true;
                     preserve_split = true;
+                    no_gaps_when_only = 2;
                 };
 
                 bind = [
@@ -114,24 +119,29 @@ in
                     "$mainMod, V, togglefloating"
                     "$mainMod, S, togglespecialworkspace, magic"
                     ",code:107, exec, $screenshot" # camera icon key on my keyboard
+
+                    "$mainMod, P, pseudo, dwindle"
+                    "$mainMod, J, togglesplit, dwindle"
                 ];
 
+                bindl = [
+                    ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+                    ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+                    ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+                    # Requires playerctl
+                    ", XF86AudioPlay, exec, playerctl play-pause"
+                    ", XF86AudioPrev, exec, playerctl previous"
+                    ", XF86AudioNext, exec, playerctl nex"
+                    # Requires brightnessctl
+                    ", XF86MonBrightnessUp, exec, brightnessctl s +10%"
+                    ", XF86MonBrightnessDown, exec, brightnessctl s 10%-"
+                ];
+                
                 bindm = [
                     "$mainMod, mouse:272, movewindow"
                     "$mainMod, mouse:273, resizewindow"
                     "$mainMod ALT, mouse:272, resizewindow"
                 ];
-
-                device = {
-                    name = "epic-mouse-v1";
-                    sensitivity = 0.75;
-                };
-
-                input = {
-                    kb_layout = "us";
-                    follow_mouse = 1;
-                    sensitivity = 0;
-                };
 
                 windowrulev2 = [
                     "suppressevent maximize, class:.*"
@@ -141,9 +151,6 @@ in
                 exec-once = [
                     "waybar & swww"
                     "hypridle"
-                    # "sleep 3 && wl-paste --type text --watch cliphist store"
-                    # "sleep 3 && wl-paste --type image --watch cliphist store"
-                    # "sleep 3 && wl-paste --watch cliphist store"
                     "sleep 3 && copyq --start-server"
                 ];
 
