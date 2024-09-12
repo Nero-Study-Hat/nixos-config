@@ -2,7 +2,8 @@
 
 {
 	boot = {
-		initrd.availableKernelModules = [ "nvme" "xhci_pci" "usb_storage" "sd_mod" "sdhci_pci" ];
+		initrd.availableKernelModules = [ "nvme" "xhci_pci" "usb_storage" "sd_mod" "sdhci_pci" "mt7921e" ];
+		initrd.network.enable = true;
         kernelModules = [ "kvm-amd" ];
 		kernelPackages = pkgs.linuxPackages_latest;
 		supportedFilesystems = [ "ntfs" ];
@@ -53,4 +54,24 @@
 	nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 	hardware.enableRedistributableFirmware = true;
 	hardware.cpu.amd.updateMicrocode = true;
+
+	hardware.graphics = {
+		enable = true;
+
+		# For AMD vulkan support
+		# driSupport = true;
+		enable32Bit = true;
+
+		extraPackages = with pkgs; [
+			amdvlk
+			rocmPackages.clr.icd
+		];
+
+		# For 32 bit applications 
+		# Only available on unstable
+		extraPackages32 = with pkgs; [
+			driversi686Linux.amdvlk
+		];
+	};
+	environment.variables.AMD_VULKAN_ICD = "RADV";
 }
