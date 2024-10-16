@@ -33,6 +33,11 @@ in
             default = true;
             description = "Setup sops-nix with associated packages and config.";
         };
+        tailscale = mkOption {
+            type = bool;
+            default = true;
+            description = "Setup tailscale VPN with associated packages and config.";
+        };
     };
 
     config = mkMerge [
@@ -103,6 +108,12 @@ in
             ( mkIf (cfg.sops)
             {
                 system-modules.sops = {
+                    enable = true;
+                };
+            })
+            ( mkIf (cfg.tailscale)
+            {
+                system-modules.tailscale = {
                     enable = true;
                 };
             })

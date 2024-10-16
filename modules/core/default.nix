@@ -6,5 +6,6 @@
         ./desktop.nix
         ./yubikey.nix
         ./sops.nix
+        ./tailscale.nix
     ];
 }
