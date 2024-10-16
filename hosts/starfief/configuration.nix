@@ -40,6 +40,10 @@ in
             hidden = true;
             pskRaw = "@HOME_PSK@";
         };
+        "Barnes & Noble Guest" = {
+            hidden = false;
+            psk = "Welcome2Wifi";
+        };
         "@DND_SSID@" = {
             hidden = true;
             pskRaw = "@DND_PSK@";

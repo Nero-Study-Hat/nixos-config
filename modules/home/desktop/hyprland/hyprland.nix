@@ -105,7 +105,7 @@ in
                 dwindle = {
                     pseudotile = true;
                     preserve_split = true;
-                    no_gaps_when_only = 2;
+                    # no_gaps_when_only = 2;
                 };
 
                 bind = [

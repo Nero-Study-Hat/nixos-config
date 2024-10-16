@@ -109,7 +109,7 @@ in
                     vesktop-enable = true;
                     cool-retro-term-enable = true;
                     morgen-enable = true;
-                    zoom-enable = false;
+                    zoom-enable = true;
                 };
             })
 
@@ -131,6 +131,7 @@ in
                     editor = "vscode";
                     githup-desktop-enable = true;
                     godot4-mono-enable = false; # currently doesn't work
+                    renpy-enable = true;
                 };
             })
             ( mkIf (cfg.default-utility-apps)

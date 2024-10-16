@@ -21,7 +21,7 @@
 			};
 			hypridle.enable = true;
             monitors = [
-                "eDP-1, 2240x1400@60, auto-left, 1.25" # main screen
+                "eDP-1, 2240x1400@60, auto-left, 1.458333" # main screen
             ];
 			default-pkgs.install = true;
 			waybar = {

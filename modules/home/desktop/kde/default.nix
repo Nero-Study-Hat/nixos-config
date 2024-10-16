@@ -32,6 +32,7 @@ in
 
             shortcuts = {
                 kwin = {
+                    #TODO: add shortcuts for moving windows
                     "Switch One Desktop to the Left" = "Ctrl+Alt+Left";
                     "Switch One Desktop to the Right" = "Ctrl+Alt+Right";
                     "Switch One Desktop Up" = "Ctrl+Alt+Up";
