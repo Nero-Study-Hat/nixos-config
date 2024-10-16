@@ -47,6 +47,12 @@ in
             type = package;
             default = pkgs.obsidian;
         };
+
+        obs-studio-enable = mkEnableOption "Enable obs-studio.";
+        obs-studio-pkg = mkOption {
+            type = package;
+            default = pkgs.obs-studio;
+        };
     };
 
     config = mkMerge [
@@ -77,6 +83,10 @@ in
         ( mkIf (cfg.obsidian-enable)
         {
             home.packages = [ cfg.obsidian-pkg ];
+        })
+        ( mkIf (cfg.obs-studio-enable)
+        {
+            home.packages = [ cfg.obs-studio-pkg ];
         })
     ];
 }

@@ -39,6 +39,18 @@ in
             type = package;
             default = pkgs.yubioath-flutter;
         };
+
+        ffmpeg-enable = mkEnableOption "Enable ffmpeg.";
+        ffmpeg-pkg = mkOption {
+            type = package;
+            default = pkgs.ffmpeg;
+        };
+
+        usbimager-enable = mkEnableOption "Enable usbimager.";
+        usbimager-pkg = mkOption {
+            type = package;
+            default = pkgs.usbimager;
+        };
     };
 
     config = mkMerge [
@@ -56,5 +68,11 @@ in
 
         ( mkIf (cfg.yubico-authenticator-enable)
         { home.packages = [ cfg.yubico-authenticator-pkg ]; })
+
+        ( mkIf (cfg.ffmpeg-enable)
+        { home.packages = [ cfg.ffmpeg-pkg ]; })
+
+        ( mkIf (cfg.usbimager-enable)
+        { home.packages = [ cfg.usbimager-pkg ]; })
     ];
 }

@@ -72,6 +72,24 @@ in
             type = package;
             default = pkgs.tldr;
         };
+
+        traceroute-enable = mkEnableOption "Install traceroute networking cli utility.";
+        traceroute-pkg = mkOption {
+            type = package;
+            default = pkgs.traceroute;
+        };
+
+        dig-enable = mkEnableOption "Install dig networking cli utility.";
+        dig-pkg = mkOption {
+            type = package;
+            default = pkgs.dig;
+        };
+
+        parallel-enable = mkEnableOption "Install parallel cli utility for running commands in parallel.";
+        parallel-pkg = mkOption {
+            type = package;
+            default = pkgs.parallel;
+        };
     };
 
     config = mkMerge [
@@ -128,5 +146,14 @@ in
 
         ( mkIf (cfg.tldr-enable)
         { home.packages = [ cfg.tldr-pkg ]; })
+
+        ( mkIf (cfg.traceroute-enable)
+        { home.packages = [ cfg.traceroute-pkg ]; })
+
+        ( mkIf (cfg.dig-enable)
+        { home.packages = [ cfg.dig-pkg ]; })
+
+        ( mkIf (cfg.parallel-enable)
+        { home.packages = [ cfg.parallel-pkg ]; })
     ];
 }

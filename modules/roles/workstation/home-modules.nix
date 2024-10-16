@@ -97,6 +97,9 @@ in
                     file-enable = true;
                     neofetch-enable = true;
                     tldr-enable = true;
+                    traceroute-enable = true;
+                    dig-enable = true;
+                    parallel-enable = true;
                 };
             })
 
@@ -123,6 +126,7 @@ in
                     pureref-enable = false;
                     remnote-enable = true;
                     obsidian-enable = true;
+                    obs-studio-enable = true;
                 };
             })
             ( mkIf (cfg.default-dev-apps)
@@ -142,6 +146,8 @@ in
                     simplescreenrecorder-enable = true;
                     yt-dlp-enable = true;
                     yubico-authenticator-enable = true;
+                    ffmpeg-enable = true;
+                    usbimager-enable = true;
                 };
             })
             ( mkIf (cfg.default-gaming)

@@ -32,6 +32,7 @@ in
                     pkief.material-icon-theme
                     bbenoist.nix
                     ms-vscode.cpptools-extension-pack
+                    # renpy.language-renpy #TODO: add to extensions nixpkgs source
                 ];
 
                 userSettings = {
