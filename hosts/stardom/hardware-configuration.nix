@@ -53,15 +53,15 @@
 		# driSupport = true;
 		enable32Bit = true;
 
-		extraPackages = with pkgs; [
-			amdvlk
-			rocmPackages.clr.icd
+		extraPackages = [
+			pkgs-stable.amdvlk
+			pkgs.rocmPackages.clr.icd
 		];
 
 		# For 32 bit applications 
 		# Only available on unstable
-		extraPackages32 = with pkgs; [
-			driversi686Linux.amdvlk
+		extraPackages32 = [
+			pkgs-stable.driversi686Linux.amdvlk
 		];
 	};
 	environment.variables.AMD_VULKAN_ICD = "RADV";
