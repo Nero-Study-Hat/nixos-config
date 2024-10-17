@@ -44,6 +44,10 @@ in
             secrets = {
                 "nero-user-password".neededForUsers = true;
                 "home-location" = { };
+                "wifi-ssids/home" = {};
+                "wifi-ssids/dnd" = {};
+                "wifi-ssids/rcollege" = {};
+                "wifi-ssids/hotspot" = {};
                 "wifi-secrets-file" = { };
             };
         };

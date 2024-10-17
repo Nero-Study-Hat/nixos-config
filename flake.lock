@@ -182,11 +182,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1729072891,
-        "narHash": "sha256-JzM1lA124i3Ck3KeSYIyVOmc322YsbkP+snlVuMaPco=",
+        "lastModified": 1729113795,
+        "narHash": "sha256-tV6aeQZ1wvAVDi+JW+IpXH9xQjZX+ZNFsuQCfWj2zWs=",
         "ref": "refs/heads/main",
-        "rev": "0baf166d39260c6d1d422cf528fb5fedc3010cdb",
-        "revCount": 5345,
+        "rev": "b57086aa4362117c1f1025246f618d760e44b026",
+        "revCount": 5349,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/hyprwm/Hyprland"
@@ -328,11 +328,11 @@
     "mysecrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1725822151,
-        "narHash": "sha256-BM4AmfNJLEwGMmrn6R+I7Vp/h3mZ66HjjeW9T4gohdc=",
+        "lastModified": 1729122971,
+        "narHash": "sha256-TfCP0tEhpU7tjZbRvaMwe4k+wKlYHjLSE+7HImjytuU=",
         "ref": "refs/heads/main",
-        "rev": "159e7f4e35989d6720b5102ad3b81aeaa248d8a6",
-        "revCount": 25,
+        "rev": "e3252b795a6e3bf486eda698218db313252a761a",
+        "revCount": 26,
         "type": "git",
         "url": "ssh://git@github.com/Nero-Study-Hat/nixos-secrets"
       },
@@ -450,11 +450,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1729011811,
-        "narHash": "sha256-lNzTx9nUEaezJJ77Zm1IkOzTdak9i1n+EP08Z4Ef7xY=",
+        "lastModified": 1729098898,
+        "narHash": "sha256-poRon0EwKWfOfttFk/8IiUPzCO/ahpNvtsSd9lizlHY=",
         "owner": "pjones",
         "repo": "plasma-manager",
-        "rev": "a9960fef15f27eb24ab172290c3febc2f1e66fd9",
+        "rev": "508a077405fa700de0248e7f84bc4fefbd308dd9",
         "type": "github"
       },
       "original": {

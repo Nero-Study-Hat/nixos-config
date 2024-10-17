@@ -117,6 +117,7 @@ in
                     
                     "alt, Q, killactive"
                     "$mainMod, V, togglefloating"
+                    "$mainMod, F, fullscreen"
                     "$mainMod, S, togglespecialworkspace, magic"
                     ",code:107, exec, $screenshot" # camera icon key on my keyboard
 
