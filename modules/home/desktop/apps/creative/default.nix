@@ -3,6 +3,7 @@
 with lib;
 let
     cfg = config.home-modules.desktop.apps.creative;
+    pureref-s = pkgs.callPackage (import ../../../../../pkgs/pureref/pureref.nix) {};
 in
 {
     # if something grows in complexity and/or size then move it from this file to its own file to import
@@ -33,10 +34,6 @@ in
         };
         # currently requires manual setup, does not work on hyprland
         pureref-enable = mkEnableOption "Enable pureref.";
-        pureref-pkg = mkOption {
-            type = package;
-            default = pkgs.pureref;
-        };
         remnote-enable = mkEnableOption "Enable remnote.";
         remnote-pkg = mkOption {
             type = package;
@@ -74,7 +71,7 @@ in
         })
         ( mkIf (cfg.pureref-enable)
         {
-            home.packages = [ cfg.pureref-pkg ];
+            home.packages = [ pureref-s ];
         })
         ( mkIf (cfg.remnote-enable)
         {

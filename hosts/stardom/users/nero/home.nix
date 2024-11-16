@@ -39,4 +39,10 @@
 			hyprkool.enable = false;
 		};
 	};
+
+	home.packages = [
+		pkgs.handbrake
+		pkgs.lmms
+		pkgs.ardour
+	];
 }

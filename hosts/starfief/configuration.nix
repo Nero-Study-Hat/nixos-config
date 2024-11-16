@@ -30,40 +30,40 @@ in
 
     networking.wireless = {
         enable = true;
-        environmentFile = config.sops.secrets.wifi-secrets-file.path;
+        # secretsFile = config.sops.secrets.wifi-secrets-file.path;
         # environmentFile = "/etc/tmp_wifi_secrets";
         interfaces = [ "wlp2s0" ];
         userControlled.enable = true;
     };
 	networking.wireless.networks = {
-        "@HOME_SSID@" = {
-            hidden = true;
-            pskRaw = "@HOME_PSK@";
-        };
+        # "HOME_SSID" = {
+        #     hidden = true;
+        #     pskRaw = "ext:HOME_PSK";
+        # };
         "Barnes & Noble Guest" = {
             hidden = false;
             psk = "Welcome2Wifi";
         };
-        "@DND_SSID@" = {
-            hidden = true;
-            pskRaw = "@DND_PSK@";
-        };
-        "@RCOLLEGE_SSID@" = {
-            hidden = true;
-            authProtocols = [ "WPA-EAP" "IEEE8021X" ];
-            auth =
-            ''
-                eap=TTLS
-                phase2="auth=PAP"
-                ca_cert="${secretspath}/rcollege_wifi_ca.cer"
-                identity="@RCOLLEGE_ID@"
-                password="@RCOLLEGE_PSWD@"
-            '';
-        };
-        "@HOTSPOT_SSID@" = {
-            hidden = true;
-            pskRaw = "@HOTSPOT_PSK@";
-        };
+        # "The Palace" = {
+        #     hidden = true;
+        #     pskRaw = "";
+        # };
+        # "RCOLLEGE_SSID@" = {
+        #     hidden = true;
+        #     authProtocols = [ "WPA-EAP" "IEEE8021X" ];
+        #     auth =
+        #     ''
+        #         eap=TTLS
+        #         phase2="auth=PAP"
+        #         ca_cert="${secretspath}/rcollege_wifi_ca.cer"
+        #         identity="@RCOLLEGE_ID@"
+        #         password="@RCOLLEGE_PSWD@"
+        #     '';
+        # };
+        # "@HOTSPOT_SSID@" = {
+        #     hidden = true;
+        #     pskRaw = "@HOTSPOT_PSK@";
+        # };
 	};
 	networking.networkmanager.enable = false;
 

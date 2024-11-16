@@ -123,7 +123,7 @@ in
                     krita-enable = true;
                     aseprite-enable = true;
                     davinci-resolve-enable = true;
-                    pureref-enable = false;
+                    pureref-enable = true;
                     remnote-enable = true;
                     obsidian-enable = true;
                     obs-studio-enable = true;

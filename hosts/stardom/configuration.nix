@@ -36,6 +36,10 @@
 	#TODO: move gparted install into system-module
 	environment.systemPackages = [
 		pkgs.gparted
+		pkgs.wine-wayland
+		pkgs.winetricks
+		pkgs.yabridge
+		pkgs.yabridgectl
 	];
 
 
