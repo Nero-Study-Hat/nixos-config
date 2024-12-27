@@ -20,7 +20,7 @@ function format_partitions () {
     EFI_PART_LABEL="UEFI"
     LINUX_PART_LABEL="linux"
 
-    if blkid | grep -q "LABEL=\"${EFI_PART_LABEL}\""; then 
+    if blkid | grep -q "LABEL=\"${EFI_PART_LABEL}\""; then
         mkfs.fat -F "32" -n "$EFI_PART_LABEL" "/dev/nvme0n1p1"
     fi
     if blkid | grep -q "PARTLABEL=\"${LINUX_PART_LABEL}\""; then 
@@ -34,7 +34,20 @@ ssh "${remote_user}@${remote_host}" 'bash -s' <<EOT
     format_partitions
 EOT
 
-echo -e $'\n**Copying Scripts to Live ISO**\n'
+
+function final_prompt () {
+    echo -e $'\n**Now run the following commands:**\n'
+    echo "cd / && nix-shell https://github.com/sgillespie/nixos-yubikey-luks/archive/master.tar.gz"
+    echo "./filesys_setup"
+}
+
+read -p $'Copy scripts to ISO (yes/y): ' copy_check
+
+if [[ "$copy_check" != "yes" && "$copy_check" != "y" ]]; then
+    final_prompt
+    ssh "${remote_user}@${remote_host}"
+    exit
+fi
 
 function copy_scripts_to_liveiso () {
     script1="filesys_setup.sh"
@@ -44,5 +57,6 @@ function copy_scripts_to_liveiso () {
 }
 
 copy_scripts_to_liveiso
+final_prompt
 
 ssh "${remote_user}@${remote_host}"

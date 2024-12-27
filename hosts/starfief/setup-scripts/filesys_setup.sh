@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-read -p $'nix-shell https://github.com/sgillespie/nixos-yubikey-luks/archive/master.tar.gz\nEnter (yes/y) if you have runthe above command: ' shell_status
+read -p $'nix-shell https://github.com/sgillespie/nixos-yubikey-luks/archive/master.tar.gz\nEnter (yes/y) if you have run the above command: ' shell_status
 
 if [[ "$shell_status" != "yes" && "$shell_status" != "y" ]]; then
     echo "run the command before the script"
@@ -73,3 +73,7 @@ function lvm_partitions_setup () {
 
 luks_yubikey_setup
 lvm_partitions_setup
+
+echo -e $'\n**Now run the following commands:**\n'
+echo "exit && exit"
+echo "./copy_keys.sh"
