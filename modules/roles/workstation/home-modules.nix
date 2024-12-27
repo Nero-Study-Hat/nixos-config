@@ -68,7 +68,6 @@ in
                 source-code-pro
                 noto-fonts
                 noto-fonts-extra
-                noto-fonts-cjk
                 noto-fonts-cjk-sans
                 noto-fonts-emoji
                 font-awesome
@@ -77,7 +76,7 @@ in
             fonts.fontconfig.defaultFonts.emoji = ["Noto Color Emoji"];
 
             programs.home-manager.enable = true;
-            home.stateVersion = "24.05";
+            home.stateVersion = "24.11";
         })
 
         (mkIf cfg.enable (mkMerge [

@@ -1,13 +1,19 @@
-{ config, lib, pkgs, pkgs-stable, modulesPath, ... }:
+{ inputs, config, lib, pkgs, pkgs-stable, pkgs-old, modulesPath, ... }:
 
 {
+	# musnix = {
+	# 	enable = true;
+	# 	# kernel.realtime = true;
+	# 	# kernel.packages = pkgs.linuxPackages_latest_rt;
+	# 	# soundcardPciId = "2f:00.4";
+	# };
+
 	boot = {
 		initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
 		initrd.kernelModules = [ "amdgpu" ];
-		kernelModules = [ "kvm-amd" ];
 		extraModulePackages = [ ];
 
-		kernelPackages = pkgs.linuxPackages_latest; #TODO: test if latest still breaks virtualbox
+		kernelPackages = pkgs.linuxPackages_latest;
 		supportedFilesystems = [ "ntfs" ];
 		loader = {
 			efi = {
@@ -24,6 +30,8 @@
 
 	fileSystems."/".device = "/dev/disk/by-label/nixos";
 	fileSystems."/boot/efi".device = "/dev/disk/by-label/NIXOS_EFI";
+
+	fileSystems."/mnt/hdd-data".device = "/dev/disk/by-label/hdd-data";
 
 	fileSystems."/mnt/nero-priv-data".device = "/dev/disk/by-label/nero-priv-data";
 	fileSystems."/mnt/nero-pub-data" =
@@ -48,20 +56,14 @@
 
 	hardware.graphics = {
 		enable = true;
-
-		# For AMD vulkan support
-		# driSupport = true;
 		enable32Bit = true;
 
 		extraPackages = [
-			pkgs-stable.amdvlk
+			pkgs.amdvlk
 			pkgs.rocmPackages.clr.icd
 		];
-
-		# For 32 bit applications 
-		# Only available on unstable
 		extraPackages32 = [
-			pkgs-stable.driversi686Linux.amdvlk
+			pkgs.driversi686Linux.amdvlk
 		];
 	};
 	environment.variables.AMD_VULKAN_ICD = "RADV";

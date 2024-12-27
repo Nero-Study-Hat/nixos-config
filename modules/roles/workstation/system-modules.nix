@@ -87,7 +87,7 @@ in
                 system-modules.desktop = {
                     sddm = true;
                     kde = true;
-                    hyprland = true;
+                    hyprland = false;
                 };
             })
             ( mkIf (cfg.virtualization)
@@ -96,7 +96,7 @@ in
                     enable = true;
                     user = "nero";
                     virtualbox = true;
-                    kvm-qemu = false;
+                    kvm-qemu = true;
                 };
             })
             ( mkIf (cfg.yubikey)

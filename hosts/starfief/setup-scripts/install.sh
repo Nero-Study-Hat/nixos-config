@@ -1,78 +1,48 @@
 #!/usr/bin/env bash
 
-# manual commands to execute from
-# su -
-# nix-shell https://github.com/sgillespie/nixos-yubikey-luks/archive/master.tar.gz
+if [ $# -eq 0 ]; then
+   echo -e "need argument(s), need\nIP address for ssh remote_dest \nyes/y for format_check if applicable"
+   exit 1
+fi
 
-# assume pre-existing
-# efi partition
-# ext4 partition
+remote_user="root"
+remote_host="$1"
+format_check="$2"
 
-# Key Setup
-echo -e $'\n**SETTING UP LUKS**\n'
-SALT_LENGTH=16
-SALT="$(dd if=/dev/random bs=1 count=$SALT_LENGTH 2>/dev/null | rbtohex)"
+function format_partitions () {
+    if [[ "$format_check" != "yes" && "$format_check" != "y" ]]; then
+        return 1
+    fi
+    echo -e $'\n**Formating Partitions**\n'
+    # assume pre-existing partitions and format them
+    # efi partition
+    # ext4 partition
+    EFI_PART_LABEL="UEFI"
+    LINUX_PART_LABEL="linux"
 
-CHALLENGE="$(echo -n $SALT | openssl dgst -binary -sha512 | rbtohex)"
-RESPONSE=$(ykchalresp -2 -x $CHALLENGE 2>/dev/null)
+    if blkid | grep -q "LABEL=\"${EFI_PART_LABEL}\""; then 
+        mkfs.fat -F "32" -n "$EFI_PART_LABEL" "/dev/nvme0n1p1"
+    fi
+    if blkid | grep -q "PARTLABEL=\"${LINUX_PART_LABEL}\""; then 
+        mkfs.ext4 -L "$LINUX_PART_LABEL" "/dev/nvme0n1p2"
+    fi
+}
 
-KEY_LENGTH=512
-ITERATIONS=100000
+ssh "${remote_user}@${remote_host}" 'bash -s' <<EOT
+    $(declare -p format_check)
+    $(declare -f format_partitions)
+    format_partitions
+EOT
 
-LUKS_KEY="$(echo | pbkdf2-sha512 $(($KEY_LENGTH / 8)) $ITERATIONS $RESPONSE | rbtohex)"
+echo -e $'\n**Copying Scripts to Live ISO**\n'
 
-CIPHER="aes-xts-plain64"
-HASH="sha512"
+function copy_scripts_to_liveiso () {
+    script1="filesys_setup.sh"
+    scp "$script1" "${remote_user}@${remote_host}:/${script1}"
+    script2="system_install.sh"
+    scp "$script2" "${remote_user}@${remote_host}:/${script2}"
+}
 
-# Key Storing (use pre-existing efi partition)
-EFI_PART="/dev/nvme0n1p1"
-EFI_MNT="/mnt/boot"
-mkdir -p "$EFI_MNT"
-mount "$EFI_PART" "$EFI_MNT"
+copy_scripts_to_liveiso
 
-STORAGE="/crypt-storage/default"
-mkdir -p "$(dirname ${EFI_MNT}${STORAGE})"
-echo -ne "$SALT\n$ITERATIONS" > "${EFI_MNT}${STORAGE}"
-
-# Create LUKS Device
-LUKS_PART="/dev/nvme0n1p2"
-# multi-line command didn't work
-echo -n "$LUKS_KEY" | hextorb | cryptsetup luksFormat --cipher="$CIPHER" --key-size="$KEY_LENGTH" --hash="$HASH" --key-file=- "$LUKS_PART"
-
-umount "$EFI_PART"
-rmdir "$EFI_MNT"
-
-### ---
-echo -e $'\n**SETTING UP LVM Partitions**\n'
-
-LUKSROOT="encrypted"
-echo -n "$LUKS_KEY" | hextorb | cryptsetup luksOpen $LUKS_PART $LUKSROOT --key-file=-
-pvcreate "/dev/mapper/$LUKSROOT"
-
-VGNAME="partitions"
-vgcreate "$VGNAME" "/dev/mapper/$LUKSROOT"
-
-lvcreate -L 16G -n swap "$VGNAME"
-FSROOT="nixos"
-lvcreate -l 100%FREE -n "$FSROOT" "$VGNAME"
-
-vgchange -ay
-
-mkswap -L swap "/dev/partitions/swap"
-mkfs.ext4 -L "$FSROOT" "/dev/partitions/$FSROOT"
-
-mount "/dev/partitions/$FSROOT" "/mnt"
-mkdir -p "$EFI_MNT"
-mount "$EFI_PART" "$EFI_MNT"
-swapon /dev/partitions/swap
-
-### ---
-echo -e $'\n**GETTING THE FLAKE REPO**\n'
-export NIX_CONFIG="experimental-features = nix-command flakes"
-export branch="main"
-export proj_dir=".nixflake"
-nix shell nixpkgs#git --command nix flake clone "github:Nero-Study-Hat/nixos-config/${branch}" --dest "/mnt/${proj_dir}"
-
-# Install
-echo $'\n**INSTALLING**\n'
-nix shell nixpkgs#git --command nixos-install --impure --flake /mnt/${proj_dir}#starfief
+ssh "${remote_user}@${remote_host}"

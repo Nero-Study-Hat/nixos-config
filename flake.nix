@@ -9,7 +9,8 @@
         };
 
         nixpkgs.url = "nixpkgs/nixos-unstable";
-        nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+        nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
+        nixpkgs-old.url = "github:nixos/nixpkgs/nixos-24.05-small";
         home-manager = {
             url = "github:nix-community/home-manager";
             inputs.nixpkgs.follows = "nixpkgs";
@@ -36,7 +37,7 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
         hyprland-virtual-desktops = {
-            url = "github:levnikmyskin/hyprland-virtual-desktops/dev";
+            url = "github:levnikmyskin/hyprland-virtual-desktops/";
             inputs.hyprland.follows = "hyprland";
             inputs.nixpkgs.follows = "nixpkgs";
         };
@@ -46,12 +47,17 @@
             inputs.nixpkgs-unstable.follows = "nixpkgs";
             inputs.hyprland.follows = "hyprland";
         };
+        musnix = {
+            url = "github:musnix/musnix";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
     };
 
     outputs = {
         self,
         nixpkgs,
         nixpkgs-stable,
+        nixpkgs-old,
         home-manager,
         nixos-generators,
         sops-nix,
@@ -73,10 +79,15 @@
                 modules = [ 
                     ./hosts/stardom/configuration.nix
                     inputs.sops-nix.nixosModules.sops
+                    inputs.musnix.nixosModules.musnix
                 ];
                 specialArgs = {
                     inherit inputs;
                     pkgs-stable = import nixpkgs-stable {
+                        inherit system;
+                        config.allowUnfree = true;
+                    };
+                    pkgs-old = import nixpkgs-old {
                         inherit system;
                         config.allowUnfree = true;
                     };

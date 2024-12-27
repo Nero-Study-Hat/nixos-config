@@ -18,8 +18,8 @@ in
 
 	users.users = {
 		alaric = {
-			initialPassword = "nixisreallycool";
 			isNormalUser = true;
+			hashedPasswordFile = config.sops.secrets."nero-user-password".path;
 			extraGroups = [ "wheel" "video" "audio" "disk" "networkmanager" "users" ];
 		};
 	};
@@ -35,37 +35,8 @@ in
         interfaces = [ "wlp2s0" ];
         userControlled.enable = true;
     };
-	networking.wireless.networks = {
-        # "HOME_SSID" = {
-        #     hidden = true;
-        #     pskRaw = "ext:HOME_PSK";
-        # };
-        "Barnes & Noble Guest" = {
-            hidden = false;
-            psk = "Welcome2Wifi";
-        };
-        # "The Palace" = {
-        #     hidden = true;
-        #     pskRaw = "";
-        # };
-        # "RCOLLEGE_SSID@" = {
-        #     hidden = true;
-        #     authProtocols = [ "WPA-EAP" "IEEE8021X" ];
-        #     auth =
-        #     ''
-        #         eap=TTLS
-        #         phase2="auth=PAP"
-        #         ca_cert="${secretspath}/rcollege_wifi_ca.cer"
-        #         identity="@RCOLLEGE_ID@"
-        #         password="@RCOLLEGE_PSWD@"
-        #     '';
-        # };
-        # "@HOTSPOT_SSID@" = {
-        #     hidden = true;
-        #     pskRaw = "@HOTSPOT_PSK@";
-        # };
-	};
-	networking.networkmanager.enable = false;
+
+	networking.networkmanager.enable = true;
 
 	environment.systemPackages = [
 		pkgs.gparted

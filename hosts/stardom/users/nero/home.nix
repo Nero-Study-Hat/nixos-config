@@ -13,7 +13,7 @@
 	home-modules.desktop = {
 		kde.enable = true;
 		hyprland = {
-			enable = true;
+			enable = false;
 			hyprlock = {
 				enable = true;
 				wallpaper = "/home/nero/Pictures/Wallpapers/bench.jpg";
@@ -41,8 +41,19 @@
 	};
 
 	home.packages = [
+		# creative video
 		pkgs.handbrake
+		pkgs.avidemux
+		# creative audio
 		pkgs.lmms
 		pkgs.ardour
+		pkgs.reaper
+		pkgs.helio-workstation
+		# wine
+		pkgs.bottles
+		# IT
+		pkgs.terraform
+		pkgs.go
+		pkgs.ansible
 	];
 }

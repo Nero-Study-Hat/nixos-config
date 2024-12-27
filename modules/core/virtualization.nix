@@ -1,4 +1,4 @@
-{ inputs, options, config, lib, pkgs, rootPath, ... }:
+{ inputs, options, config, lib, pkgs, pkgs-old, rootPath, ... }:
 
 with lib;
 let
@@ -16,6 +16,12 @@ in
     };
 
     config = mkIf cfg.enable (mkMerge [
+        ({
+            environment.systemPackages = [
+                pkgs.libguestfs
+                pkgs.guestfs-tools
+            ];
+        })
         ( mkIf (cfg.virtualbox)
         {
             virtualisation.virtualbox.host.enable = true;
@@ -26,7 +32,23 @@ in
         })
         ( mkIf (cfg.kvm-qemu)
         {
-            # stuff
+            environment.systemPackages = [ pkgs.virt-manager ];
+            virtualisation.libvirtd = {
+                enable = true;
+                qemu = {
+                    package = pkgs.qemu_kvm;
+                    vhostUserPackages = [ pkgs.virtiofsd ];
+                    runAsRoot = true;
+                    swtpm.enable = true;
+                    ovmf = {
+                        enable = true;
+                        packages = [(pkgs.OVMF.override {
+                            secureBoot = true;
+                            tpmSupport = true;
+                        }).fd];
+                    };
+                };
+            };
         })
     ]);
 }
