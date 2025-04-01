@@ -4,88 +4,65 @@
 	imports = [
 		../../modules/core/desktop.nix
 		./hardware-configuration.nix
+
+		../../modules/roles/workstation/system-modules.nix
 	];
 
-	desktop.choice = "all";
-
-	nix.settings = {
-		substituters = ["https://hyprland.cachix.org"];
-		trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-
-		experimental-features = "nix-command flakes";
-		# Deduplicate and optimize nix store
-		auto-optimise-store = true;
-	};
-
-	networking.hostName = "stardom";
-	networking.networkmanager.enable = true;
-
-	time.timeZone = "America/New_York";
-
-	boot.kernelPackages = pkgs.linuxPackages_6_8;
-	boot.supportedFilesystems = [ "ntfs" ];
-	boot.loader = {
-		efi = {
-			efiSysMountPoint = "/boot/efi";
-		};
-		grub = {
-			efiSupport = true;
-			efiInstallAsRemovable = true;
-			device = "nodev";
-		};
-	};
-	boot.tmp.cleanOnBoot = true;
+    roles.workstation.system = {
+        enable = true;
+        hostname = "stardom";
+    };
 
 	users.users = {
 		nero = {
+			isNormalUser = true;
+			hashedPasswordFile = config.sops.secrets."nero-user-password".path;
+			extraGroups = [ "wheel" "video" "audio" "disk" "networkmanager" "users" "libvirtd" ];
+		};
+		bo = {
 			initialPassword = "nixisreallycool";
 			isNormalUser = true;
-			extraGroups = [
-							"wheel" "video" "audio" "disk" "networkmanager" 
-						];
+			extraGroups = [ "wheel" "video" "audio" "disk" "networkmanager" "users" ];
 		};
 	};
 
-	fonts.fontDir.enable = true;
-	fonts.enableDefaultPackages = true;
-	fonts.enableGhostscriptFonts = true;
+	users.groups."realtime".members = [ "nero" ];
 
+	networking.networkmanager.enable = true;
 
-	# security.polkit.enable = true;
-	# programs.dconf.enable = true;
-
-	# enable sound with pipewire
-	security.rtkit.enable = true;
-	services.pipewire = {
-		enable = true;
-		alsa.enable = true;
-		alsa.support32Bit = true;
-		pulse.enable = true;
-		jack.enable = true;
-	};
-
-	# Enable CUPS to print documents.
 	services.printing.enable = true;
+	boot.tmp.cleanOnBoot = true;
 
-	nixpkgs.config.allowUnfree = true;
+	security.polkit.enable = true;
 
-    programs.steam = {
-        enable = true;
-    };
-
-	environment.systemPackages = with pkgs; [
-		dotnetCorePackages.sdk_8_0_1xx
-		python3
+	# gparted has to be installed in system config it seems
+	#TODO: move gparted install into system-module
+	environment.systemPackages = [
+		pkgs.gparted
+		pkgs.wine-wayland
+		pkgs.winetricks
+		pkgs.yabridge
+		pkgs.yabridgectl
+		pkgs.gamemode
 	];
 
-	environment.pathsToLink = [ "/share/bash-completion" ];
-
-	# # Virtualbox Setup
-	virtualisation.virtualbox.host.enable = true;
-	virtualisation.virtualbox.host.package = pkgs.virtualbox;
-	users.extraGroups.vboxusers.members = [ "nero" ];
-	virtualisation.virtualbox.host.enableExtensionPack = true;
-	virtualisation.virtualbox.guest.enable = true;
-
-	system.stateVersion = "24.05";
+	users.groups."gamemode".members = [ "nero" ];
+	programs.gamemode = {
+		enable = true;
+		enableRenice = true;
+		settings = {
+			general = {
+				softrealtime = "on";
+				desiredgov = "performance";
+				renice = 11;
+				disable_splitlock = 1;
+				pin_cores= "yes";
+				inhibit_screensaver = 0;
+			};
+			custom = {
+				start = "notify-send -a 'Gamemode' 'Optimizations activated'";
+				end = "notify-send -a 'Gamemode' 'Optimizations deactivated'";
+			};
+		};
+	};
 }

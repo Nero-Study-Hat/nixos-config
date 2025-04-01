@@ -2,8 +2,15 @@
     description = "My initial system flake.";
 
     inputs = {
+        # if old version of an input is needed, you can check the commit hash in the flake.lock
+        mysecrets = {
+            url = "git+ssh://git@github.com/Nero-Study-Hat/nixos-secrets";
+            flake = false;
+        };
+
         nixpkgs.url = "nixpkgs/nixos-unstable";
-        nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+        nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
+        nixpkgs-old.url = "github:nixos/nixpkgs/nixos-24.05-small";
         home-manager = {
             url = "github:nix-community/home-manager";
             inputs.nixpkgs.follows = "nixpkgs";
@@ -14,26 +21,40 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
 
+        sops-nix = {
+            url = "github:Mic92/sops-nix";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
+
         plasma-manager = {
             url = "github:pjones/plasma-manager";
             inputs.nixpkgs.follows = "nixpkgs";
             inputs.home-manager.follows = "home-manager";
         };
-        
-        hyprland = {
-            url = "git+https://github.com/hyprwm/Hyprland/?ref=refs/tags/v0.41.2&rev=918d8340afd652b011b937d29d5eea0be08467f5&submodules=1";
+
+        # neither hyprland or hyprland-virt-desktops work at the same time (because of issues in versions)
+        # hyprland = {
+        #     type = "git";
+        #     submodules = true;
+        #     url = "https://github.com/hyprwm/Hyprland";
+        #     # ref = "refs/tags/v0.44.0";
+        #     inputs.nixpkgs.follows = "nixpkgs";
+        # };
+        # hyprland-virtual-desktops = {
+        #     url = "github:levnikmyskin/hyprland-virtual-desktops";
+        #     inputs.hyprland.follows = "hyprland";
+        #     inputs.nixpkgs.follows = "nixpkgs";
+        # };
+        # hyprkool = {
+        #     url = "github:thrombe/hyprkool/0.7.1";
+        #     inputs.nixpkgs.follows = "nixpkgs-stable";
+        #     inputs.nixpkgs-unstable.follows = "nixpkgs";
+        #     inputs.hyprland.follows = "hyprland";
+        # };
+
+        musnix = {
+            url = "github:musnix/musnix";
             inputs.nixpkgs.follows = "nixpkgs";
-        };
-        hyprland-virtual-desktops = {
-            url = "github:levnikmyskin/hyprland-virtual-desktops/dev";
-            inputs.hyprland.follows = "hyprland";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
-        hyprkool = {
-            url = "github:thrombe/hyprkool/0.7.1";
-            inputs.nixpkgs.follows = "nixpkgs-stable";
-            inputs.nixpkgs-unstable.follows = "nixpkgs";
-            inputs.hyprland.follows = "hyprland";
         };
     };
 
@@ -41,8 +62,10 @@
         self,
         nixpkgs,
         nixpkgs-stable,
+        nixpkgs-old,
         home-manager,
         nixos-generators,
+        sops-nix,
         ... 
     }@inputs:
     let
@@ -52,37 +75,44 @@
         defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
         rootPath = self;
     in {
-        nixpkgs.overlays = [ inputs.hyprland.overlays.default ];
+        # nixpkgs.overlays = [ inputs.hyprland.overlays.default ];
 
 
         nixosConfigurations = {
-            stardom = nixpkgs.lib.nixosSystem {
+            stardom = nixpkgs-stable.lib.nixosSystem {
                 inherit system;
                 modules = [ 
                     ./hosts/stardom/configuration.nix
+                    inputs.sops-nix.nixosModules.sops
+                    inputs.musnix.nixosModules.musnix
                 ];
-                specialArgs = { inherit inputs; };
-            };
+                specialArgs = {
+                    inherit inputs;
+                    pkgs-stable = import nixpkgs-stable {
+                        inherit system;
+                        config.allowUnfree = true;
 
-            isoimage = nixpkgs.lib.nixosSystem {
-                inherit system;
-                modules = [
-                    ./hosts/isoimage/configuration.nix
-                    home-manager.nixosModules.home-manager
-                    {
-                        home-manager.useGlobalPkgs = true;
-                        home-manager.useUserPackages = true;
-                        home-manager.users.iso = import ./users/iso/home.nix;
-
-                        home-manager.extraSpecialArgs = {
-                            inherit inputs;
-                            inherit rootPath;
-                            pkgs-stable = import nixpkgs-stable {
-                                inherit system;
-                                config.allowUnfree = true;
-                            };
+                    overlays = [
+                        (self: super: {
+                        google-chrome = super.google-chrome.override {
+                        commandLineArgs =
+                        "--proxy-server='https=127.0.0.1:3128;http=127.0.0.1:3128'";
                         };
-                    }
+                        # ... other overlays
+                        })
+                    ];
+                    };
+                    pkgs-old = import nixpkgs-old {
+                        inherit system;
+                        config.allowUnfree = true;
+                    };
+                };
+            };
+            starfief = nixpkgs.lib.nixosSystem {
+                inherit system;
+                modules = [ 
+                    ./hosts/starfief/configuration.nix
+                    inputs.sops-nix.nixosModules.sops
                 ];
                 specialArgs = {
                     inherit inputs;
@@ -92,17 +122,6 @@
                     };
                 };
             };
-
-            # iso = nixos.lib.nixosSystem {
-            #     system = "x86_64-linux";
-            #     modules = [
-            #         "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-            #         ({ pkgs, ... }: {
-            #             environment.systemPackages = [ pkgs.neovim ];
-            #             isoImage.forceTextMode = true;
-            #         })
-            #     ];
-            # };
         };
         
         homeConfigurations = {
@@ -118,7 +137,39 @@
                 };
 
                 modules = [
-                    ./users/nero/home.nix
+                    ./hosts/stardom/users/nero/home.nix
+                    inputs.plasma-manager.homeManagerModules.plasma-manager
+                ];
+            };
+            alaric = home-manager.lib.homeManagerConfiguration {
+                inherit pkgs;
+                extraSpecialArgs = {
+                    inherit inputs;
+                    inherit rootPath;
+                    pkgs-stable = import nixpkgs-stable {
+                        inherit system;
+                        config.allowUnfree = true;
+                    };
+                };
+
+                modules = [
+                    ./hosts/starfief/home.nix
+                    inputs.plasma-manager.homeManagerModules.plasma-manager
+                ];
+            };
+            bo = home-manager.lib.homeManagerConfiguration {
+                inherit pkgs;
+                extraSpecialArgs = {
+                    inherit inputs;
+                    inherit rootPath;
+                    pkgs-stable = import nixpkgs-stable {
+                        inherit system;
+                        config.allowUnfree = true;
+                    };
+                };
+
+                modules = [
+                    ./hosts/stardom/users/bo/home.nix
                     inputs.plasma-manager.homeManagerModules.plasma-manager
                 ];
             };
