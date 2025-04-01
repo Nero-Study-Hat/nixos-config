@@ -1,4 +1,4 @@
-{ inputs, outputs, lib, config, pkgs, pkgs-stable, ... }:
+{ inputs, outputs, lib, config, pkgs, pkgs-stable, rootPath, ... }:
 
 let
     secretspath = builtins.toString inputs.mysecrets;
@@ -14,6 +14,7 @@ in
     roles.workstation.system = {
         enable = true;
         hostname = "starfief";
+	virtualization = false; # for quicker install
     };
 
 	users.users = {
@@ -28,15 +29,17 @@ in
 	services.printing.enable = true;
 	boot.tmp.cleanOnBoot = true;
 
-    networking.wireless = {
-        enable = true;
-        # secretsFile = config.sops.secrets.wifi-secrets-file.path;
-        # environmentFile = "/etc/tmp_wifi_secrets";
-        interfaces = [ "wlp2s0" ];
-        userControlled.enable = true;
-    };
+	networking.wireless = {
+		enable = true;  # Enables wireless support via wpa_supplicant.
+		userControlled.enable = true;
+		allowAuxiliaryImperativeNetworks = true;  # Networks defined in aux imperitive networks (/etc/wpa_supplicant.conf)
+	};
 
-	networking.networkmanager.enable = true;
+	environment.etc."wpa_supplicant.conf" = {
+		source = config.sops.secrets.wpa_supplicant-conf.path;
+	};
+
+	networking.networkmanager.enable = false;
 
 	environment.systemPackages = [
 		pkgs.gparted

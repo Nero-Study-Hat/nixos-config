@@ -49,6 +49,7 @@
 
 	fileSystems."/".device = "/dev/disk/by-label/nixos";
 	fileSystems."/boot".device = "/dev/disk/by-label/UEFI";
+	fileSystems."/mnt/data".device = "/dev/disk/by-label/data";
 	swapDevices = [{ device = "/dev/disk/by-label/swap"; }];
 
 	nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

@@ -13,7 +13,7 @@
 	home-modules.desktop = {
 		kde.enable = true;
 		hyprland = {
-			enable = true;
+			enable = false;
 			hyprlock = {
 				enable = true;
 				wallpaper = "/home/alaric/...";

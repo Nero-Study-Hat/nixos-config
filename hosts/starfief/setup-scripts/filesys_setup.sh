@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-read -p $'nix-shell https://github.com/sgillespie/nixos-yubikey-luks/archive/master.tar.gz\nEnter (yes/y) if you have run the above command: ' shell_status
+read -p $'nix-shell https://github.com/sgillespie/nixos-yubikey-luks/archive/master.tar.gz\nEnter (yes/n) if you have run the above command: ' shell_status
 
 if [[ "$shell_status" != "yes" && "$shell_status" != "y" ]]; then
     echo "run the command before the script"
@@ -76,4 +76,5 @@ lvm_partitions_setup
 
 echo -e $'\n**Now run the following commands:**\n'
 echo "exit && exit"
+echo 'run the following in local flake dir if needed: nix flake lock --update-input "mysecrets"'
 echo "./copy_keys.sh"

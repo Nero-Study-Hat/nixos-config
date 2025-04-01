@@ -36,12 +36,12 @@ EOT
 
 
 function final_prompt () {
-    echo -e $'\n**Now run the following commands:**\n'
+    echo -e $'\n**Now run the following commands:**'
     echo "cd / && nix-shell https://github.com/sgillespie/nixos-yubikey-luks/archive/master.tar.gz"
-    echo "./filesys_setup"
+    echo -e $'./filesys_setup\n'
 }
 
-read -p $'Copy scripts to ISO (yes/y): ' copy_check
+read -p $'Copy script to ISO (yes/y): ' copy_check
 
 if [[ "$copy_check" != "yes" && "$copy_check" != "y" ]]; then
     final_prompt
@@ -49,14 +49,9 @@ if [[ "$copy_check" != "yes" && "$copy_check" != "y" ]]; then
     exit
 fi
 
-function copy_scripts_to_liveiso () {
-    script1="filesys_setup.sh"
-    scp "$script1" "${remote_user}@${remote_host}:/${script1}"
-    script2="system_install.sh"
-    scp "$script2" "${remote_user}@${remote_host}:/${script2}"
-}
+script1="filesys_setup.sh"
+scp "$script1" "${remote_user}@${remote_host}:/${script1}"
 
-copy_scripts_to_liveiso
 final_prompt
 
 ssh "${remote_user}@${remote_host}"

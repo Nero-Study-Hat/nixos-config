@@ -36,19 +36,21 @@ in
                 # ssh key will be created for each host as part of manual install process
                 # TODO: consider having this path point to "/etc/ssh/ssh_host_ed25519_key" for being user agnostic per host
                 # find a way to pass user path if wanted as ~ alias doesn't work
-                sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" "/mnt/etc/ssh/ssh_host_ed25519_key" ];
+                sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" "${inputs.self}/sops-nix/secrets_key" ];
                 keyFile = "/var/lib/sops-nix/key.txt";
                 generateKey = true;
             };
 
             secrets = {
                 "nero-user-password".neededForUsers = true;
-                "home-location" = { };
+                "home-location" = {};
                 "wifi-ssids/home" = {};
                 "wifi-ssids/dnd" = {};
                 "wifi-ssids/rcollege" = {};
                 "wifi-ssids/hotspot" = {};
-                "wifi-secrets-file" = { };
+                "wifi-secrets-file" = {};
+                "rcollege_wifi_ca" = {};
+                "wpa_supplicant-conf" = {};
             };
         };
     };
