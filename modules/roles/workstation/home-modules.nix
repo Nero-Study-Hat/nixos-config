@@ -106,7 +106,7 @@ in
             {
                 home-modules.desktop.apps.basic = {
                     brave-browser-enable = true;
-                    mullvad-browser-enable = true;
+                    mullvad-browser-enable = false;
                     dolphin-enable = true;
                     vesktop-enable = true;
                     cool-retro-term-enable = true;
@@ -119,9 +119,11 @@ in
             {
                 home-modules.desktop.apps.creative = {
                     blender-enable = true;
+                    blender-pkg = pkgs-stable.blender-hip; # unstable broken currently
                     krita-enable = true;
                     aseprite-enable = true;
-                    davinci-resolve-enable = true;
+                    aseprite-pkg = pkgs-stable.aseprite; # unstable broken currently
+                    davinci-resolve-enable = false;
                     pureref-enable = true;
                     remnote-enable = true;
                     obsidian-enable = true;
@@ -141,6 +143,7 @@ in
             {
                 home-modules.desktop.apps.utility = {
                     protonvpn-enable = true;
+                    protonvpn-pkg = pkgs-stable.protonvpn-cli_2; # latest currently doesn't work
                     gparted-enable = false;
                     simplescreenrecorder-enable = true;
                     yt-dlp-enable = true;

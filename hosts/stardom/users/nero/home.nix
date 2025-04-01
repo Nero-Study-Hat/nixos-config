@@ -43,7 +43,7 @@
 	home.packages = [
 		# creative video
 		pkgs.handbrake
-		pkgs.avidemux
+		# pkgs-stable.avidemux
 		# creative audio
 		pkgs.lmms
 		pkgs.ardour
@@ -55,5 +55,8 @@
 		pkgs.terraform
 		pkgs.go
 		pkgs.ansible
+		# vpn
+		pkgs.protonvpn-gui
+		# more
 	];
 }

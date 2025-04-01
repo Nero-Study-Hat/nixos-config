@@ -46,8 +46,6 @@
 		pkgs.gamemode
 	];
 
-	# music I found to save
-	# https://music.youtube.com/watch?v=LlltD3d2t0Q&list=OLAK5uy_l54s3hYsFz7oym06wkSERZOKtxqVJGRtg
 	users.groups."gamemode".members = [ "nero" ];
 	programs.gamemode = {
 		enable = true;
@@ -67,10 +65,4 @@
 			};
 		};
 	};
-
-	#TODO: add package to home-modules gaming
-    # programs.steam = {
-    #     enable = true;
-    # };
-
 }

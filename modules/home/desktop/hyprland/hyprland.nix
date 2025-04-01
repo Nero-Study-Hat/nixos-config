@@ -162,6 +162,8 @@ in
                     "QT_STYLE_OVERRIDE,kvantum"
                     "USE_WAYLAND_GRIM,true"
                     "GDK_SCALE,1"
+                    "XDG_SESSION_TYPE,wayland"
+                    "WLR_NO_HARDWARE_CURSORS,1"
                 ];
             };
         };

@@ -33,9 +33,9 @@ nix build {path/to/flake/dir}#isoimage -o {target/output/path}
 
 # --- cleaning ---
 nix-collect-garbage
-nix-collect-garbage --delete-older-than {number of days}d
 nix-store --gc
 sudo nix-store --optimise
+nix-collect-garbage --delete-older-than {number of days}d
 sudo nix-collect-garbage -d
 # useful pkg for cleaning is ncdu
 # for me
@@ -51,3 +51,4 @@ ssh -vT git@github.com # helps when new key is not working
 # get number for file permissions
 stat -c "%a %n" "./Documents/Udev.html"
 stat -c "%a %n" "./Documents/"
+chown -R user:user directory/

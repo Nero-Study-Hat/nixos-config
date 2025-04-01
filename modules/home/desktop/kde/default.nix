@@ -12,7 +12,6 @@ in
     config = mkIf cfg.enable {
         home.packages = with pkgs; [
             pkgs-stable.libsForQt5.bismuth
-            pkgs.kdePackages.fcitx5-with-addons
             pkgs.flameshot
             pkgs.kdePackages.yakuake
             pkgs.kdePackages.konsole

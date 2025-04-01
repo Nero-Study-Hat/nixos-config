@@ -31,22 +31,27 @@
             inputs.nixpkgs.follows = "nixpkgs";
             inputs.home-manager.follows = "home-manager";
         };
-        
-        hyprland = {
-            url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
-        hyprland-virtual-desktops = {
-            url = "github:levnikmyskin/hyprland-virtual-desktops/";
-            inputs.hyprland.follows = "hyprland";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
-        hyprkool = {
-            url = "github:thrombe/hyprkool/0.7.1";
-            inputs.nixpkgs.follows = "nixpkgs-stable";
-            inputs.nixpkgs-unstable.follows = "nixpkgs";
-            inputs.hyprland.follows = "hyprland";
-        };
+
+        # neither hyprland or hyprland-virt-desktops work at the same time (because of issues in versions)
+        # hyprland = {
+        #     type = "git";
+        #     submodules = true;
+        #     url = "https://github.com/hyprwm/Hyprland";
+        #     # ref = "refs/tags/v0.44.0";
+        #     inputs.nixpkgs.follows = "nixpkgs";
+        # };
+        # hyprland-virtual-desktops = {
+        #     url = "github:levnikmyskin/hyprland-virtual-desktops";
+        #     inputs.hyprland.follows = "hyprland";
+        #     inputs.nixpkgs.follows = "nixpkgs";
+        # };
+        # hyprkool = {
+        #     url = "github:thrombe/hyprkool/0.7.1";
+        #     inputs.nixpkgs.follows = "nixpkgs-stable";
+        #     inputs.nixpkgs-unstable.follows = "nixpkgs";
+        #     inputs.hyprland.follows = "hyprland";
+        # };
+
         musnix = {
             url = "github:musnix/musnix";
             inputs.nixpkgs.follows = "nixpkgs";
@@ -70,11 +75,11 @@
         defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
         rootPath = self;
     in {
-        nixpkgs.overlays = [ inputs.hyprland.overlays.default ];
+        # nixpkgs.overlays = [ inputs.hyprland.overlays.default ];
 
 
         nixosConfigurations = {
-            stardom = nixpkgs.lib.nixosSystem {
+            stardom = nixpkgs-stable.lib.nixosSystem {
                 inherit system;
                 modules = [ 
                     ./hosts/stardom/configuration.nix
@@ -86,6 +91,16 @@
                     pkgs-stable = import nixpkgs-stable {
                         inherit system;
                         config.allowUnfree = true;
+
+                    overlays = [
+                        (self: super: {
+                        google-chrome = super.google-chrome.override {
+                        commandLineArgs =
+                        "--proxy-server='https=127.0.0.1:3128;http=127.0.0.1:3128'";
+                        };
+                        # ... other overlays
+                        })
+                    ];
                     };
                     pkgs-old = import nixpkgs-old {
                         inherit system;
