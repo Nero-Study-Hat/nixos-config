@@ -9,8 +9,8 @@
         };
 
         nixpkgs.url = "nixpkgs/nixos-unstable";
-        nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
-        nixpkgs-old.url = "github:nixos/nixpkgs/nixos-24.05-small";
+        nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
+        nixpkgs-old.url = "github:nixos/nixpkgs/nixos-24.11";
         home-manager = {
             url = "github:nix-community/home-manager";
             inputs.nixpkgs.follows = "nixpkgs";
@@ -88,19 +88,10 @@
                 ];
                 specialArgs = {
                     inherit inputs;
+                    inherit rootPath;
                     pkgs-stable = import nixpkgs-stable {
                         inherit system;
                         config.allowUnfree = true;
-
-                    overlays = [
-                        (self: super: {
-                        google-chrome = super.google-chrome.override {
-                        commandLineArgs =
-                        "--proxy-server='https=127.0.0.1:3128;http=127.0.0.1:3128'";
-                        };
-                        # ... other overlays
-                        })
-                    ];
                     };
                     pkgs-old = import nixpkgs-old {
                         inherit system;

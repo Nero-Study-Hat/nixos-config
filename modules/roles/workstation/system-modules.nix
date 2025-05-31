@@ -96,7 +96,7 @@ in
                     enable = true;
                     user = "nero";
                     virtualbox = true;
-                    kvm-qemu = true;
+                    kvm-qemu = false;
                 };
             })
             ( mkIf (cfg.yubikey)

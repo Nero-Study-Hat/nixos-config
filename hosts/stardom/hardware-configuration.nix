@@ -9,6 +9,7 @@
 	# };
 
 	boot = {
+		# kernelParams = [ "kvm.enable_virt_at_load=0" ];
 		initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
 		initrd.kernelModules = [ "amdgpu" ];
 		extraModulePackages = [ ];

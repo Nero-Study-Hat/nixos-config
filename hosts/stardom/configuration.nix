@@ -1,4 +1,4 @@
-{ inputs, outputs, lib, config, pkgs, ... }:
+{ inputs, outputs, lib, config, pkgs, rootPath, ... }:
 
 {
 	imports = [
@@ -34,6 +34,11 @@
 	boot.tmp.cleanOnBoot = true;
 
 	security.polkit.enable = true;
+
+	# allow let's encrypt staging certs as trusted (for testing)
+	security.pki.certificateFiles = [
+		"${rootPath}/hosts/stardom/letsencrypt-stg-root-x1.pem"
+	];
 
 	# gparted has to be installed in system config it seems
 	#TODO: move gparted install into system-module
