@@ -13,7 +13,7 @@
 	home-modules.desktop = {
 		kde.enable = true;
 		hyprland = {
-			enable = false;
+			enable = true;
 			hyprlock = {
 				enable = true;
 				wallpaper = "/home/nero/Pictures/Wallpapers/bench.jpg";
@@ -22,9 +22,13 @@
 			hypridle.enable = true;
 			# main PC
 			# FIXME: move to stardom users and create for starfief
+			# monitors = [
+			# 	"DP-2, 3440x1440@100, auto-left, 1"
+			# 	"HDMI-A-1, 1680x1050@60, 0x0, 1, transform, 1"
+			# ];
 			monitors = [
-				"DP-2, 3440x1440@100, auto-left, 1"
-				"HDMI-A-1, 1680x1050@60, 0x0, 1, transform, 1"
+				"DP-2, 3440x1440@100, 0x0, 1"
+				"HDMI-A-1, 1680x1050@60, auto-left, 1, transform, 1"
 			];
 			default-pkgs.install = true;
 			waybar = {

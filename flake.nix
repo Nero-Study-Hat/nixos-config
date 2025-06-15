@@ -32,19 +32,18 @@
             inputs.home-manager.follows = "home-manager";
         };
 
-        # neither hyprland or hyprland-virt-desktops work at the same time (because of issues in versions)
-        # hyprland = {
-        #     type = "git";
-        #     submodules = true;
-        #     url = "https://github.com/hyprwm/Hyprland";
-        #     # ref = "refs/tags/v0.44.0";
-        #     inputs.nixpkgs.follows = "nixpkgs";
-        # };
-        # hyprland-virtual-desktops = {
-        #     url = "github:levnikmyskin/hyprland-virtual-desktops";
-        #     inputs.hyprland.follows = "hyprland";
-        #     inputs.nixpkgs.follows = "nixpkgs";
-        # };
+        hyprland = {
+            type = "git";
+            submodules = true;
+            url = "https://github.com/hyprwm/Hyprland";
+            # ref = "refs/tags/v0.43.0";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
+        hyprland-virtual-desktops = {
+            url = "github:levnikmyskin/hyprland-virtual-desktops";
+            inputs.hyprland.follows = "hyprland";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
         # hyprkool = {
         #     url = "github:thrombe/hyprkool/0.7.1";
         #     inputs.nixpkgs.follows = "nixpkgs-stable";
@@ -52,10 +51,10 @@
         #     inputs.hyprland.follows = "hyprland";
         # };
 
-        musnix = {
-            url = "github:musnix/musnix";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
+        # musnix = {
+        #     url = "github:musnix/musnix";
+        #     inputs.nixpkgs.follows = "nixpkgs";
+        # };
     };
 
     outputs = {
@@ -84,7 +83,7 @@
                 modules = [ 
                     ./hosts/stardom/configuration.nix
                     inputs.sops-nix.nixosModules.sops
-                    inputs.musnix.nixosModules.musnix
+                    # inputs.musnix.nixosModules.musnix
                 ];
                 specialArgs = {
                     inherit inputs;

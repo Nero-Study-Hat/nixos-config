@@ -14,7 +14,8 @@
 		initrd.kernelModules = [ "amdgpu" ];
 		extraModulePackages = [ ];
 
-		kernelPackages = pkgs.linuxPackages_latest;
+		# kernelPackages = pkgs.linuxPackages_latest;
+		kernelPackages = pkgs.pkgs.linuxPackages_6_12; # required to match w/ virtualbox
 		supportedFilesystems = [ "ntfs" ];
 		loader = {
 			efi = {

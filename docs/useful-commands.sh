@@ -39,7 +39,7 @@ nix-collect-garbage --delete-older-than {number of days}d
 sudo nix-collect-garbage -d
 # useful pkg for cleaning is ncdu
 # for me
-cd / && ncdu --exclude "nero-priv-data" --exclude "nero-pub-data"
+cd / && ncdu --exclude "nero-priv-data" --exclude "nero-pub-data" --exclude "hdd-data"
 
 # --- ssh ---
 eval `ssh-agent`;ssh-add id_rsa

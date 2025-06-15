@@ -87,7 +87,7 @@ in
                 system-modules.desktop = {
                     sddm = true;
                     kde = true;
-                    hyprland = false;
+                    hyprland = true;
                 };
             })
             ( mkIf (cfg.virtualization)
