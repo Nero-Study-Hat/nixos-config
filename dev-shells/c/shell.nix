@@ -3,6 +3,8 @@
 pkgs.mkShell {
     name = "virtual desktop switcher C project";
     packages = with pkgs; [
+        glibc
+        glibc.static
         gcc
         cmake
     ];

@@ -3,7 +3,8 @@
 #include <stdbool.h>
 #include <string.h>
 
-// cmd for testing (dev dir): gcc desktop-switcher.c -o demo && ./demo "arg1" "arg2" && rm demo
+// cmd for testing (dev dir): gcc -static desktop-switcher.c -o demo && ./demo "arg1" "arg2" && rm demo
+// -static is important for nixos with no global gcc
 // use `which gcc` to get compiler path for vscode
 
 void echoCorrectInputs(const char* validArgs[], const int numOfValidArgs, const char* issue, const bool failExit) {

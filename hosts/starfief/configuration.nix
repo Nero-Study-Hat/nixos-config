@@ -14,7 +14,7 @@ in
     roles.workstation.system = {
         enable = true;
         hostname = "starfief";
-	virtualization = false; # for quicker install
+		virtualization = false; # for quicker install
     };
 
 	users.users = {

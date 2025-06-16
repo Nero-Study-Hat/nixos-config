@@ -13,7 +13,7 @@
 	home-modules.desktop = {
 		kde.enable = true;
 		hyprland = {
-			enable = false;
+			enable = true;
 			hyprlock = {
 				enable = true;
 				wallpaper = "/home/alaric/...";
@@ -21,7 +21,7 @@
 			};
 			hypridle.enable = true;
             monitors = [
-                "eDP-1, 2240x1400@60, auto-left, 1.458333" # main screen
+                "eDP-1, 2240x1400@60, 0x0, 1.458333" # main screen
             ];
 			default-pkgs.install = true;
 			waybar = {
