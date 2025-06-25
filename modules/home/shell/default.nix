@@ -90,6 +90,18 @@ in
             type = package;
             default = pkgs.parallel;
         };
+
+        tree-enable = mkEnableOption "Install tree cli utility.";
+        tree-pkg = mkOption {
+            type = package;
+            default = pkgs.tree;
+        };
+
+        bat-enable = mkEnableOption "Install bat cli utility.";
+        bat-pkg = mkOption {
+            type = package;
+            default = pkgs.bat;
+        };
     };
 
     config = mkMerge [
@@ -155,5 +167,8 @@ in
 
         ( mkIf (cfg.parallel-enable)
         { home.packages = [ cfg.parallel-pkg ]; })
+
+        ( mkIf (cfg.bat-enable)
+        { home.packages = [ cfg.bat-pkg ]; })
     ];
 }

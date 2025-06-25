@@ -30,11 +30,6 @@ in
             type = package;
             default = pkgs.vesktop;
         };
-        cool-retro-term-enable = mkEnableOption "Enable cool-retro-term.";
-        cool-retro-term-pkg = mkOption {
-            type = package;
-            default = pkgs.cool-retro-term;
-        };
         morgen-enable = mkEnableOption "Enable morgen calendar.";
         morgen-pkg = mkOption {
             type = package;
@@ -63,10 +58,6 @@ in
         ( mkIf (cfg.vesktop-enable)
         {
             home.packages = [ cfg.vesktop-pkg ];
-        })
-        ( mkIf (cfg.cool-retro-term-enable)
-        {
-            home.packages = [ cfg.cool-retro-term-pkg ];
         })
         ( mkIf (cfg.morgen-enable)
         {

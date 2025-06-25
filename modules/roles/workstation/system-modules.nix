@@ -61,8 +61,9 @@ in
             programs.ssh.startAgent = true;
             programs.ssh.agentTimeout = "2h";
 
-            environment.pathsToLink = [ "/share/bash-completion" ];
+            # environment.pathsToLink = [ "/share/bash-completion" ];
             environment.variables.EDITOR = "code --wait";
+            environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
             fonts.fontDir.enable = true;
             fonts.enableDefaultPackages = true;
@@ -78,7 +79,7 @@ in
                 jack.enable = true;
             };
 
-            system.stateVersion = "24.11";
+            system.stateVersion = "25.05";
         })
 
         (mkIf cfg.enable (mkMerge [

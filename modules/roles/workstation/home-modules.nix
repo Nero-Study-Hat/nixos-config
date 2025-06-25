@@ -76,7 +76,7 @@ in
             fonts.fontconfig.defaultFonts.emoji = ["Noto Color Emoji"];
 
             programs.home-manager.enable = true;
-            home.stateVersion = "24.11";
+            home.stateVersion = "25.05";
         })
 
         (mkIf cfg.enable (mkMerge [
@@ -84,7 +84,8 @@ in
             {
                 # home.packages = with pkgs; [ cowsay ];
                 home-modules.shell = {
-                    language.bash-enable = true;
+                    # language.bash-enable = true;
+                    language.zsh-enable = true;
                     ssh-client.enable = true;
                     direnv-enable = true;
                     git-enable = true;
@@ -99,6 +100,8 @@ in
                     traceroute-enable = true;
                     dig-enable = true;
                     parallel-enable = true;
+                    tree-enable = true;
+                    bat-enable = true;
                 };
             })
 
@@ -109,7 +112,6 @@ in
                     mullvad-browser-enable = false;
                     dolphin-enable = true;
                     vesktop-enable = true;
-                    cool-retro-term-enable = true;
                     morgen-enable = true;
                     zoom-enable = true;
                 };
@@ -133,7 +135,10 @@ in
             ( mkIf (cfg.default-dev-apps)
             {
                 home-modules.desktop.apps.dev = {
-                    editor = "vscode";
+                    vscode-enable = true;
+                    neovim-enable = false;
+                    cool-retro-term-enable = true;
+                    ghostty-enable = true;
                     githup-desktop-enable = true;
                     godot4-mono-enable = false; # currently doesn't work
                     renpy-enable = true;

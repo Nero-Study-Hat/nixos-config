@@ -26,6 +26,9 @@
 		};
 	};
 
+	programs.zsh.enable = true;
+	users.users.nero.shell = pkgs.zsh;
+
 	users.groups."realtime".members = [ "nero" ];
 
 	networking.networkmanager.enable = true;
@@ -36,9 +39,9 @@
 	security.polkit.enable = true;
 
 	# allow let's encrypt staging certs as trusted (for testing)
-	security.pki.certificateFiles = [
-		"${rootPath}/hosts/stardom/letsencrypt-stg-root-x1.pem"
-	];
+	# security.pki.certificateFiles = [
+	# 	"${rootPath}/hosts/stardom/letsencrypt-stg-root-x1.pem"
+	# ];
 
 	# gparted has to be installed in system config it seems
 	#TODO: move gparted install into system-module

@@ -43,18 +43,56 @@ in
                 bashrcExtra = ''eval "$(direnv hook bash)"'';
             };
         })
+
+        # https://mynixos.com/home-manager/options/programs.zsh
         ( mkIf (cfg.enable-all || cfg.zsh-enable)
         {
-            home.packages = [
-                chosen-pkgs.zsh
-            ];
+            # home.packages = [
+            #     chosen-pkgs.zsh
+            # ];
             programs.zsh = {
                 enable = true;
                 enableCompletion = true;
+                syntaxHighlighting.enable = true;
+                autosuggestion.enable = true;
+
+                history = {
+                    size = 10000;
+                    ignoreAllDups = true;
+                    ignorePatterns = ["ls *"];
+                };
+
+                historySubstringSearch = {
+                    enable = true;
+                    searchUpKey = ["\\eOA"];
+                    searchDownKey = ["\\eOB"];
+                };
+
                 shellAliases = {
                     cl = "clear";
+                    res = "result/activate && rm -r result";
+                    flake-update = "cd $FLAKE && nix flake update";
+                    stardom = "sudo nixos-rebuild switch --flake $FLAKE#stardom --no-update-lock-file";
+                    nero = "cd ~/tmp && nix run home-manager -- build --flake $FLAKE#nero";
+                    starfief = "sudo nixos-rebuild switch --flake $FLAKE#starfief --no-update-lock-file";
+                    alaric = "cd ~/tmp && nix run home-manager -- build --flake $FLAKE#alaric";
                 };
-                # bashrcExtra = ''eval "$(direnv hook bash)"''; # switch with hook for zsh
+
+                oh-my-zsh = {
+                    enable = true;
+                    theme = "gnzh";
+                    plugins = [
+                        "git"
+                    ];
+                        # "zsh-autosuggestions"
+                        # "zsh-autocomplete"
+                };
+
+                dotDir = ".config/zsh";
+                initContent = ''
+                    # Evaluate direnv hook
+                    eval "$(direnv hook zsh)"
+                '';
             };
         })
     ];

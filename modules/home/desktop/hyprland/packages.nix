@@ -23,7 +23,7 @@ in
             swww           # wallpaper daemon
             hyprcursor
 
-            playerctl
+            
             brightnessctl
             wl-screenrec
 
