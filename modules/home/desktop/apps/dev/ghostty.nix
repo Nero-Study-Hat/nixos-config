@@ -21,60 +21,80 @@ in
 
             # custom theming
             themes = {
-                # currently default catppuccin-mocha
                 nero-theme = {
-                    cursor-color = "f5e0dc";
-                    foreground = "cdd6f4";
-                    background = "1e1e2e";
+                    cursor-color = "#7e57c2";
+                    background = "011628";
+                    foreground = "d6deeb";
                     palette = [
-                        "0=#45475a"
-                        "1=#f38ba8"
-                        "2=#a6e3a1"
-                        "3=#f9e2af"
-                        "4=#89b4fa"
-                        "5=#f5c2e7"
-                        "6=#94e2d5"
-                        "7=#bac2de"
-                        "8=#585b70"
-                        "9=#f38ba8"
-                        "10=#a6e3a1"
-                        "11=#f9e2af"
-                        "12=#89b4fa"
-                        "13=#f5c2e7"
-                        "14=#94e2d5"
-                        "15=#a6adc8"
+                        "0=#011628"
+                        "1=#EF5350"
+                        "2=#22DA6E"
+                        "3=#ADDB67"
+                        "4=#82AAFF"
+                        "5=#C792EA"
+                        "6=#21C7A8"
+                        "7=#FFFFFF"
+                        "8=#575656"
+                        "9=#EF5350"
+                        "10=#22DA6E"
+                        "11=#FFEB95"
+                        "12=#82AAFF"
+                        "13=#C792EA"
+                        "14=#7FDBCA"
+                        "15=#FFFFFF"
                     ];
-                    selection-background = "353749";
-                    selection-foreground = "cdd6f4";
+                    selection-background = "5f7e97";
+                    selection-foreground = "dee4ee";
                 };
             };
 
             settings = {
                 # behavior
                 auto-update = "off";
+                shell-integration-features = "no-cursor";
+                confirm-close-surface = "false";
+                window-save-state = "always";
                 quit-after-last-window-closed = "true";
-                shell-integration-features = "true";
+                initial-window = "true";
+                
 
                 # window
-                initial-window = "true";
-                resize-overlay = "never";
-                background-opacity = "0.85";
-                window-save-state = "always";
-                window-step-resize = "false";
+                background-opacity = "0.75";
                 background-blur-radius = "15";
+                window-padding-x = "10";
+                window-padding-y = "10";
                 window-padding-balance = "true";
-                confirm-close-surface = "false";
+                gtk-wide-tabs = "false";
 
                 # fonts
-                theme = "Teerb";
+                theme = "nero-theme";
                 bold-is-bright = "true";
                 font-style = "medium";
-                font-size = "14";
+                font-size = "15";
                 font-family = "Cascadia Code";
+                font-feature = "+liga,+calt";
 
                 # mouse
+                cursor-color = "#4dd6cc";
+                cursor-style = "bar";
+                cursor-style-blink = "false";
                 mouse-scroll-multiplier = "2";
                 mouse-hide-while-typing = "true";
+
+                # shortcuts
+                keybind = [
+                    "ctrl+`>left=goto_split:left"
+                    "ctrl+`>down=goto_split:down"
+                    "ctrl+`>up=goto_split:up"
+                    "ctrl+`>right=goto_split:right"
+
+                    "ctrl+a>left=new_split:left"
+                    "ctrl+a>down=new_split:down"
+                    "ctrl+a>up=new_split:up"
+                    "ctrl+a>right=new_split:right"
+                    "ctrl+a>enter=toggle_split_zoom"
+                    "ctrl+a>backspace=close_surface"
+                ];
 
             };
         };

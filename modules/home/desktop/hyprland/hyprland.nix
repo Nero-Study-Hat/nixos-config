@@ -113,14 +113,30 @@ in
                     "ALT, SPACE, exec, $menu"
                 ];
 
+                workspace = [
+                    "100, special:ghostty"
+                    "101, special:vesktop"
+                ];
+
                 bindr = [
                     "$mainMod, T, exec, $terminal"
                     
                     "alt, Q, killactive"
                     "$mainMod, V, togglefloating"
                     "$mainMod, F, fullscreen"
-                    "$mainMod, S, togglespecialworkspace, magic"
                     ",code:107, exec, $screenshot" # camera icon key on my keyboard
+
+                    "$mainMod, RIGHT, movetoworkspace, -1"
+                    "$mainMod, LEFT, movetoworkspace, +1"
+                    
+                    # special workspace logic
+                    "$mainMod D, DOWN, movetoworkspace, +0"
+                    # pocket special workspace logic
+                    "$mainMod, A, togglespecialworkspace, ghostty"
+                    "ALT A, UP, movetoworkspace, special:ghostty" # has to be ALT, $mainMod moves to different special for some reason
+                    # discord pocket special workspace logic
+                    "$mainMod, D, togglespecialworkspace, vesktop"
+                    "$mainMod D, UP, movetoworkspace, special:vesktop"
 
                     "$mainMod, P, pseudo, dwindle"
                     "$mainMod, J, togglesplit, dwindle"
@@ -154,6 +170,10 @@ in
                     "waybar & swww"
                     "hypridle"
                     "sleep 3 && copyq --start-server"
+
+                    # Autostart Special Workspace Apps
+                    "[workspace special:ghostty silent] ghostty"
+                    "[workspace special:vesktop silent] vesktop"
                 ];
 
                 env = [

@@ -49,6 +49,21 @@ in
             # "editor.minimap.enabled": false,
             # "workbench.colorTheme": "One Dark Pro Darker",
             # "workbench.iconTheme": "material-icon-theme",
+
+            # keybinds.json config
+            # {
+            #     "key": "ctrl+enter",
+            #     "command": "file-browser.open"
+            # },
+
+            # {
+            #     "key": "ctrl+'", // or use "key": "\""
+            #     "command": "editor.action.insertSnippet",
+            #     "when": "editorHasSelection",
+            #     "args": {
+            #         "snippet": "\"${TM_SELECTED_TEXT}\""
+            #     },
+            # },
             # ---
             programs.vscode = {
                 enable = true;
