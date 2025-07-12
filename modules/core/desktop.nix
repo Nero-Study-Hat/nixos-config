@@ -46,8 +46,9 @@ in
 			programs.hyprland = {
 				enable = true;
 				xwayland.enable = true;
-				package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-				portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+				package = pkgs-stable.hyprland;
+				portalPackage = pkgs-stable.xdg-desktop-portal-hyprland;
+				withUWSM = true;
 			};
 
 			services.dbus.enable = true;
@@ -55,8 +56,8 @@ in
 				enable = true;
 				wlr.enable = true;
 				extraPortals = [ 
-					pkgs.xdg-desktop-portal-wlr
-					pkgs.xdg-desktop-portal-gtk
+					pkgs-stable.xdg-desktop-portal-wlr
+					pkgs-stable.xdg-desktop-portal-gtk
 				];
 			};
 		})

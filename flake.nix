@@ -32,17 +32,9 @@
             inputs.home-manager.follows = "home-manager";
         };
 
-        hyprland = {
-            type = "git";
-            submodules = true;
-            url = "https://github.com/hyprwm/Hyprland";
-            # ref = "refs/tags/v0.43.0";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
         hyprland-virtual-desktops = {
             url = "github:levnikmyskin/hyprland-virtual-desktops";
-            inputs.hyprland.follows = "hyprland";
-            inputs.nixpkgs.follows = "nixpkgs";
+            inputs.nixpkgs.follows = "nixpkgs-stable"; # pkg of hyprland I'm using
         };
         # hyprkool = {
         #     url = "github:thrombe/hyprkool/0.7.1";
@@ -74,9 +66,6 @@
         defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
         rootPath = self;
     in {
-        # nixpkgs.overlays = [ inputs.hyprland.overlays.default ];
-
-
         nixosConfigurations = {
             stardom = nixpkgs-stable.lib.nixosSystem {
                 inherit system;

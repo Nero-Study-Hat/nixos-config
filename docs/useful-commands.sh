@@ -25,6 +25,9 @@ sudo nixos-rebuild switch --flake ~/.nixflake#stardom -v --show-trace >>nixos-re
 nix run home-manager -- build --flake /{path/to/flake/dir}#nero
 result/activate
 
+nix run home-manager -- switch --flake $FLAKE#nero -b backup
+
+
 # in flake dir
 home-manager switch --flake {path/to/flake/dir}#username
 
@@ -52,3 +55,7 @@ ssh -vT git@github.com # helps when new key is not working
 stat -c "%a %n" "./Documents/Udev.html"
 stat -c "%a %n" "./Documents/"
 chown -R user:user directory/
+
+# -- starting hyprland from tty1 ---
+# (this is such duck tape)
+uwsm start hyprland-uwsm.desktop

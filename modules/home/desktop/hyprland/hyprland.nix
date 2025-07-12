@@ -18,11 +18,38 @@ in
     };
 
     config = mkIf cfg.enable {
+        home.pointerCursor = {
+            gtk.enable = true;
+            # x11.enable = true;
+            package = pkgs.bibata-cursors;
+            name = "Bibata-Modern-Classic";
+            size = 16;
+        };
+        gtk = {
+            enable = true;
+            theme = {
+                package = pkgs.flat-remix-gtk;
+                name = "Flat-Remix-GTK-Grey-Darkest";
+            };
+            iconTheme = {
+                package = pkgs.adwaita-icon-theme;
+                name = "Adwaita";
+            };
+            font = {
+            name = "Sans";
+            size = 11;
+            };
+        };
+
         wayland.windowManager.hyprland = {
             enable = true;
-            package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+            package = null;
+            # set the Hyprland and XDPH packages to null to use the ones from the NixOS module
+            portalPackage = null;
             xwayland.enable = true;
-            systemd.enable = true;
+
+            # true conflicts with uwsm set in system config
+            systemd.enable = false;
 
             settings = {
                 debug = {
@@ -133,7 +160,7 @@ in
                     "$mainMod D, DOWN, movetoworkspace, +0"
                     # pocket special workspace logic
                     "$mainMod, A, togglespecialworkspace, ghostty"
-                    "ALT A, UP, movetoworkspace, special:ghostty" # has to be ALT, $mainMod moves to different special for some reason
+                    "$mainMod, R, movetoworkspace, special:ghostty" # has to be ALT, $mainMod moves to different special for some reason
                     # discord pocket special workspace logic
                     "$mainMod, D, togglespecialworkspace, vesktop"
                     "$mainMod D, UP, movetoworkspace, special:vesktop"
@@ -169,22 +196,23 @@ in
                 exec-once = [
                     "waybar & swww"
                     "hypridle"
-                    "sleep 3 && copyq --start-server"
+                    "sleep 3 && uwsm app -- copyq --start-server"
 
                     # Autostart Special Workspace Apps
-                    "[workspace special:ghostty silent] ghostty"
-                    "[workspace special:vesktop silent] vesktop"
+                    "[workspace special:ghostty silent] uwsm app -- ghostty"
+                    "[workspace special:vesktop silent] uwsm app -- vesktop"
                 ];
 
-                env = [
-                    "XCURSOR_SIZE,24"
-                    "HYPRCURSOR_SIZE,24"
-                    "QT_STYLE_OVERRIDE,kvantum"
-                    "USE_WAYLAND_GRIM,true"
-                    "GDK_SCALE,1"
-                    "XDG_SESSION_TYPE,wayland"
-                    "WLR_NO_HARDWARE_CURSORS,1"
-                ];
+                # needs updating for UWSM
+                # env = [
+                #     "XCURSOR_SIZE,24"
+                #     "HYPRCURSOR_SIZE,24"
+                #     "QT_STYLE_OVERRIDE,kvantum"
+                #     "USE_WAYLAND_GRIM,true"
+                #     "GDK_SCALE,1"
+                #     "XDG_SESSION_TYPE,wayland"
+                #     "WLR_NO_HARDWARE_CURSORS,1"
+                # ];
             };
         };
     };
