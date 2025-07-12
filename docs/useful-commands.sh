@@ -40,6 +40,10 @@ nix-store --gc
 sudo nix-store --optimise
 nix-collect-garbage --delete-older-than {number of days}d
 sudo nix-collect-garbage -d
+
+# for finding conflicts, duplicates, and dependencies
+nix-tree
+
 # useful pkg for cleaning is ncdu
 # for me
 cd / && ncdu --exclude "nero-priv-data" --exclude "nero-pub-data" --exclude "hdd-data"

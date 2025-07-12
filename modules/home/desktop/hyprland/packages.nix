@@ -17,8 +17,6 @@ in
             wlr-randr
             xorg.xrandr    # for XWayland windows
             nwg-look
-            kdePackages.breeze-icons
-            kdePackages.qtstyleplugin-kvantum
 
             swww           # wallpaper daemon
             hyprcursor

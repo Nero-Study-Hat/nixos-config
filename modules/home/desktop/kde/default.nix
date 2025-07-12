@@ -11,10 +11,11 @@ in
 
     config = mkIf cfg.enable {
         home.packages = with pkgs; [
-            pkgs-stable.libsForQt5.bismuth
-            pkgs.flameshot
-            pkgs.kdePackages.yakuake
-            pkgs.kdePackages.konsole
+            flameshot
+            kdePackages.yakuake
+            kdePackages.sddm-kcm
+            wayland-utils # Wayland utilities
+            wl-clipboard # Command-line copy/paste utilities for Wayland
         ];
 
         programs.plasma = {
@@ -25,6 +26,8 @@ in
                 lookAndFeel = "org.kde.breezedark.desktop";
                 #   cursorTheme = "Bibata-Modern-Ice";
                 #   iconTheme = "Papirus-Dark";
+
+                # note no longer using Qt5
                 #   wallpaper = "${pkgs.libsForQt5.plasma-workspace-wallpapers}/share/wallpapers/Patak/contents/images/1080x1920.png";
             };
 

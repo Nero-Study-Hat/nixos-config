@@ -23,7 +23,7 @@ in
         dolphin-enable = mkEnableOption "Enable dolphin.";
         dolphin-pkg = mkOption {
             type = package;
-            default = pkgs.libsForQt5.dolphin;
+            default = pkgs.kdePackages.dolphin;
         };
         vesktop-enable = mkEnableOption "Enable vesktop.";
         vesktop-pkg = mkOption {

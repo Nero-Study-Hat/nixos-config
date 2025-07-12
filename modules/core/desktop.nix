@@ -27,16 +27,22 @@ in
 		({
 			services.xserver.enable = true;
 			services.xserver.videoDrivers = [ "amdgpu" ];
+
+			environment.systemPackages = [
+				pkgs-stable.kdePackages.qtwayland
+			];
 		})
 
 		( mkIf (cfg.sddm)
 		{
 			services.displayManager.sddm.enable = true;
+			services.displayManager.sddm.wayland.enable = true;
 		})
 
 		( mkIf (cfg.kde)
 		{
-			services.xserver.desktopManager.plasma5.enable = true;
+			services.desktopManager.plasma6.enable = true;
+			programs.dconf.enable = true;
 		})
 
 		( mkIf (cfg.hyprland)
@@ -55,7 +61,7 @@ in
 			xdg.portal = {
 				enable = true;
 				wlr.enable = true;
-				extraPortals = [ 
+				extraPortals = [
 					pkgs-stable.xdg-desktop-portal-wlr
 					pkgs-stable.xdg-desktop-portal-gtk
 				];
