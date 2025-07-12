@@ -7,5 +7,6 @@
         ./yubikey.nix
         ./sops.nix
         ./tailscale.nix
+        ./wireshark.nix
     ];
 }

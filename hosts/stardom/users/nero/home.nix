@@ -44,6 +44,14 @@
 		};
 	};
 
+	home.file.".local/lib/wireshark/extcap/cshargextcap" = {
+		source = "${rootPath}/pkgs/wireshark-plugins/cshargextcap";
+		executable = true;
+	};
+	home.file.".local/lib/wireshark/plugins/ts-dissector.lua" = {
+		source = "${rootPath}/pkgs/wireshark-plugins/ts-dissector.lua";
+	};
+
 	home.packages = [
 		# creative video
 		pkgs.handbrake

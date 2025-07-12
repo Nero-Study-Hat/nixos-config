@@ -38,6 +38,11 @@ in
             default = true;
             description = "Setup tailscale VPN with associated packages and config.";
         };
+        wireshark = mkOption {
+            type = bool;
+            default = true;
+            description = "Setup Wireshark with associated packages and config.";
+        };
     };
 
     config = mkMerge [
@@ -45,9 +50,6 @@ in
         {
             nixpkgs.config.allowUnfree = true;
             nix.settings = {
-                substituters = ["https://hyprland.cachix.org"];
-                trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-
                 experimental-features = "nix-command flakes";
                 # Deduplicate and optimize nix store
                 auto-optimise-store = true;
@@ -115,6 +117,12 @@ in
             ( mkIf (cfg.tailscale)
             {
                 system-modules.tailscale = {
+                    enable = true;
+                };
+            })
+            ( mkIf (cfg.wireshark)
+            {
+                system-modules.wireshark = {
                     enable = true;
                 };
             })

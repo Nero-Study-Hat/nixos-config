@@ -46,6 +46,7 @@
 	# gparted has to be installed in system config it seems
 	#TODO: move gparted install into system-module
 	environment.systemPackages = [
+		pkgs.nix-tree
 		pkgs.gparted
 		pkgs.wine-wayland
 		pkgs.winetricks
