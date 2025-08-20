@@ -25,6 +25,20 @@ in
 		};
 	};
 
+	programs.uwsm = {
+		enable = true;
+		waylandCompositors."hyprland" = {
+			prettyName = "Hyprland";
+			comment = "Hyprland compositor managed by UWSM";
+			binPath = "/run/current-system/sw/bin/Hyprland";
+		};
+	};
+
+	programs.zsh.enable = true;
+	users.users.alaric.shell = pkgs.zsh;
+
+	users.groups."realtime".members = [ "alaric" ];
+
 	security.polkit.enable = true;
 	services.printing.enable = true;
 	boot.tmp.cleanOnBoot = true;
