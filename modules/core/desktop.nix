@@ -52,8 +52,8 @@ in
 			programs.hyprland = {
 				enable = true;
 				xwayland.enable = true;
-				package = pkgs.hyprland;
-				portalPackage = pkgs.xdg-desktop-portal-hyprland;
+				package = pkgs-stable.hyprland;
+				portalPackage = pkgs-stable.xdg-desktop-portal-hyprland;
 				withUWSM = true;
 			};
 
@@ -62,7 +62,7 @@ in
 				enable = true;
 				wlr.enable = true;
 				# extraPortals breaks laptop config
-				extraPortals = with pkgs; [
+				extraPortals = with pkgs-stable; [
 					xdg-desktop-portal-gtk
 					kdePackages.xdg-desktop-portal-kde
 					xdg-desktop-portal-hyprland

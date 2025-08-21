@@ -34,7 +34,7 @@
 
         hyprland-virtual-desktops = {
             url = "github:levnikmyskin/hyprland-virtual-desktops";
-            inputs.nixpkgs.follows = "nixpkgs"; # pkg of hyprland I'm using
+            inputs.nixpkgs.follows = "nixpkgs-stable"; # pkg of hyprland I'm using
         };
         # hyprkool = {
         #     url = "github:thrombe/hyprkool/0.7.1";

@@ -126,9 +126,12 @@ in
                     aseprite-enable = true;
                     aseprite-pkg = pkgs-stable.aseprite; # unstable broken currently
                     davinci-resolve-enable = false;
+                    vital-enable = true;
                     pureref-enable = true;
                     remnote-enable = true;
                     obsidian-enable = true;
+                    logseq-enable = false; # easily breaks for me currently
+                    anytype-enable = true;
                     obs-studio-enable = true;
                 };
             })

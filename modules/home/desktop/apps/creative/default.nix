@@ -32,6 +32,13 @@ in
             type = package;
             default = pkgs.davinci-resolve;
         };
+
+        vital-enable = mkEnableOption "Enable vital, a digital synth tool.";
+        vital-pkg = mkOption {
+            type = package;
+            default = pkgs.vital;
+        };
+
         # currently requires manual setup, does not work on hyprland
         pureref-enable = mkEnableOption "Enable pureref.";
         remnote-enable = mkEnableOption "Enable remnote.";
@@ -43,6 +50,17 @@ in
         obsidian-pkg = mkOption {
             type = package;
             default = pkgs.obsidian;
+        };
+        logseq-enable = mkEnableOption "Enable obsidian.";
+        logseq-pkg = mkOption {
+            type = package;
+            default = pkgs.logseq;
+        };
+
+        anytype-enable = mkEnableOption "Enable anytype.";
+        anytype-pkg = mkOption {
+            type = package;
+            default = pkgs.anytype;
         };
 
         obs-studio-enable = mkEnableOption "Enable obs-studio.";
@@ -69,6 +87,10 @@ in
         {
             home.packages = [ cfg.davinci-resolve-pkg ];
         })
+        ( mkIf (cfg.vital-enable)
+        {
+            home.packages = [ cfg.vital-pkg ];
+        })
         ( mkIf (cfg.pureref-enable)
         {
             home.packages = [ pureref-s ];
@@ -80,6 +102,14 @@ in
         ( mkIf (cfg.obsidian-enable)
         {
             home.packages = [ cfg.obsidian-pkg ];
+        })
+        ( mkIf (cfg.logseq-enable)
+        {
+            home.packages = [ cfg.logseq-pkg ];
+        })
+        ( mkIf (cfg.anytype-enable)
+        {
+            home.packages = [ cfg.anytype-pkg ];
         })
         ( mkIf (cfg.obs-studio-enable)
         {

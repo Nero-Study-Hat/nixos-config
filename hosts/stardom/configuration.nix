@@ -26,6 +26,15 @@
 		};
 	};
 
+	# programs.uwsm = {
+	# 	enable = true;
+	# 	waylandCompositors."hyprland" = {
+	# 		prettyName = "Hyprland";
+	# 		comment = "Hyprland compositor managed by UWSM";
+	# 		binPath = "/run/current-system/sw/bin/Hyprland";
+	# 	};
+	# };
+
 	programs.zsh.enable = true;
 	users.users.nero.shell = pkgs.zsh;
 
@@ -37,6 +46,17 @@
 	boot.tmp.cleanOnBoot = true;
 
 	security.polkit.enable = true;
+
+	# enables unpatched dynamic binaries to run on NixOS, required for C# Dev Kit ext
+	# programs.nix-ld.enable = true;
+
+	# enable when needed with a nix switch: not on always for security
+	# keeping for apps not made into a nix pkg provided this way
+	# currently: balenaEtcher
+	# programs.appimage = {
+	# 	enable = true;
+	# 	binfmt = true;
+	# };
 
 	# allow let's encrypt staging certs as trusted (for testing)
 	# security.pki.certificateFiles = [
